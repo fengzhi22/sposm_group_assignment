@@ -1,0 +1,2 @@
+Check out for further development of a package
+https://github.com/lockedata/starters
