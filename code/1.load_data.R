@@ -1,7 +1,7 @@
 # **********************************************************************************************
 #### D E F I N I T I O N S ####
 # source to download
-url <- "https://www.bundesnetzagentur.de/SharedDocs/Downloads/DE/Sachgebiete/Energie/Unternehmen_Institutionen/ErneuerbareEnergien/ZahlenDatenInformationen/VOeFF_Registerdaten/DatenAb310119.zip"
+url <- "https://www.bundesnetzagentur.de/SharedDocs/Downloads/DE/Sachgebiete/Energie/Unternehmen_Institutionen/ErneuerbareEnergien/ZahlenDatenInformationen/VOeFF_Registerdaten/DatenAb310119.zip;jsessionid=8E141CCB4412E0706DDA7F950F37B970?__blob=publicationFile&v=7"
 file_to_load <- "DatenAb310119.zip"
 
 url_shape_plz <- "https://www.suche-postleitzahl.org/download_files/public/plz-gebiete.shp.zip"
