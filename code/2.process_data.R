@@ -23,12 +23,13 @@ lapply(packages, require, character.only = T)
 
 # ***********************************************************************************************
 #### load data ####
-enh <- read.csv2(here("data", "raw", file_to_load), row.names = FALSE, encoding = "UTF-8")
+enh <- read.csv2(here("data", "raw", file_to_load), row.names = NULL, encoding = "UTF-8")
 ger_shape_plz <- st_read(file_ger_shape_plz, options = "ENCODING=UTF-8", stringsAsFactors = FALSE)
 ger_shape_state <- st_read(file_ger_shape_state, options = "ENCODING=UTF-8", stringsAsFactors = FALSE)
 
 # prepare merge
-names(ger_shape)[names(ger_shape_plz) == "plz"] <- "Plz"
+names(ger_shape_plz)[names(ger_shape_plz) == "plz"] <- "Plz"
+ger_shape_plz$Plz <- as.integer(ger_shape_plz$Plz)
 
 # ***********************************************************************************************
 #### match shape file on Plz ####
@@ -62,7 +63,7 @@ map_and_data_solar_current_plz <- map_and_data_solar_current %>%
             Bundesland = first(Bundesland))
 
 # problems with geometry: inner_join again after aggregation
-map_and_data_solar_current_plz <- inner_join(map_and_data_solar_current_plz, ger_shape)
+map_and_data_solar_current_plz <- inner_join(map_and_data_solar_current_plz, ger_shape_plz)
 
 table(map_and_data_solar_current_plz$Bundesland)
 
@@ -86,4 +87,4 @@ saveRDS(map_and_data_solar_current_plz, here("data", "processed", "map_and_data_
 saveRDS(map_and_data_solar_current_state, here("data", "processed", "map_and_data_solar_current_state.rds")) 
 
 # ***********************************************************************************************
-file.edit("3.show_map.R")
+file.edit(here("code", "3.show_map.R"))

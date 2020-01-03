@@ -1,6 +1,6 @@
 # **********************************************************************************************
 #### D E F I N I T I O N S ####
-authors <- c("Le Binh", "Yagmur Dalman", "Zhu Fenghzhi","Sebastian Geschonke", "Manuel Pfeffer")
+authors <- c("Le Binh", "Yagmur Dalman", "Zhu Fengzhi","Sebastian Geschonke", "Manuel Pfeffer")
 
 
 # ***********************************************************************************************
