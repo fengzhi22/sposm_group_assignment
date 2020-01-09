@@ -1,3 +1,8 @@
+# load data
+map_and_data_solar_current_plz <- readRDS(here("data", "processed", "map_and_data_solar_current_plz.rds"))
+map_and_data_solar_current_state <- readRDS(here("data", "processed", "map_and_data_solar_current_state.rds"))
+
+# create server
 server <- function(input, output) {
   
   dataset <- reactive({
@@ -19,6 +24,7 @@ server <- function(input, output) {
   
 }
 
+# create ui
 dataset <- reactive({
   get(paste0("map_and_data_solar_current_", input$geo_level))
 })
