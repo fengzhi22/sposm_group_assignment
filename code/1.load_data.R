@@ -20,7 +20,7 @@ url_variables_expl <- "https://www.bundesnetzagentur.de/SharedDocs/Downloads/DE/
 
 # ***********************************************************************************************
 #### installing, loading libraries ####
-packages <- c("here", "httr", "zip", "readxl")
+packages <- c("here", "httr", "zip", "readxl", "shiny", "ggplot2")
 
 ### install if necessary
 lapply(packages, 
