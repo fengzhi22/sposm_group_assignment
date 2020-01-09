@@ -14,6 +14,6 @@ Group Assignment
 Sebastian Geschonke  
 Le Binh  
 Yagmur Dalman  
-Zhu Fenghzhi  
+Zhu Fengzhi  
 
 
