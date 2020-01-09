@@ -69,7 +69,7 @@ table(map_and_data_solar_current_plz$Bundesland)
 
 
 # ***********************************************************************************************
-#### aggregate data further on sate level ####
+#### aggregate data further on state level ####
 map_and_data_solar_current_plz_ <- map_and_data_solar_current_plz %>%
   mutate(Plz1 = substr(Plz, 1, 1))
 
