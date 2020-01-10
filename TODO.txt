@@ -1,2 +1,13 @@
+Changes necessary
+- concordance table of Plz to federal state
+- concordance table of Plz to Landkreis level
+
+Extensions possible
+- Shiny: other energy sources
+- Shiny: swap communal level to Landkreis (current level not very helpful)
+- Shiny: show state variable of existing facilities for the end of a specific year
+- Shiny: 
+
+
 Check out for further development of a package
 https://github.com/lockedata/starters

@@ -1,17 +1,14 @@
-# **********************************************************************************************
-#### D E F I N I T I O N S ####
-authors <- c("Le Binh", "Yagmur Dalman", "Zhu Fengzhi","Sebastian Geschonke", "Manuel Pfeffer")
-
-
 # ***********************************************************************************************
 #### installing, loading libraries ####
+library("utils")
+
 packages <- c("here",  "PBSmodelling")
 
 ### install if necessary
 lapply(packages, 
        function(x)
        {
-         if(!(x %in% installed.packages()))
+         if(!(x %in% installed.packages()) | x %in% old.packages())
          {
            install.packages(x)  
          }
@@ -19,6 +16,11 @@ lapply(packages,
 
 lapply(packages, require, character.only = T)
 
+
+# **********************************************************************************************
+#### D E F I N I T I O N S ####
+#rm(list=ls(all=TRUE))
+authors <- c("Le Binh", "Yagmur Dalman", "Zhu Fengzhi", "Sebastian Geschonke")
 
 
 # ***********************************************************************************************

@@ -1,5 +1,29 @@
+# ***********************************************************************************************
+#### installing, loading libraries ####
+library("utils")
+
+packages <- c("here", "shiny", "sf", "ggplot2")
+
+### install if necessary
+lapply(packages, 
+       function(x)
+       {
+         if(!(x %in% installed.packages()) | x %in% old.packages())
+         {
+           install.packages(x)  
+         }
+       })
+
+lapply(packages, require, character.only = T)
+
+# **********************************************************************************************
+#### D E F I N I T I O N S ####
+#rm(list=ls(all=TRUE))
+
+
+# ***********************************************************************************************
 # load data
-map_and_data_solar_current_plz <- readRDS(here("data", "processed", "map_and_data_solar_current_plz.rds"))
+map_and_data_solar_current_county <- readRDS(here("data", "processed", "map_and_data_solar_current_county.rds"))
 map_and_data_solar_current_state <- readRDS(here("data", "processed", "map_and_data_solar_current_state.rds"))
 
 # create server
@@ -31,10 +55,10 @@ dataset <- reactive({
 
 ui <- fluidPage(
   
-  titlePanel("German Power System Explorer"),
+  titlePanel("German Power Plants Explorer"),
   
   sidebarPanel(
-    selectInput('geo_level', 'Geographical Level', c("State" = "state", "Community" = "plz")),
+    selectInput('geo_level', 'Geographical Level', c("State" = "state", "Community" = "county")),
     selectInput('out_var', 'Output Variable', c("Number of solar plants" = "n", "Sum of solar plants' power" = "sum"))
   ),
   

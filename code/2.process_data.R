@@ -1,42 +1,57 @@
-# **********************************************************************************************
-#### D E F I N I T I O N S ####
-file_to_load <- "enh.csv"
-file_ger_shape_plz <- here("data", "raw", "shape_plz", "plz-gebiete.shp")
-file_ger_shape_state <- here("data", "raw", "shape_state", "plz-1stellig.shp")
-
 # ***********************************************************************************************
 #### installing, loading libraries ####
+library("utils")
+
 packages <- c("here", "dplyr", "sf", "tmap", "tmaptools", "leaflet")
 
 ### install if necessary
 lapply(packages, 
        function(x)
        {
-           if(!(x %in% installed.packages()))
-           {
-               install.packages(x)  
-           }
+         if(!(x %in% installed.packages()) | x %in% old.packages())
+         {
+           install.packages(x)  
+         }
        })
 
 lapply(packages, require, character.only = T)
 
 
+# **********************************************************************************************
+#### D E F I N I T I O N S ####
+#rm(list=ls(all=TRUE))
+
+file_to_load <- "enh.csv"
+
+subfolder <- zip_list(here("data", "raw", "shape_germany_bundesland_landkreis.zip"))$filename[1]
+subfolder <- gsub("/", "", subfolder, fixed = TRUE)
+file_ger_shape <- here("data", "raw", "shape_ger", subfolder, "vg2500", "vg2500_sta.shp")
+file_ger_shape_state <- here("data", "raw", "shape_ger", subfolder, "vg2500", "vg2500_lan.shp")
+file_ger_shape_county <- here("data", "raw", "shape_ger", subfolder, "vg2500", "vg2500_krs.shp")
+
+
 # ***********************************************************************************************
 #### load data ####
 enh <- read.csv2(here("data", "raw", file_to_load), row.names = NULL, encoding = "UTF-8")
-ger_shape_plz <- st_read(file_ger_shape_plz, options = "ENCODING=UTF-8", stringsAsFactors = FALSE)
+ger_shape <- st_read(file_ger_shape, options = "ENCODING=UTF-8", stringsAsFactors = FALSE)
 ger_shape_state <- st_read(file_ger_shape_state, options = "ENCODING=UTF-8", stringsAsFactors = FALSE)
+ger_shape_county <- st_read(file_ger_shape_county, options = "ENCODING=UTF-8", stringsAsFactors = FALSE)
 
-# prepare merge
-names(ger_shape_plz)[names(ger_shape_plz) == "plz"] <- "Plz"
-ger_shape_plz$Plz <- as.integer(ger_shape_plz$Plz)
+# some shapes need multiple entries of geometry
+# these duplicated entries will multiply the amount of facilities and power -> needs correction if merged too early
+# federal level: duplicate found
+ger_shape$GEN[duplicated(ger_shape$GEN)]
 
-# ***********************************************************************************************
-#### match shape file on Plz ####
-map_and_data <- inner_join(enh, ger_shape_plz)
+# state-level: no duplicates
+ger_shape_state$GEN[duplicated(ger_shape_state$GEN)]
 
-which(is.na(map_and_data$geometry))
-# --> match complete
+# county-level: some duplicates (with different geometry information: adding later to one county)
+ger_shape_county$GEN[duplicated(ger_shape_county$GEN)]
+
+
+## prepare merge
+names(ger_shape_state)[names(ger_shape_state) == "GEN"] <- "Bundesland"
+names(ger_shape_county)[names(ger_shape_county) == "GEN"] <- "Landkreis"
 
 
 # ***********************************************************************************************
@@ -46,45 +61,58 @@ which(is.na(map_and_data$geometry))
 # there are several different types of energy production
 table(map_and_data$EinheitenTyp)
 
-map_and_data_solar <- map_and_data %>%
+map_and_data_solar <- map_and_data_state %>%
   filter(EinheitenTyp == "Solareinheit")
 
 # some of them are not in use anymore
 map_and_data_solar_current <- map_and_data_solar %>%
   filter(is.na(EndgueltigeStilllegungDatum))
 
+# save for later purposes
+saveRDS(map_and_data_solar_current, here("data", "processed", "map_and_data_solar_current.rds")) 
+
 
 # ***********************************************************************************************
-#### aggregate data on Plz ####
-map_and_data_solar_current_plz <- map_and_data_solar_current %>%
-  select(Plz, Ort, Bundesland, Gemeinde, Nettonennleistung, note, geometry) %>%
-  group_by(Plz) %>%
-  summarize(n = length(Plz), mean = mean(Nettonennleistung), sum = sum(Nettonennleistung),
-            Bundesland = first(Bundesland))
+#### aggregate data on county level ####
+map_and_data_solar_current$EinheitenTyp <- as.character(map_and_data_solar_current$EinheitenTyp)
+table(map_and_data_solar_current$EinheitenTyp)
 
-# problems with geometry: inner_join again after aggregation
-map_and_data_solar_current_plz <- inner_join(map_and_data_solar_current_plz, ger_shape_plz)
+map_and_data_solar_current_county <- map_and_data_solar_current %>%
+  select(Plz, Ort, Bundesland, Landkreis, Gemeinde, Nettonennleistung, EinheitenTyp) %>%
+  group_by(Landkreis) %>%
+  summarize(n = length(Landkreis), mean = mean(Nettonennleistung), sum = sum(Nettonennleistung),
+            Einheitentyp = first(EinheitenTyp))
 
-table(map_and_data_solar_current_plz$Bundesland)
+# check if number of counties is the same as in the shape file
+length(map_and_data_solar_current_county$Landkreis) == (nrow(ger_shape_county) - length(ger_shape_county$Landkreis[duplicated(ger_shape_county$Landkreis)]))
+# which counties are not in the shape file
+map_and_data_solar_current_county$Landkreis[which(!map_and_data_solar_current_county$Landkreis %in% ger_shape_county$Landkreis)]
+# -> [TBD] Why do these counties have no shape information? Do they belong to another county? ...
+
+
+# merge shape file after aggregation
+map_and_data_solar_current_county <- inner_join(map_and_data_solar_current_county, ger_shape_county)
+
+
+# save data
+saveRDS(map_and_data_solar_current_county, here("data", "processed", "map_and_data_solar_current_county.rds")) 
+
 
 
 # ***********************************************************************************************
 #### aggregate data further on state level ####
-map_and_data_solar_current_plz_ <- map_and_data_solar_current_plz %>%
-  mutate(Plz1 = substr(Plz, 1, 1))
+map_and_data_solar_current_state <- map_and_data_solar_current %>%
+  group_by(Bundesland) %>%
+  summarize(n = length(Bundesland), mean = mean(Nettonennleistung), sum = sum(Nettonennleistung),
+            Einheitentyp = first(EinheitenTyp))
 
-map_and_data_solar_current_state <- map_and_data_solar_current_plz_ %>%
-  group_by(Plz1) %>%
-  summarize(n = sum(n), mean = mean(mean), sum = sum(sum))
-
-names(ger_shape_state)[names(ger_shape_state) == "plz"] <- "Plz1"
-
+# merge shape file after aggregation
 map_and_data_solar_current_state <- inner_join(map_and_data_solar_current_state, ger_shape_state)
 
-# ***********************************************************************************************
-#### save data that was a "long" time calculated ####
-saveRDS(map_and_data_solar_current_plz, here("data", "processed", "map_and_data_solar_current_plz.rds")) 
+# save
 saveRDS(map_and_data_solar_current_state, here("data", "processed", "map_and_data_solar_current_state.rds")) 
+
+
 
 # ***********************************************************************************************
 file.edit(here("code", "3.show_map.R"))
