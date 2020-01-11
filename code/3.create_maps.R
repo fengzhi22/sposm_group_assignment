@@ -89,6 +89,15 @@ data_solar_current_state <- data_solar_current %>%
 map_and_data_solar_current_state <- inner_join(ger_shape_state, data_solar_current_state)
 
 
+# ***********************************************************************************************
+#### save ####
+saveRDS(map_and_data_solar_current_county, here("data", "processed", "map_and_data_solar_current_county.rds"))
+saveRDS(map_and_data_solar_current_state ,here("data", "processed", "map_and_data_solar_current_state.rds"))
+# [TBD] loading RDS files and using it with tmap raised an error
+# --> That's why there might be problems with tmap in Shiny, 
+# if not loading and assembling the shape file and data within Shiny
+
+
 
 # ***********************************************************************************************
 #### create map using ggplot ####
@@ -198,7 +207,5 @@ tmap_save(tmob_solar_county_number, here("graphs","tmap_solar_county_number.pdf"
 
 
 
-
-# ***********************************************************************************************
 # ***********************************************************************************************
 file.edit(here("code", "4.shiny.R"))

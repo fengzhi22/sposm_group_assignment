@@ -1,6 +1,6 @@
 Extensions possible
 - Shiny: other energy sources
-- Shiny: swap communal level to Landkreis (current level not very helpful)
+-- prepare data
 - Shiny: show state variable of existing facilities for the end of a specific year
 - Shiny: 
 
