@@ -1,7 +1,3 @@
-Changes necessary
-- concordance table of Plz to federal state
-- concordance table of Plz to Landkreis level
-
 Extensions possible
 - Shiny: other energy sources
 - Shiny: swap communal level to Landkreis (current level not very helpful)
