@@ -164,32 +164,37 @@ sf::st_is_valid()
 
 
 ## reduced
-tm_shape(map_and_data_solar_current_state) +
+tmob_solar_state_number <- tm_shape(map_and_data_solar_current_state) +
   tm_polygons("n", palette = "Greens", n = 10, title = "Number") +
   tm_layout(legend.outside = TRUE,
             title = "Solar plants\nat 'state' level\n(Bundesland)")
-tmap_save(here("graphs","map2_n.pdf"))
+tmob_solar_state_number
+tmap_save(tmob_solar_state_number, here("graphs","tmap_solar_state_number.pdf"))
 
-tm_shape(map_and_data_solar_current_state) +
+
+tmob_solar_state_power <- tm_shape(map_and_data_solar_current_state) +
   tm_polygons("sum", palette = "Greens", n = 10, title = "Power") +
   tm_layout(legend.outside = TRUE,
             title = "Solar plants\nat 'state' level\n(Bundesland)")
-
-
+tmob_solar_state_power
+tmap_save(tmob_solar_state_power, here("graphs","tmap_solar_state_power.pdf"))
 
 
 ### county
-tm_shape(map_and_data_solar_current_county) +
+tmob_solar_county_power <- tm_shape(map_and_data_solar_current_county) +
   tm_polygons("sum", palette = "Greens", n = 10, title = "Power") +
   tm_layout(legend.outside = TRUE,
             title = "Solar plants\nat 'county' level\n(Landkreis)")
+tmob_solar_county_power
+tmap_save(tmob_solar_county_power, here("graphs","tmap_solar_county_power.pdf"))
 
 
-
-tm_shape(map_and_data_solar_current_county) +
+tmob_solar_county_number <- tm_shape(map_and_data_solar_current_county) +
   tm_polygons("n", palette = "Greens", n = 10, title = "Number") +
   tm_layout(legend.outside = TRUE,
             title = "Solar plants\nat 'county' level\n(Landkreis)")
+tmob_solar_county_number
+tmap_save(tmob_solar_county_number, here("graphs","tmap_solar_county_number.pdf"))
 
 
 
