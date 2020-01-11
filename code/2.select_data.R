@@ -37,15 +37,17 @@ enh <- read.csv2(here("data", "raw", file_to_load), row.names = NULL, encoding =
 # there are several different types of energy production
 table(enh$EinheitenTyp)
 
-data_solar <- enh %>%
-  filter(EinheitenTyp == "Solareinheit")
+data_solar_wind <- enh %>%
+  filter(EinheitenTyp %in% c("Solareinheit", "Windeinheit"))
 
-# some of them are not in use anymore
-data_solar_current <- data_solar %>%
+table(data_solar_wind$EinheitenTyp)
+
+# some of them might not be in use anymore
+data_solar_wind_current <- data_solar_wind %>%
   filter(is.na(EndgueltigeStilllegungDatum))
 
 # save for later purposes
-saveRDS(data_solar_current, here("data", "processed", "data_solar_current.rds")) 
+saveRDS(data_solar_wind_current, here("data", "processed", "data_solar_wind_current.rds")) 
 
 
 

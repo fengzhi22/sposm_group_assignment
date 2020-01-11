@@ -1,7 +1,15 @@
 Extensions possible
-- Shiny: other energy sources
--- prepare data
-- Shiny: show state variable of existing facilities for the end of a specific year
+
+- data & Shiny: add other energy sources
+DONE-- 1st step: add wind
+-- later: add the others
+-- How to deal with off-shore wind that is not located at the map?
+-- How can we choose different colors in Shiny depending on the source of energy?
+
+- Shiny: year by year resolution in additional gif below
+-- prepare data with simple year column
+-- show state variable of existing facilities for the end of a specific year
+
 - Shiny: 
 
 
