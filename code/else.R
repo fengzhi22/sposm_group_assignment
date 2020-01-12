@@ -1,4 +1,11 @@
 # ***********************************************************************************************
+#### tmap example ####
+data("World")
+tm_shape(World)
+
+
+
+# ***********************************************************************************************
 #### set directory at top level of the project ####
 # identify folder of running or sourced script
 thisFolder <- function() {

@@ -111,7 +111,7 @@ server <- function(input, output) {
   
   output$plot1 <- renderPlot({
     
-    p <- ggplot(energy_source(), aes(geometry = geometry)) +
+    p1 <- ggplot(energy_source(), aes(geometry = geometry)) +
       geom_sf(aes(fill = get(input$out_var))) +
       scale_fill_gradient(low = "#B6FF52", high = "#3B5518", name = "Quantity") +
       theme(axis.title = element_blank(),
@@ -119,18 +119,18 @@ server <- function(input, output) {
             axis.ticks = element_blank(),
             panel.background = element_blank())
 
-    print(p)
+    print(p1)
     
   })
   
   output$plot2 <- renderPlot({
     
-    p <- tm_shape(energy_source()) +
+    p2 <- tm_shape(energy_source()) +
       tm_polygons(input$out_var, palette = coloring(), n = 10, title = title_legend()) +
       tm_layout(legend.outside = TRUE) +
       tm_layout(frame = FALSE)
     
-    print(p)
+    print(p2)
     
   })
   
@@ -138,39 +138,29 @@ server <- function(input, output) {
 
 # ***********************************************************************************************
 #### create ui ####
-dataset <- reactive({
-  get(paste0("map_and_data_solar_current_", input$geo_level))
-})
-
-energy_source <- reactive({
-  dataset() %>% filter(EinheitenTyp == input$source)
-})
-
-coloring <- reactive({
-  if (input$source == "Solareinheit"){"Greens"}else{
-    if (input$source == "Windeinheit"){"Blues"}
-  }
-})
-
-title_legend <- reactive({
-  if (input$out_var == "n"){"Number of power plants"}else{
-    if (input$out_var == "sum"){"Power in kw(p)"}
-  }
-})
-
-
 ui <- fluidPage(
-  
-  titlePanel("German Power Plants Explorer"),
-  
-  sidebarPanel(
-    selectInput('source', 'Energy Source', c("Solar Energy" = "Solareinheit", "Wind Energy" = "Windeinheit")),
-    selectInput('geo_level', 'Geographical Level', c("State" = "state", "County" = "county")),
-    selectInput('out_var', 'Output Variable', c("Number of power plants" = "n", "Sum of power plants' power" = "sum"))
-  ),
-  
-  mainPanel(
-    plotOutput('plot2')
+  fluidRow(
+    column(width = 4,
+           fluidRow(
+             column(width = 12,
+                    h3("German Power Plants Explorer", align = "center"),
+                    #titlePanel("German Power Plants Explorer"),
+                    sidebarPanel(width = 12,
+                                 selectInput('source', 'Energy Source', c("Solar Energy" = "Solareinheit", "Wind Energy" = "Windeinheit")),
+                                 selectInput('geo_level', 'Geographical Level', c("State" = "state", "County" = "county")),
+                                 selectInput('out_var', 'Output Variable', c("Number of power plants" = "n", "Sum of power plants' power" = "sum"))
+                    ),
+             )
+           )
+ 
+    ),
+    column(width = 8,
+           mainPanel(
+             h3("Germany in geographical zones"),
+             plotOutput('plot2')#,
+             #plotOutput('plot1')
+           )
+    )
   )
 )
 
