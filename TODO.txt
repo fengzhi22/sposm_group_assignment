@@ -1,16 +1,20 @@
-Extensions possible
+Code Questions
+- Shiny App: Do the server and the ui need the same code? (there seems to be a doubling of code)
 
+
+Extensions possible
 - data & Shiny: add other energy sources
 DONE-- 1st step: add wind
 -- later: add the others
 -- How to deal with off-shore wind that is not located at the map?
--- How can we choose different colors in Shiny depending on the source of energy?
+--- maybe use the geo information from the source and put little dots on the map for the location?
+DONE-- How can we choose different colors in Shiny depending on the source of energy?
 
 - Shiny: year by year resolution in additional gif below
 -- prepare data with simple year column
 -- show state variable of existing facilities for the end of a specific year
 
-- Shiny: 
+- Shiny: numeric sidebar for the number of categories (2-15)
 
 
 Check out for further development of a package

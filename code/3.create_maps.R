@@ -123,46 +123,58 @@ selection_source_state <- map_and_data_solar_wind_current_state %>%
 
 
 ## Landkreis: Nettonennleistung
-map1_netto <-  ggplot(selection_source_county, aes(geometry = geometry)) +
-  geom_sf(aes(fill = sum)) +
-  scale_fill_gradient(low = "#C6FF72", high = "#2B5508") +
-  ggtitle("Sum of solar plants' power at community level (Landkreis)")
-map1_netto
-
-ggsave(here("graphs","map1_netto.pdf"))
-
 # lightgreen #C6FF72
 # darkgreen #2B5508
+
 
 ## Landkreis: amount n of solar plants
 map1_n <- ggplot(selection_source_county, aes(geometry = geometry)) +
   geom_sf(aes(fill = n)) +
   scale_fill_gradient(low = "#C6FF72", high = "#2B5508") +
-  ggtitle("Number of solar plants at community level (Landkreis)")
+  ggtitle("Number of solar plants\nat community level (Landkreis)") +
+  theme_void() +
+  theme(plot.title = element_text(hjust = 0.5))
 map1_n
-# --> takes some time
+
 ggsave(here("graphs","map1_n.pdf"))
+
+
+map1_netto <-  ggplot(selection_source_county, aes(geometry = geometry)) +
+  geom_sf(aes(fill = sum)) +
+  scale_fill_gradient(low = "#C6FF72", high = "#2B5508") +
+  ggtitle("Sum of solar plants' power at community level (Landkreis)") +
+  theme_void() +
+  theme(plot.title = element_text(hjust = 0.5))
+map1_netto
+
+ggsave(here("graphs","map1_netto.pdf"))
+
 # *********************************************
 
 ### second map on state level
-# power in total
-map2_netto <- ggplot(selection_source_state, aes(geometry = geometry)) +
-  geom_sf(aes(fill = sum)) +
-  scale_fill_gradient(low = "#C6FF72", high = "#2B5508") +
-  ggtitle("Sum of solar plants' power at 'state' level (Bundesland)")
-map2_netto
-
-ggsave(here("graphs","map2_netto.pdf"))
-
-
 # number of solar plants at state level
 map2_n <- ggplot(selection_source_state, aes(geometry = geometry)) +
   geom_sf(aes(fill = n)) +
   scale_fill_gradient(low = "#C6FF72", high = "#2B5508") +
-  ggtitle("Number of solar plants at 'state' level (Bundesland)")
+  ggtitle("Number of solar plants at 'state' level (Bundesland)") +
+  theme_void() +
+  theme(plot.title = element_text(hjust = 0.5))
 map2_n
 
 ggsave(here("graphs","map2_n.pdf"))
+
+
+# power in total
+map2_netto <- ggplot(selection_source_state, aes(geometry = geometry)) +
+  geom_sf(aes(fill = sum)) +
+  scale_fill_gradient(low = "#C6FF72", high = "#2B5508") +
+  ggtitle("Sum of solar plants' power at 'state' level (Bundesland)") +
+  theme_void() +
+  theme(plot.title = element_text(hjust = 0.5))
+map2_netto
+
+ggsave(here("graphs","map2_netto.pdf"))
+
 
 
 
@@ -187,7 +199,8 @@ tm_shape(selection_source_state) +
              title.col = "Power",
              palette = "Blues") +
   tm_layout(legend.outside = TRUE,
-            title = "Solar plants\nat 'state' level\n(Bundesland)")
+            title = "Solar plants\nat 'state' level\n(Bundesland)") + 
+  tm_layout(frame = FALSE)
 
 # [TBD]: What is this warning about?
 sf::st_is_valid()
@@ -203,7 +216,7 @@ tmap_save(tmob_solar_state_number, here("graphs","tmap_solar_state_number.pdf"))
 
 
 tmob_solar_state_power <- tm_shape(selection_source_state) +
-  tm_polygons("sum", palette = "Greens", n = 10, title = "Power") +
+  tm_polygons("sum", palette = "Greens", n = 10, title = "Power in kw(p)") +
   tm_layout(legend.outside = TRUE,
             title = "Solar plants\nat 'state' level\n(Bundesland)")
 tmob_solar_state_power
@@ -211,20 +224,20 @@ tmap_save(tmob_solar_state_power, here("graphs","tmap_solar_state_power.pdf"))
 
 
 ### county
-tmob_solar_county_power <- tm_shape(selection_source_county) +
-  tm_polygons("sum", palette = "Greens", n = 10, title = "Power") +
-  tm_layout(legend.outside = TRUE,
-            title = "Solar plants\nat 'county' level\n(Landkreis)")
-tmob_solar_county_power
-tmap_save(tmob_solar_county_power, here("graphs","tmap_solar_county_power.pdf"))
-
-
 tmob_solar_county_number <- tm_shape(selection_source_county) +
   tm_polygons("n", palette = "Greens", n = 10, title = "Number") +
   tm_layout(legend.outside = TRUE,
             title = "Solar plants\nat 'county' level\n(Landkreis)")
 tmob_solar_county_number
 tmap_save(tmob_solar_county_number, here("graphs","tmap_solar_county_number.pdf"))
+
+
+tmob_solar_county_power <- tm_shape(selection_source_county) +
+  tm_polygons("sum", palette = "Greens", n = 10, title = "Power in kw(p)") +
+  tm_layout(legend.outside = TRUE,
+            title = "Solar plants\nat 'county' level\n(Landkreis)")
+tmob_solar_county_power
+tmap_save(tmob_solar_county_power, here("graphs","tmap_solar_county_power.pdf"))
 
 
 
@@ -240,38 +253,39 @@ selection_source_state <- map_and_data_solar_wind_current_state %>%
 tmob_wind_state_number <- tm_shape(selection_source_state) +
   tm_polygons("n", palette = "Blues", n = 10, title = "Number") +
   tm_layout(legend.outside = TRUE,
-            title = "Solar plants\nat 'state' level\n(Bundesland)")
+            title = "Wind power plants\nat 'state' level\n(Bundesland)")
 tmob_wind_state_number
 tmap_save(tmob_wind_state_number, here("graphs","tmap_wind_state_number.pdf"))
 
 
 tmob_wind_state_power <- tm_shape(selection_source_state) +
-  tm_polygons("sum", palette = "Blues", n = 10, title = "Power") +
+  tm_polygons("sum", palette = "Blues", n = 10, title = "Power in kw") +
   tm_layout(legend.outside = TRUE,
-            title = "Solar plants\nat 'state' level\n(Bundesland)")
+            title = "Wind power plants\nat 'state' level\n(Bundesland)")
 tmob_wind_state_power
 tmap_save(tmob_wind_state_power, here("graphs","tmap_wind_state_power.pdf"))
 
 
 ### county
-tmob_wind_county_power <- tm_shape(selection_source_county) +
-  tm_polygons("sum", palette = "Blues", n = 10, title = "Power") +
-  tm_layout(legend.outside = TRUE,
-            title = "Solar plants\nat 'county' level\n(Landkreis)")
-tmob_wind_county_power
-tmap_save(tmob_wind_county_power, here("graphs","tmap_wind_county_power.pdf"))
-
-
 tmob_wind_county_number <- tm_shape(selection_source_county) +
   tm_polygons("n", palette = "Blues", n = 10, title = "Number") +
   tm_layout(legend.outside = TRUE,
-            title = "Solar plants\nat 'county' level\n(Landkreis)")
+            title = "Wind power plants\nat 'county' level\n(Landkreis)")
 tmob_wind_county_number
 tmap_save(tmob_wind_county_number, here("graphs","tmap_wind_county_number.pdf"))
+
+
+tmob_wind_county_power <- tm_shape(selection_source_county) +
+  tm_polygons("sum", palette = "Blues", n = 10, title = "Power in kw") +
+  tm_layout(legend.outside = TRUE,
+            title = "Wind power plants\nat 'county' level\n(Landkreis)")
+tmob_wind_county_power
+tmap_save(tmob_wind_county_power, here("graphs","tmap_wind_county_power.pdf"))
+
 
 
 
 
 
 # ***********************************************************************************************
-file.edit(here("code", "4.shiny.R"))
+file.edit(here("code", "4.2shiny_solar_wind.R"))

@@ -40,7 +40,8 @@ server <- function(input, output) {
       scale_fill_gradient(low = "#B6FF52", high = "#3B5518", name = "Quantity") +
       theme(axis.title = element_blank(),
             axis.text = element_blank(),
-            axis.ticks = element_blank())
+            axis.ticks = element_blank(),
+            panel.background = element_blank())
 
     print(p)
     
