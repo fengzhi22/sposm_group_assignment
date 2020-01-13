@@ -15,6 +15,12 @@
 - data & Shiny: add other energy sources
 DONE-- 1st step: add wind
 -- later: add the others
+-- use different colors in Shiny
+--- biomass: should be green (change color of solar to yellow)
+--- coal: grey-black
+--- brown coal: bright brown - dark brown
+--- nuclear: green - neon-green (from a normal green to a very bright and shining green?)
+--- etc. ...
 DONE-- How can we choose different colors in Shiny depending on the source of energy?
 
 
@@ -25,34 +31,49 @@ DONE-- How can we choose different colors in Shiny depending on the source of en
 - Shiny: numeric sidebar for the number of categories in the legend and graphic (2-15, start: 10)
 -- sliderInput
 https://shiny.rstudio.com/reference/shiny/0.14/sliderInput.html
-(other panels: conditionalPanel, )
+(other panels: conditionalPanel, etc.?)
 
 
 ******************************************
 ***** 3)
-3-6 hours
-- Shiny: year by year resolution in additional gif below
--- prepare data with simple year column
--- show state variable of existing facilities for the end of a specific year
+1-2 hour
+- Shiny: add average power plant production potential as output variable
+-- already calculated and in the processed data
+-- just needs a Shiny integration
 
 
 ******************************************
 ***** 4)
-4-8 hours
-- Shiny: Show exact location
--- in second map below or maybe the same App?
--- There is information on the geographical location (degree of latitude and longitude) of (some) power plants an the source data
+3-6 hours
+- Shiny: evolvement of production potential over time
+-- Data: prepare data with simple year column
+--- show state variable of existing facilities for the end of a specific year
+-- Shiny: additional gif or multiple plots in different years (below the current graphic)
 
 
 ******************************************
 ***** 5)
-2-4 hours
-- How to deal with off-shore wind that is not located at the map?
--- maybe use the geo information from the source and put little dots on the map for the location?
+4-8 hours
+- Shiny: Show exact location of power plants
+-- in second map below or maybe in the same grahpic?
+(below might be problematic since the place is already used by 
+-- Data: There is information on the geographical location (degree of latitude and longitude) of (some) power plants an the source data
+-- Data: make the geographic information campatible with the shape file and print it
+-- Shiny: export plot to Shiny
+-- Shiny: use a "Yes/No" choice of the user to show the dots in the first map?
 
 
 ******************************************
 ***** 6)
+2-4 hours
+- How to deal with offshore wind that is not located at the map?
+-- can rely on the work before
+-- maybe use the geo information from the source and put little dots on the map for the location?
+- How to express the output variables for these?
+
+
+******************************************
+***** 7)
 2-4 hours
 - Shiny Dashboard?
 -- another style for showing the ui
