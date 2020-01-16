@@ -2,7 +2,7 @@
 #### installing, loading libraries ####
 library("utils")
 
-packages <- c("here", "httr", "readxl", "ggplot2")
+packages <- c("here", "httr", "readxl", "ggplot2", "zip")
 
 ### install if necessary
 lapply(packages, 
@@ -70,7 +70,7 @@ if(!file.exists(here("data", "raw", file_ger_shape)))
 #}
 
 # save information on MaStR variables
-if(!file.exists(here("resources", file_ger_shape_state)))
+if(!file.exists(here("resources", "MaStR_unit_explanations.xlsx")))
 {
   download.file(url_variables_expl, here("resources", "MaStR_unit_explanations.xlsx"))
 }
