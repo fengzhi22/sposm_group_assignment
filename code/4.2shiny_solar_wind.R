@@ -190,7 +190,7 @@ ui <- dashboardPage(
               h2("Reference"),
               div(class = "list",
                   tags$ul(
-                    tags$li(tags$b("Data"), ": German power plants raw data is downloaded from official register “Marktstammdatenregister” through following link:", tags$a(href="https://www.bundesnetzagentur.de/SharedDocs/Downloads/DE/Sachgebiete/Energie/Unternehmen_Institutionen/ErneuerbareEnergien/ZahlenDatenInformationen/VOeFF_Registerdaten/DatenAb310119.zip", "https://www.bundesnetzagentur.de/SharedDocs/Downloads/DE/Sachgebiete/Energie/Unternehmen_Institutionen/ErneuerbareEnergien/ZahlenDatenInformationen/VOeFF_Registerdaten/DatenAb310119.zip")),
+                    tags$li(tags$b("Data"), ": German power plants raw data is downloaded from official register “Marktstammdatenregister” through following link:", tags$a(href="https://www.bundesnetzagentur.de/SharedDocs/Downloads/DE/Sachgebiete/Energie/Unternehmen_Institutionen/ErneuerbareEnergien/ZahlenDatenInformationen/VOeFF_Registerdaten/DatenAb310119.zip", "https://www.bundesnetzagentur.de/SharedDocs/Downloads/DE/Sachgebiete/Energie/", tags$br("Unternehmen_Institutionen/ErneuerbareEnergien/ZahlenDatenInformationen/VOeFF_Registerdaten/DatenAb310119.zip"))),
                     p("The register includes the potential production of power plants in Germany including renewables like wind, solar and biomass as well as coal and nuclear. The source provides more than 100 variables for various purposes."),
                     tags$li(tags$b("License"), ": What should we write about data license? Should we translate some relevant sections of the data usage policy of Bundesnetzagentur?")
                   )
