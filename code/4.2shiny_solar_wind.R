@@ -2,7 +2,7 @@
 #### installing, loading libraries ####
 library("utils")
 
-packages <- c("here", "shiny", "sf", "ggplot2", "dplyr")
+packages <- c("here", "shiny", "sf", "ggplot2", "dplyr", "shinydashboard")
 
 ### install if necessary
 lapply(packages, 
@@ -138,28 +138,64 @@ server <- function(input, output) {
 
 # ***********************************************************************************************
 #### create ui ####
-ui <- fluidPage(
-  fluidRow(
-    column(width = 4,
-           fluidRow(
-             column(width = 12,
-                    h3("German Power Plants Explorer", align = "center"),
-                    #titlePanel("German Power Plants Explorer"),
-                    sidebarPanel(width = 12,
-                                 selectInput('source', 'Energy Source', c("Solar Energy" = "Solareinheit", "Wind Energy" = "Windeinheit")),
-                                 selectInput('geo_level', 'Geographical Level', c("State" = "state", "County" = "county")),
-                                 selectInput('out_var', 'Output Variable', c("Number of power plants" = "n", "Sum of power plants' power" = "sum"))
-                    ),
-             )
-           )
- 
-    ),
-    column(width = 8,
-           mainPanel(
-             h3("Germany in geographical zones"),
-             plotOutput('plot2')#,
-             #plotOutput('plot1')
-           )
+ui <- dashboardPage(
+  dashboardHeader(title = "Dashboard"),
+  dashboardSidebar(
+    sidebarMenu(
+      menuItem("Storyline", tabName = "storyline", icon = icon("dashboard")),
+      menuItem("Data", tabName = "data_explorer", icon = icon("th")),
+      menuItem("Reference", tabName = "reference", icon = icon("th"))
+    )
+  ),
+  dashboardBody(
+    tabItems(
+      # First tab content
+      tabItem(tabName = "storyline",
+              h2("Do rich regions use more renewable energy in Germany? (for example)"),
+              div(class = "text",
+                  p("Because we do not have a story yet,", tags$b("the content is left blank intentionally.")),
+                  p("And I just put these sentences", tags$em("to test the codes."))
+              )
+      ),
+      
+      # Second tab content
+      tabItem(tabName = "data_explorer",
+              fluidRow(
+                column(width = 4,
+                       fluidRow(
+                         column(width = 12,
+                                h3("German Power Plants Explorer", align = "center"),
+                                #titlePanel("German Power Plants Explorer"),
+                                sidebarPanel(width = 12,
+                                             selectInput('source', 'Energy Source', c("Solar Energy" = "Solareinheit", "Wind Energy" = "Windeinheit")),
+                                             selectInput('geo_level', 'Geographical Level', c("State" = "state", "County" = "county")),
+                                             selectInput('out_var', 'Output Variable', c("Number of power plants" = "n", "Sum of power plants' power" = "sum"))
+                                ),
+                         )
+                       )
+                       
+                ),
+                column(width = 8,
+                       mainPanel(
+                         h3("Germany in geographical zones"),
+                         plotOutput('plot2')#,
+                         #plotOutput('plot1')
+                       )
+                )
+              )
+      ),
+      
+      # Third tab content
+      tabItem(tabName = "reference",
+              h2("Reference"),
+              div(class = "list",
+                  tags$ul(
+                    tags$li(tags$b("Data"), ": German power plants raw data is downloaded from official register “Marktstammdatenregister” through following link:", tags$a(href="https://www.bundesnetzagentur.de/SharedDocs/Downloads/DE/Sachgebiete/Energie/Unternehmen_Institutionen/ErneuerbareEnergien/ZahlenDatenInformationen/VOeFF_Registerdaten/DatenAb310119.zip", "https://www.bundesnetzagentur.de/SharedDocs/Downloads/DE/Sachgebiete/Energie/", tags$br("Unternehmen_Institutionen/ErneuerbareEnergien/ZahlenDatenInformationen/VOeFF_Registerdaten/DatenAb310119.zip"))),
+                    p("The register includes the potential production of power plants in Germany including renewables like wind, solar and biomass as well as coal and nuclear. The source provides more than 100 variables for various purposes."),
+                    tags$li(tags$b("License"), ": What should we write about data license? Should we translate some relevant sections of the data usage policy of Bundesnetzagentur?")
+                  )
+              )
+      )
     )
   )
 )
