@@ -1,0 +1,19 @@
+R-package "wiesbaden" on accessing German statistics
+https://github.com/sumtxt/wiesbaden
+
+R-package "destatiscleanr"
+https://github.com/cutterkom/destatiscleanr
+
+
+
+
+Regional atlas of Germany (based on regional statistics)
+- state/district/county
+- 2000-2017
+- data
+-- population statistics
+-- social indicators (e.g. income)
+--
+- many other options to choose in displaying
+https://www-genesis.destatis.de/gis/genView?GenMLURL=https://www-genesis.destatis.de/regatlas/AI002-1.xml&CONTEXT=REGATLAS01
+
