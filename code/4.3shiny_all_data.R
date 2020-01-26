@@ -2,7 +2,7 @@
 #### installing, loading libraries ####
 library("utils")
 
-packages <- c("here", "shiny", "zip", "sf", "tmap", "tmaptools", "ggplot2", "dplyr", "shinydashboard")
+packages <- c("here", "shiny", "zip", "sf", "tmap", "tmaptools", "ggplot2", "dplyr", "shinydashboard", "leaflet")
 
 ### install if necessary
 lapply(packages, 
@@ -76,7 +76,11 @@ ger_shape_state$ags <- as.numeric(ger_shape_state$ags)
 map_and_data_state <- inner_join(ger_shape_state, data_state, by = c("ags" = "ags_federal_state"))
 map_and_data_county <- inner_join(ger_shape_county, data_county, by = c("ags" = "ags_county"))
 # Landkreis "offshore" dropped
+names(map_and_data_state)[names(map_and_data_state) == "Bundesland.x"] <- "regionid"
+names(map_and_data_county)[names(map_and_data_county) == "name"] <- "regionid"
 
+saveRDS(map_and_data_state, file = here("data", "processed","map_and_data_state.rds"))
+saveRDS(map_and_data_county, file = here("data", "processed","map_and_data_county.rds"))
 # missing ags_federal_state dropped
 table(data_state$ags_federal_state, useNA = "always")
 data_state[is.na(data_state$ags_federal_state),]
@@ -94,7 +98,7 @@ server <- function(input, output) {
     get(paste0("map_and_data_", input$geo_level))
   })
   
-  energy_source <- reactive({
+  Energy <- reactive({
     dataset() %>% filter(EinheitenTyp == input$source)
   })
   
@@ -106,13 +110,15 @@ server <- function(input, output) {
   
   title_legend <- reactive({
     if (input$out_var == "n"){"Number of power plants"}else{
-      if (input$out_var == "sum"){"Power in kw(p)"}
+      if (input$out_var == "sum"){"Power in kw(p)"} else{
+      if (input$out_var == "mean"){"Power in kw(p)"}
+      }
     }
   })
   
   output$plot1 <- renderPlot({
     
-    p1 <- ggplot(energy_source(), aes(geometry = geometry)) +
+    p1 <- ggplot(Energy(), aes(geometry = geometry)) +
       geom_sf(aes(fill = get(input$out_var))) +
       scale_fill_gradient(low = "#B6FF52", high = "#3B5518", name = "Quantity") +
       theme(axis.title = element_blank(),
@@ -124,14 +130,14 @@ server <- function(input, output) {
     
   })
   
-  output$plot2 <- renderPlot({
+  output$plot2 <- renderLeaflet({
     
-    p2 <- tm_shape(energy_source()) +
-      tm_polygons(input$out_var, palette = coloring(), n = 10, title = title_legend()) +
+    p2 <- tm_shape(Energy()) +
+      tm_polygons(input$out_var, palette = coloring(), n = input$scale, title = title_legend(), id = "regionid", popup.vars = c("Value:" = input$out_var)) +
       tm_layout(legend.outside = TRUE) +
       tm_layout(frame = FALSE)
     
-    print(p2)
+      tmap_leaflet(p2)
     
   })
   
@@ -170,7 +176,11 @@ ui <- dashboardPage(
                                 sidebarPanel(width = 12,
                                              selectInput('source', 'Energy Source', c("Solar Energy" = "Solareinheit", "Wind Energy" = "Windeinheit")),
                                              selectInput('geo_level', 'Geographical Level', c("State" = "state", "County" = "county")),
-                                             selectInput('out_var', 'Output Variable', c("Number of power plants" = "n", "Sum of power plants' power" = "sum"))
+                                             selectInput('out_var', 'Output Variable', c("Total number of power plants" = "n", 
+                                                                                         "Total power production" = "sum", 
+                                                                                         "Average power production per plant" = "mean" )),
+                                             sliderInput("scale", "Rough Number of Legend Classes",
+                                                         min = 2, max = 10, value = 6),
                                 ),
                          )
                        )
@@ -179,7 +189,7 @@ ui <- dashboardPage(
                 column(width = 8,
                        mainPanel(
                          h3("Germany in geographical zones"),
-                         plotOutput('plot2')#,
+                         leafletOutput('plot2')#,
                          #plotOutput('plot1')
                        )
                 )
@@ -191,7 +201,7 @@ ui <- dashboardPage(
               h2("Reference"),
               div(class = "list",
                   tags$ul(
-                    tags$li(tags$b("Data"), ": German power plants raw data is downloaded from official register “Marktstammdatenregister” through following link:", tags$a(href="https://www.bundesnetzagentur.de/SharedDocs/Downloads/DE/Sachgebiete/Energie/Unternehmen_Institutionen/ErneuerbareEnergien/ZahlenDatenInformationen/VOeFF_Registerdaten/DatenAb310119.zip", "https://www.bundesnetzagentur.de/SharedDocs/Downloads/DE/Sachgebiete/Energie/", tags$br("Unternehmen_Institutionen/ErneuerbareEnergien/ZahlenDatenInformationen/VOeFF_Registerdaten/DatenAb310119.zip"))),
+                    tags$li(tags$b("Data"), ": German power plants raw data is downloaded from official register Marktstammdatenregister through following link:", tags$a(href="https://www.bundesnetzagentur.de/SharedDocs/Downloads/DE/Sachgebiete/Energie/Unternehmen_Institutionen/ErneuerbareEnergien/ZahlenDatenInformationen/VOeFF_Registerdaten/DatenAb310119.zip", "https://www.bundesnetzagentur.de/SharedDocs/Downloads/DE/Sachgebiete/Energie/", tags$br("Unternehmen_Institutionen/ErneuerbareEnergien/ZahlenDatenInformationen/VOeFF_Registerdaten/DatenAb310119.zip"))),
                     p("The register includes the potential production of power plants in Germany including renewables like wind, solar and biomass as well as coal and nuclear. The source provides more than 100 variables for various purposes."),
                     tags$li(tags$b("License"), ": What should we write about data license? Should we translate some relevant sections of the data usage policy of Bundesnetzagentur?")
                   )
