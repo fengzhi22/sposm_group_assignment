@@ -8,11 +8,12 @@
 .Rproj.user/
 
 # folders with probably a lot of content
-/data/*
-
+/data/raw/
+# but keep data/processed as long as the content is small
 
 # inspirational R-code for later purposes
 /code/else.R
+
 # OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
 .httr-oauth
 

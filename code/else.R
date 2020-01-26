@@ -70,3 +70,83 @@ if(FALSE)
 #C:/Users/Sebastian/Google Drive/_Downloads/vg250_neu
 
 test <- st_read("C:/Users/Sebastian/Google Drive/_Downloads/vg250_neu", options = "ENCODING=UTF-8", stringsAsFactors = FALSE)
+
+
+
+
+# ***********************************************************************************************
+#### messing with regional data and other sources ####
+
+### regional statistic
+# use Wiesbaden to do that?
+# https://github.com/sumtxt/wiesbaden
+
+# You need an account at 
+# https://www.regionalstatistik.de/
+# to use the data
+
+# destatis_user <-c(user="your-username",password="your-password",db="database-shortname")
+
+# GET("https://www.regionalstatistik.de", authenticate(destatis_user[1], destatis_user[2], "basic"))
+## authenticate against Windows credentails
+page <- GET("https://www.regionalstatistik.de", authenticate(":", ":", "ntlm"))
+# -> does not work!?
+
+test_login(genesis=c(db='regio'))
+# -> does not work!?
+
+
+#download_csv()
+test <- retrieve_datalist(tableseries = "14111", genesis=c(db="regio"))
+#retrieve_data()
+# -> does not work!?
+
+test2 <- retrieve_data(tablename="14111KJ002", genesis=c(db="regio") )
+# -> does not work!?
+
+# e.g. state elections 1.9.2019
+#download_csv(here("data", "raw", "14311-01"))
+# -> does not work: loads some html table
+
+# 
+#download_csv(here("data", "raw", "14342-01-03-4"))
+
+
+
+### ags
+# devtools::install_github("sumtxt/ags")
+#library("ags")
+# -> Not helpful
+
+# choroplethr package
+#ags <- data("ChoroplethPostalCodesAndAGS_Germany")
+# -> does not work, data not existent
+
+
+## Destatis download by hand
+# https://www.destatis.de/DE/Themen/Laender-Regionen/Regionales/Gemeindeverzeichnis/Administrativ/Archiv/GV100ADQ/GV100AD3101.html
+# use package raster to load ascii file
+
+# ****
+url_ags <- "https://www.destatis.de/DE/Themen/Laender-Regionen/Regionales/Gemeindeverzeichnis/Administrativ/Archiv/GV100ADQ/GV100AD3101.zip?__blob=publicationFile"
+file_ags <- "GV100AD3101.zip"
+
+if(!file.exists(here("data", "raw", file_ags)))
+{
+  download.file(url_ags, here("data", "raw", file_ags))
+}
+
+zipF <- here("data", 'raw', file_ags)
+outDir <- here("data", 'raw')
+unzip(zipF, exdir = outDir)
+
+#ags <- raster(here("data", 'raw', "GV100AD_310120.ASC"))
+# -> does not work
+
+#ags <- read.csv(here("data", 'raw', "GV100AD_310120.ASC"), header = FALSE, skip = 1)
+# -> fucking messy
+
+
+
+### 
+
