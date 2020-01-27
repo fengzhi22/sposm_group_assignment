@@ -75,8 +75,8 @@ ger_shape_state$ags <- as.numeric(ger_shape_state$ags)
 ## general maps for data exploration
 map_and_data_state <- inner_join(ger_shape_state, data_state, by = c("ags" = "ags_federal_state"))
 map_and_data_county <- inner_join(ger_shape_county, data_county, by = c("ags" = "ags_county"))
-# Landkreis "offshore" dropped
-names(map_and_data_state)[names(map_and_data_state) == "Bundesland.x"] <- "regionid"
+# Lage "Windkraft auf See" dropped
+names(map_and_data_state)[names(map_and_data_state) == "Bundesland"] <- "regionid"
 names(map_and_data_county)[names(map_and_data_county) == "name"] <- "regionid"
 
 saveRDS(map_and_data_state, file = here("data", "processed","map_and_data_state.rds"))
