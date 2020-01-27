@@ -60,27 +60,6 @@ ger_shape_county <- st_read(file_ger_shape_county, options = "ENCODING=UTF-8", s
 
 
 # ***********************************************************************************************
-#### selection [TBD] ####
-
-### ATTENTION!!! [TBD]
-# there are several different types of energy production
-table(enh$EinheitenTyp)
-
-data_solar_wind <- enh %>%
-  filter(EinheitenTyp %in% c("Solareinheit", "Windeinheit"))
-
-table(data_solar_wind$EinheitenTyp)
-
-# some of them might not be in use anymore
-data_solar_wind_current <- data_solar_wind %>%
-  filter(is.na(EndgueltigeStilllegungDatum))
-
-# save for later purposes
-saveRDS(data_solar_wind_current, here("data", "processed", "data_solar_wind_current.rds")) 
-
-
-
-# ***********************************************************************************************
 #### load AGS (Amtlicher Gemeindeschlüssel) ####
 #ags <- destatiscleanr(here("data", "raw", paste0("AuszugGV4QAktuell", ".xlsx")))
 # -> just works for csv files
@@ -247,15 +226,25 @@ table(ger_shape_county$GEN[!(ger_shape_county$RS %in% enh3$ags_county)])
 # -> Yes! This is great news :D
 # prerequisite so that all other regional data can be matched via ags_county information
 
-## [TBD]
-# summarize to states/counties without conflicts
-# merge information from regional statistics via the AGS
+
+
+# ***********************************************************************************************
+#### data cleaning ####
+# due some inconsistencies in the source data
+# relating to the relation of Bundesland to ags,
+# respectively of county to ags,
+# we drop Bundesland and county here.
+# The names re-appear with the shape-file later
+drops <- c("Bundesland", "Landkreis")
+enh3 <- enh3[, !(names(enh3) %in% drops)]
+
+
 
 # ***********************************************************************************************
 #### aggregate data on state level by year ####
 data_state_yearly <- enh3 %>%
-  group_by(start_year, EinheitenTyp, Bundesland, ags_federal_state) %>%
-  summarize(n = length(Bundesland), mean = mean(Nettonennleistung), sum = sum(Nettonennleistung)) %>%
+  group_by(start_year, EinheitenTyp, ags_federal_state) %>%
+  summarize(n = length(ags_federal_state), mean = mean(Nettonennleistung), sum = sum(Nettonennleistung)) %>%
   ungroup()
 
 
@@ -270,8 +259,8 @@ write.csv2(data_state_yearly, file = here("data", "processed", "data_state_yearl
 # ***********************************************************************************************
 #### aggregate data on state level ####
 data_state <- enh3 %>%
-  group_by(EinheitenTyp, Bundesland, ags_federal_state) %>%
-  summarize(n = length(Bundesland), mean = mean(Nettonennleistung), sum = sum(Nettonennleistung)) %>%
+  group_by(EinheitenTyp, ags_federal_state) %>%
+  summarize(n = length(ags_federal_state), mean = mean(Nettonennleistung), sum = sum(Nettonennleistung)) %>%
   ungroup()
 
 write.csv2(data_state, file = here("data", "processed", "data_state.csv"), row.names = FALSE, fileEncoding="UTF-8")
@@ -281,7 +270,7 @@ write.csv2(data_state, file = here("data", "processed", "data_state.csv"), row.n
 #### aggregate data on county level by year ####
 # consolidate
 data_county_yearly <- enh3 %>%
-  group_by(start_year, EinheitenTyp, Landkreis, name, ags_county) %>%
+  group_by(start_year, EinheitenTyp, name, ags_county) %>%
   summarize(n = length(ags_county), mean = mean(Nettonennleistung), sum = sum(Nettonennleistung)) %>%
   ungroup()
 
@@ -293,7 +282,7 @@ write.csv2(data_county_yearly, file = here("data", "processed", "data_county_yea
 #### aggregate data on county level ####
 # consolidate
 data_county <- enh3 %>%
-  group_by(EinheitenTyp, Landkreis, name, ags_county) %>%
+  group_by(EinheitenTyp, name, ags_county) %>%
   summarize(n = length(ags_county), mean = mean(Nettonennleistung), sum = sum(Nettonennleistung)) %>%
   ungroup()
 
@@ -304,7 +293,7 @@ write.csv2(data_county, file = here("data", "processed", "data_county.csv"), row
 
 # ***********************************************************************************************
 #### granular data set with offshore windpower ####
-data_offshore <- enh3[enh3$Landkreis == "offshore", ]
+data_offshore <- enh3[enh3$Lage == "Windkraft auf See" & !is.na(enh3$Lage), ]
 
 write.csv2(data_offshore, file = here("data", "processed", "data_offshore.csv"), row.names = FALSE, fileEncoding="UTF-8")
 
