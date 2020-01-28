@@ -103,8 +103,16 @@ server <- function(input, output) {
   })
   
   coloring <- reactive({
-    if (input$source == "Solareinheit"){"Greens"}else{
-      if (input$source == "Windeinheit"){"Blues"}
+    if (input$source == "Solareinheit"){"YlOrRd"}else{
+      if (input$source == "Windeinheit"){"Blues"}else{
+        if(input$source == "Verbrennung"){"Greys"}else{
+          if(input$source == "Biomasse"){"Greens"}else{
+            if(input$source == "Wasser"){"Blues"}else{
+              if(input$source == "Geothermie"){"Oranges"}
+            }
+          }
+        }
+      }
     }
   })
   
@@ -174,7 +182,9 @@ ui <- dashboardPage(
                                 h3("German Power Plants Explorer", align = "center"),
                                 #titlePanel("German Power Plants Explorer"),
                                 sidebarPanel(width = 12,
-                                             selectInput('source', 'Energy Source', c("Solar Energy" = "Solareinheit", "Wind Energy" = "Windeinheit")),
+                                             selectInput('source', 'Energy Source', c("Solar Energy" = "Solareinheit", "Wind Energy" = "Windeinheit", 
+                                                                                      "Coal Energy" = "Verbrennung", "Biomass Energy" = "Biomasse", 
+                                                                                      "Water Energy" = "Wasser", "Geothermal Energy" = "Geothermie")),
                                              selectInput('geo_level', 'Geographical Level', c("State" = "state", "County" = "county")),
                                              selectInput('out_var', 'Output Variable', c("Total number of power plants" = "n", 
                                                                                          "Total power production" = "sum", 
@@ -206,7 +216,7 @@ ui <- dashboardPage(
                     tags$li(tags$b("License"), ": What should we write about data license? Should we translate some relevant sections of the data usage policy of Bundesnetzagentur?")
                   )
               )
-      )
+     )
     )
   )
 )
