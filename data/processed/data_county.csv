@@ -356,6 +356,413 @@
 "Biomasse";"Würzburg";"09679";36;406,416666666667;14631
 "Biomasse";"Zollernalbkreis";"08417";10;453,5;4535
 "Biomasse";"Zwickau";"14524";15;938,466666666667;14077
+"Braunkohle";"Chemnitz, Stadt";"14511";2;75650;151300
+"Braunkohle";"Cottbus, Stadt";"12052";3;24000;72000
+"Braunkohle";"Görlitz";"14626";6;411790;2470740
+"Braunkohle";"Leipzig";"14729";1;891000;891000
+"Braunkohle";"Ostalbkreis";"08136";1;1500;1500
+"Braunkohle";"Spree-Neiße";"12071";8;563750;4510000
+"Gas";"Ahrweiler";"07131";28;163,138928571429;4567,89
+"Gas";"Aichach-Friedberg";"09771";41;43,8256097560976;1796,85
+"Gas";"Alb-Donau-Kreis";"08425";92;32,1735869565217;2959,97
+"Gas";"Altenburger Land";"16077";20;39,8205;796,41
+"Gas";"Altenkirchen (Westerwald)";"07132";25;21,7048;542,62
+"Gas";"Altmarkkreis Salzwedel";"15081";15;65,0366666666667;975,55
+"Gas";"Altötting";"09171";15;135,808;2037,12
+"Gas";"Alzey-Worms";"07331";44;34,0272727272727;1497,2
+"Gas";"Amberg";"09361";18;58,4544444444444;1052,18
+"Gas";"Amberg-Sulzbach";"09371";7;4,16571428571429;29,16
+"Gas";"Ammerland";"03451";32;15,22828125;487,305
+"Gas";"Anhalt-Bitterfeld";"15082";24;159,66175;3831,882
+"Gas";"Ansbach";"09561";29;173,463793103448;5030,45
+"Gas";"Ansbach";"09571";48;125,685833333333;6032,92
+"Gas";"Aschaffenburg";"09661";15;38,608;579,12
+"Gas";"Aschaffenburg";"09671";39;8,82102564102564;344,02
+"Gas";"Augsburg";"09761";22;2383,41363636364;52435,1
+"Gas";"Augsburg";"09772";39;32,3153846153846;1260,3
+"Gas";"Aurich";"03452";34;20,125;684,25
+"Gas";"Bad Dürkheim";"07332";39;9,8574358974359;384,44
+"Gas";"Bad Kissingen";"09672";29;26,7362068965517;775,35
+"Gas";"Bad Kreuznach";"07133";27;16,1685185185185;436,55
+"Gas";"Bad Tölz-Wolfratshausen";"09173";10;37,535;375,35
+"Gas";"Baden-Baden, Stadtkreis";"08211";16;181,3878125;2902,205
+"Gas";"Bamberg";"09461";40;36,7067;1468,268
+"Gas";"Bamberg";"09471";19;56,35;1070,65
+"Gas";"Barnim";"12060";25;200,0768;5001,92
+"Gas";"Bautzen";"14625";53;202,663981132075;10741,191
+"Gas";"Bayreuth";"09462";13;314,247307692308;4085,215
+"Gas";"Bayreuth";"09472";13;16,0692307692308;208,9
+"Gas";"Berchtesgadener Land";"09172";21;109,319047619048;2295,7
+"Gas";"Bergstraße";"06431";37;225,248648648649;8334,2
+"Gas";"Berlin, Stadt";"11000";432;798,936733796296;345140,669
+"Gas";"Bernkastel-Wittlich";"07231";15;110,688866666667;1660,333
+"Gas";"Biberach";"08426";88;90,6643181818182;7978,46
+"Gas";"Bielefeld, Stadt";"05711";104;61,0355769230769;6347,7
+"Gas";"Birkenfeld";"07134";3;238,666666666667;716
+"Gas";"Böblingen";"08115";142;777,724591549296;110436,892
+"Gas";"Bochum, Stadt";"05911";46;1258,3247826087;57882,94
+"Gas";"Bodenseekreis";"08435";94;137,445957446809;12919,92
+"Gas";"Bonn, Stadt";"05314";41;29,7650731707317;1220,368
+"Gas";"Börde";"15083";57;154,637192982456;8814,32
+"Gas";"Borken";"05554";122;108,077704918033;13185,48
+"Gas";"Bottrop, Stadt";"05512";73;340,29904109589;24841,83
+"Gas";"Brandenburg an der Havel, Stadt";"12051";12;14857,1875;178286,25
+"Gas";"Braunschweig, Stadt";"03101";29;373,915517241379;10843,55
+"Gas";"Breisgau-Hochschwarzwald";"08315";103;60,9035922330097;6273,07
+"Gas";"Bremen, Stadt";"04011";109;36,4747155963303;3975,744
+"Gas";"Bremerhaven, Stadt";"04012";16;29,875;478
+"Gas";"Burgenlandkreis";"15084";37;2624,42648648649;97103,78
+"Gas";"Calw";"08235";46;43,9046739130435;2019,615
+"Gas";"Celle";"03351";54;24,8925925925926;1344,2
+"Gas";"Cham";"09372";34;15,7855882352941;536,71
+"Gas";"Chemnitz, Stadt";"14511";34;72,4342647058824;2462,765
+"Gas";"Cloppenburg";"03453";62;207,654580645161;12874,584
+"Gas";"Coburg";"09463";24;165,5775;3973,86
+"Gas";"Coburg";"09473";28;116,74;3268,72
+"Gas";"Cochem-Zell";"07135";4;6,815;27,26
+"Gas";"Coesfeld";"05558";37;39,2331351351351;1451,626
+"Gas";"Cottbus, Stadt";"12052";6;93,6183333333333;561,71
+"Gas";"Cuxhaven";"03352";36;26,9776666666667;971,196
+"Gas";"Dachau";"09174";21;330,178571428571;6933,75
+"Gas";"Dahme-Spreewald";"12061";46;244,691391304348;11255,804
+"Gas";"Darmstadt-Dieburg";"06432";63;22,8674603174603;1440,65
+"Gas";"Darmstadt, Wissenschaftsstadt";"06411";60;1992,104;119526,24
+"Gas";"Deggendorf";"09271";28;50,2478571428571;1406,94
+"Gas";"Delmenhorst, Stadt";"03401";6;13,8333333333333;83
+"Gas";"Dessau-Roßlau, Stadt";"15001";19;2066,84736842105;39270,1
+"Gas";"Diepholz";"03251";51;26,6090392156863;1357,061
+"Gas";"Dillingen a.d.Donau";"09773";17;201,632352941176;3427,75
+"Gas";"Dingolfing-Landau";"09279";39;832,978974358974;32486,18
+"Gas";"Dithmarschen";"01051";64;16,1575;1034,08
+"Gas";"Donau-Ries";"09779";27;255,672222222222;6903,15
+"Gas";"Donnersbergkreis";"07333";27;44,1242592592593;1191,355
+"Gas";"Dortmund, Stadt";"05913";66;81,2116515151515;5359,969
+"Gas";"Dresden, Stadt";"14612";107;182,265514018692;19502,41
+"Gas";"Duisburg, Stadt";"05112";42;4866,85047619048;204407,72
+"Gas";"Düren";"05358";31;95,3767741935484;2956,68
+"Gas";"Düsseldorf, Stadt";"05111";56;231,922571428571;12987,664
+"Gas";"Ebersberg";"09175";20;89,136;1782,72
+"Gas";"Eichsfeld";"16061";41;96,5651219512195;3959,17
+"Gas";"Eichstätt";"09176";31;655,707096774194;20326,92
+"Gas";"Eifelkreis Bitburg-Prüm";"07232";18;75,6405555555556;1361,53
+"Gas";"Eisenach, Stadt";"16056";9;2467,06666666667;22203,6
+"Gas";"Elbe-Elster";"12062";9;52,3333333333333;471
+"Gas";"Emden, Stadt";"03402";8;21,40625;171,25
+"Gas";"Emmendingen";"08316";68;49,8930882352941;3392,73
+"Gas";"Emsland";"03454";93;63,8839247311828;5941,205
+"Gas";"Ennepe-Ruhr-Kreis";"05954";86;4959,36405813953;426505,309
+"Gas";"Enzkreis";"08236";40;38,8335;1553,34
+"Gas";"Erding";"09177";28;80,9903571428571;2267,73
+"Gas";"Erfurt, Stadt";"16051";36;2256,77611111111;81243,94
+"Gas";"Erlangen";"09562";31;44,7548387096774;1387,4
+"Gas";"Erlangen-Höchstadt";"09572";29;259,382068965517;7522,08
+"Gas";"Erzgebirgskreis";"14521";77;75,8076623376623;5837,19
+"Gas";"Essen, Stadt";"05113";42;79,6723809523809;3346,24
+"Gas";"Esslingen";"08116";130;57,8872;7525,336
+"Gas";"Euskirchen";"05366";45;40,944;1842,48
+"Gas";"Flensburg, Stadt";"01001";5;10172,2;50861
+"Gas";"Forchheim";"09474";21;45,3971428571429;953,34
+"Gas";"Frankenthal (Pfalz), kreisfreie Stadt";"07311";8;6,25;50
+"Gas";"Frankfurt (Oder), Stadt";"12053";2;12,75;25,5
+"Gas";"Frankfurt am Main, Stadt";"06412";164;1751,62670731707;287266,78
+"Gas";"Freiburg im Breisgau, Stadtkreis";"08311";78;73,6544230769231;5745,045
+"Gas";"Freising";"09178";26;194,686538461538;5061,85
+"Gas";"Freudenstadt";"08237";58;97,8378448275862;5674,595
+"Gas";"Freyung-Grafenau";"09272";18;1925,37833333333;34656,81
+"Gas";"Friesland";"03455";16;154,526875;2472,43
+"Gas";"Fulda";"06631";100;94,57434;9457,434
+"Gas";"Fürstenfeldbruck";"09179";49;44,6087755102041;2185,83
+"Gas";"Fürth";"09563";31;36,9341935483871;1144,96
+"Gas";"Fürth";"09573";19;102,513157894737;1947,75
+"Gas";"Garmisch-Partenkirchen";"09180";20;99,3325;1986,65
+"Gas";"Gelsenkirchen, Stadt";"05513";28;131,443571428571;3680,42
+"Gas";"Gera, Stadt";"16052";17;2353,59705882353;40011,15
+"Gas";"Germersheim";"07334";21;15,426619047619;323,959
+"Gas";"Gießen";"06531";144;296,523055555556;42699,32
+"Gas";"Gifhorn";"03151";49;15,4816326530612;758,6
+"Gas";"Göppingen";"08117";96;68,9063541666667;6615,01
+"Gas";"Görlitz";"14626";46;112,154347826087;5159,1
+"Gas";"Goslar";"03153";82;66,109512195122;5420,98
+"Gas";"Gotha";"16067";30;199,609333333333;5988,28
+"Gas";"Göttingen";"03159";99;306,781313131313;30371,35
+"Gas";"Grafschaft Bentheim";"03456";36;217,952777777778;7846,3
+"Gas";"Greiz";"16076";9;113,872222222222;1024,85
+"Gas";"Groß-Gerau";"06433";50;2353,0776;117653,88
+"Gas";"Günzburg";"09774";33;218,885757575758;7223,23
+"Gas";"Gütersloh";"05754";156;200,064762820513;31210,103
+"Gas";"Hagen, Stadt der FernUniversität";"05914";12;20832,975;249995,7
+"Gas";"Halle (Saale), Stadt";"15002";15;3259,14;48887,1
+"Gas";"Hamburg, Freie und Hansestadt";"02000";336;132,97055952381;44678,108
+"Gas";"Hameln-Pyrmont";"03252";22;80,9213636363636;1780,27
+"Gas";"Hamm, Stadt";"05915";41;20072,8873170732;822988,38
+"Gas";"Harburg";"03353";57;43,9031754385965;2502,481
+"Gas";"Harz";"15085";53;195,14358490566;10342,61
+"Gas";"Haßberge";"09674";8;327,758375;2622,067
+"Gas";"Havelland";"12063";18;83,75;1507,5
+"Gas";"Heidekreis";"03358";46;462,324826086957;21266,942
+"Gas";"Heidelberg, Stadtkreis";"08221";11;3,21818181818182;35,4
+"Gas";"Heidenheim";"08135";34;637,688823529412;21681,42
+"Gas";"Heilbronn";"08125";84;50,0678571428571;4205,7
+"Gas";"Heilbronn, Stadtkreis";"08121";49;37,0191836734694;1813,94
+"Gas";"Heinsberg";"05370";56;38,8825;2177,42
+"Gas";"Helmstedt";"03154";40;205,52875;8221,15
+"Gas";"Herford";"05758";78;83,1903846153846;6488,85
+"Gas";"Herne, Stadt";"05916";12;6,43416666666667;77,21
+"Gas";"Hersfeld-Rotenburg";"06632";24;38,1354166666667;915,25
+"Gas";"Herzogtum Lauenburg";"01053";61;28,4503114754098;1735,469
+"Gas";"Hildburghausen";"16069";12;65,69;788,28
+"Gas";"Hildesheim";"03254";68;70,7117647058824;4808,4
+"Gas";"Hochsauerlandkreis";"05958";45;167,9948;7559,766
+"Gas";"Hochtaunuskreis";"06434";50;65,11432;3255,716
+"Gas";"Hof";"09464";18;322,677777777778;5808,2
+"Gas";"Hof";"09475";34;9,88235294117647;336
+"Gas";"Hohenlohekreis";"08126";26;79,2921153846154;2061,595
+"Gas";"Holzminden";"03255";9;84,3555555555556;759,2
+"Gas";"Höxter";"05762";25;91,112;2277,8
+"Gas";"Ilm-Kreis";"16070";18;205,752222222222;3703,54
+"Gas";"Ingolstadt";"09161";17;30,5882352941176;520
+"Gas";"Jena, Stadt";"16053";18;84,2761111111111;1516,97
+"Gas";"Jerichower Land";"15086";22;64,3375909090909;1415,427
+"Gas";"Kaiserslautern";"07335";15;969,994266666667;14549,914
+"Gas";"Kaiserslautern, kreisfreie Stadt";"07312";7;38,1214285714286;266,85
+"Gas";"Karlsruhe";"08215";108;41,7753796296296;4511,741
+"Gas";"Karlsruhe, Stadtkreis";"08212";17;12,1082352941176;205,84
+"Gas";"Kassel";"06633";39;1857,71128205128;72450,74
+"Gas";"Kassel, documenta-Stadt";"06611";29;114,981724137931;3334,47
+"Gas";"Kaufbeuren";"09762";21;32,5052380952381;682,61
+"Gas";"Kelheim";"09273";32;835,12203125;26723,905
+"Gas";"Kempten (Allgäu)";"09763";14;126,496428571429;1770,95
+"Gas";"Kiel, Landeshauptstadt";"01002";69;3096,09130434783;213630,3
+"Gas";"Kitzingen";"09675";29;115,67;3354,43
+"Gas";"Kleve";"05154";65;174,835138461538;11364,284
+"Gas";"Koblenz, kreisfreie Stadt";"07111";24;145,68125;3496,35
+"Gas";"Köln, Stadt";"05315";135;59,4799037037037;8029,787
+"Gas";"Konstanz";"08335";73;73,1682191780822;5341,28
+"Gas";"Krefeld, Stadt";"05114";15;35,5860666666667;533,791
+"Gas";"Kronach";"09476";6;1596,11333333333;9576,68
+"Gas";"Kulmbach";"09477";37;126,209459459459;4669,75
+"Gas";"Kusel";"07336";11;7,49090909090909;82,4
+"Gas";"Kyffhäuserkreis";"16065";18;132,240555555556;2380,33
+"Gas";"Lahn-Dill-Kreis";"06532";125;27,64716;3455,895
+"Gas";"Landau in der Pfalz, kreisfreie Stadt";"07313";17;39,8182352941176;676,91
+"Gas";"Landkreis Rostock";"13072";28;93,1811428571429;2609,072
+"Gas";"Landsberg am Lech";"09181";12;16,6883333333333;200,26
+"Gas";"Landshut";"09261";33;36,5121212121212;1204,9
+"Gas";"Landshut";"09274";24;62,16875;1492,05
+"Gas";"Leer";"03457";28;50,075;1402,1
+"Gas";"Leipzig";"14729";57;83,9682456140351;4786,19
+"Gas";"Leipzig, Stadt";"14713";87;71,4534367816092;6216,449
+"Gas";"Leverkusen, Stadt";"05316";20;20,9315;418,63
+"Gas";"Lichtenfels";"09478";13;44,6923076923077;581
+"Gas";"Limburg-Weilburg";"06533";31;39,8696774193548;1235,96
+"Gas";"Lindau (Bodensee)";"09776";8;6,01375;48,11
+"Gas";"Lippe";"05766";100;144,72775;14472,775
+"Gas";"Lörrach";"08336";53;58,0637735849057;3077,38
+"Gas";"Lübeck, Hansestadt";"01003";53;78,7067358490566;4171,457
+"Gas";"Lüchow-Dannenberg";"03354";13;57,3692307692308;745,8
+"Gas";"Ludwigsburg";"08118";124;92,1617338709677;11428,055
+"Gas";"Ludwigshafen am Rhein, kreisfreie Stadt";"07314";34;201,727058823529;6858,72
+"Gas";"Ludwigslust-Parchim";"13076";39;181,246923076923;7068,63
+"Gas";"Lüneburg";"03355";30;93,6693333333333;2810,08
+"Gas";"Magdeburg, Landeshauptstadt";"15003";83;45,703734939759;3793,41
+"Gas";"Main-Kinzig-Kreis";"06435";115;34,6463304347826;3984,328
+"Gas";"Main-Spessart";"09677";18;47,6361111111111;857,45
+"Gas";"Main-Tauber-Kreis";"08128";43;217,256976744186;9342,05
+"Gas";"Main-Taunus-Kreis";"06436";60;19,647;1178,82
+"Gas";"Mainz-Bingen";"07339";45;31,4564222222222;1415,539
+"Gas";"Mainz, kreisfreie Stadt";"07315";48;165,28;7933,44
+"Gas";"Mannheim, Stadtkreis";"08222";22;70,3404545454545;1547,49
+"Gas";"Mansfeld-Südharz";"15087";21;239,569047619048;5030,95
+"Gas";"Marburg-Biedenkopf";"06534";55;121,573090909091;6686,52
+"Gas";"Märkisch-Oderland";"12064";23;50,3969565217391;1159,13
+"Gas";"Märkischer Kreis";"05962";108;144,004398148148;15552,475
+"Gas";"Mayen-Koblenz";"07137";35;22,2314285714286;778,1
+"Gas";"Mecklenburgische Seenplatte";"13071";19;46,2252631578947;878,28
+"Gas";"Meißen";"14627";76;109,127105263158;8293,66
+"Gas";"Memmingen";"09764";6;6,875;41,25
+"Gas";"Merzig-Wadern";"10042";12;34,3258333333333;411,91
+"Gas";"Mettmann";"05158";61;88,6077213114754;5405,071
+"Gas";"Miesbach";"09182";22;121,775;2679,05
+"Gas";"Miltenberg";"09676";30;54,2516666666667;1627,55
+"Gas";"Minden-Lübbecke";"05770";81;120,325308641975;9746,35
+"Gas";"Mittelsachsen";"14522";51;23,6562745098039;1206,47
+"Gas";"Mönchengladbach, Stadt";"05116";22;146,911863636364;3232,061
+"Gas";"Mühldorf a.Inn";"09183";24;80,7025833333333;1936,862
+"Gas";"Mülheim an der Ruhr, Stadt";"05117";28;113,056071428571;3165,57
+"Gas";"München";"09184";48;147,478125;7078,95
+"Gas";"München, Landeshauptstadt";"09162";91;7365,20923076923;670234,04
+"Gas";"Münster, Stadt";"05515";143;572,644363636364;81888,144
+"Gas";"Neckar-Odenwald-Kreis";"08225";19;13,0263157894737;247,5
+"Gas";"Neu-Ulm";"09775";20;86,545;1730,9
+"Gas";"Neuburg-Schrobenhausen";"09185";8;24,5225;196,18
+"Gas";"Neumarkt i.d.OPf.";"09373";60;35,4325;2125,95
+"Gas";"Neumünster, Stadt";"01004";7;177,678571428571;1243,75
+"Gas";"Neunkirchen";"10043";11;12,1772727272727;133,95
+"Gas";"Neustadt a.d.Aisch-Bad Windsheim";"09575";25;56,2396;1405,99
+"Gas";"Neustadt a.d.Waldnaab";"09374";8;2,450125;19,601
+"Gas";"Neustadt an der Weinstraße, kreisfreie Stadt";"07316";21;132,216666666667;2776,55
+"Gas";"Neuwied";"07138";60;65,5411666666667;3932,47
+"Gas";"Nienburg (Weser)";"03256";32;6,728125;215,3
+"Gas";"Nordfriesland";"01054";86;24,4752790697674;2104,874
+"Gas";"Nordhausen";"16062";16;347,421875;5558,75
+"Gas";"Nordsachsen";"14730";48;122,771770833333;5893,045
+"Gas";"Nordwestmecklenburg";"13074";31;175,579677419355;5442,97
+"Gas";"Northeim";"03155";33;275,3;9084,9
+"Gas";"Nürnberg";"09564";42;756,391666666667;31768,45
+"Gas";"Nürnberger Land";"09574";33;96,2236363636364;3175,38
+"Gas";"Oberallgäu";"09780";38;98,3815789473684;3738,5
+"Gas";"Oberbergischer Kreis";"05374";61;35,9440983606557;2192,59
+"Gas";"Oberhausen, Stadt";"05119";14;43,4821428571429;608,75
+"Gas";"Oberhavel";"12065";22;59,3818181818182;1306,4
+"Gas";"Oberspreewald-Lausitz";"12066";30;178,791666666667;5363,75
+"Gas";"Odenwaldkreis";"06437";11;972,871181818182;10701,583
+"Gas";"Oder-Spree";"12067";26;2731,89773076923;71029,341
+"Gas";"Offenbach";"06438";72;33,7705555555556;2431,48
+"Gas";"Offenbach am Main, Stadt";"06413";11;7,25909090909091;79,85
+"Gas";"Oldenburg";"03458";35;884,966285714286;30973,82
+"Gas";"Oldenburg (Oldenburg), Stadt";"03403";33;46,9430303030303;1549,12
+"Gas";"Olpe";"05966";31;31,8357741935484;986,909
+"Gas";"Ortenaukreis";"08317";129;44,8839147286822;5790,025
+"Gas";"Osnabrück";"03459";135;150,228696296296;20280,874
+"Gas";"Osnabrück, Stadt";"03404";52;93,0644230769231;4839,35
+"Gas";"Ostalbkreis";"08136";118;274,447177966102;32384,767
+"Gas";"Ostallgäu";"09777";53;122,107735849057;6471,71
+"Gas";"Osterholz";"03356";13;8,17692307692308;106,3
+"Gas";"Ostholstein";"01055";79;50,8062784810127;4013,696
+"Gas";"Ostprignitz-Ruppin";"12068";10;780,4;7804
+"Gas";"Paderborn";"05774";58;147,69275862069;8566,18
+"Gas";"Passau";"09262";18;112,316666666667;2021,7
+"Gas";"Passau";"09275";43;75,7737209302326;3258,27
+"Gas";"Peine";"03157";44;29,5745454545455;1301,28
+"Gas";"Pfaffenhofen a.d.Ilm";"09186";12;96,6291666666667;1159,55
+"Gas";"Pforzheim, Stadtkreis";"08231";31;1349,68138709677;41840,123
+"Gas";"Pinneberg";"01056";58;98,2136206896552;5696,39
+"Gas";"Pirmasens, kreisfreie Stadt";"07317";8;835,84375;6686,75
+"Gas";"Plön";"01057";23;24,061652173913;553,418
+"Gas";"Potsdam-Mittelmark";"12069";37;47,2737297297297;1749,128
+"Gas";"Potsdam, Stadt";"12054";27;1718,98259259259;46412,53
+"Gas";"Prignitz";"12070";8;118,7375;949,9
+"Gas";"Rastatt";"08216";52;43,1494807692308;2243,773
+"Gas";"Ravensburg";"08436";78;174,705256410256;13627,01
+"Gas";"Recklinghausen";"05562";62;244,344032258065;15149,33
+"Gas";"Regen";"09276";16;73,8375;1181,4
+"Gas";"Regensburg";"09362";57;36,1545263157895;2060,808
+"Gas";"Regensburg";"09375";20;30,1125;602,25
+"Gas";"Region Hannover";"03241";279;37,9583548387097;10590,381
+"Gas";"Regionalverband Saarbrücken";"10041";20;4127,1;82542
+"Gas";"Rems-Murr-Kreis";"08119";133;61,2493984962406;8146,17
+"Gas";"Remscheid, Stadt";"05120";12;10,3708333333333;124,45
+"Gas";"Rendsburg-Eckernförde";"01058";71;21,5259154929577;1528,34
+"Gas";"Reutlingen";"08415";79;168,81582278481;13336,45
+"Gas";"Rhein-Erft-Kreis";"05362";66;814,064621212121;53728,265
+"Gas";"Rhein-Hunsrück-Kreis";"07140";10;55,85;558,5
+"Gas";"Rhein-Kreis Neuss";"05162";70;57,6795714285714;4037,57
+"Gas";"Rhein-Lahn-Kreis";"07141";18;44,9916666666667;809,85
+"Gas";"Rhein-Neckar-Kreis";"08226";76;145,105763157895;11028,038
+"Gas";"Rhein-Pfalz-Kreis";"07338";26;14,2926923076923;371,61
+"Gas";"Rhein-Sieg-Kreis";"05382";104;76,5937019230769;7965,745
+"Gas";"Rheingau-Taunus-Kreis";"06439";68;217,295147058824;14776,07
+"Gas";"Rheinisch-Bergischer Kreis";"05378";55;16,6652727272727;916,59
+"Gas";"Rhön-Grabfeld";"09673";24;41,1833333333333;988,4
+"Gas";"Rosenheim";"09163";6;18,7083333333333;112,25
+"Gas";"Rosenheim";"09187";40;89,79425;3591,77
+"Gas";"Rostock";"13003";13;19,0230769230769;247,3
+"Gas";"Rotenburg (Wümme)";"03357";57;88,2845263157895;5032,218
+"Gas";"Roth";"09576";35;78,9;2761,5
+"Gas";"Rottal-Inn";"09277";21;69,1171428571429;1451,46
+"Gas";"Rottweil";"08325";44;85,5088636363636;3762,39
+"Gas";"Saale-Holzland-Kreis";"16074";12;74,1733333333333;890,08
+"Gas";"Saale-Orla-Kreis";"16075";15;155,810666666667;2337,16
+"Gas";"Saalekreis";"15088";23;419,692608695652;9652,93
+"Gas";"Saalfeld-Rudolstadt";"16073";14;112,875;1580,25
+"Gas";"Saarlouis";"10044";16;1370,265625;21924,25
+"Gas";"Saarpfalz-Kreis";"10045";40;275,29875;11011,95
+"Gas";"Sächsische Schweiz-Osterzgebirge";"14628";67;96,0028358208955;6432,19
+"Gas";"Salzgitter, Stadt";"03102";19;16978,1184210526;322584,25
+"Gas";"Salzlandkreis";"15089";39;3079,66666666667;120107
+"Gas";"Schaumburg";"03257";32;40,75;1304
+"Gas";"Schleswig-Flensburg";"01059";69;39,4467391304348;2721,825
+"Gas";"Schmalkalden-Meiningen";"16066";32;209,5821875;6706,63
+"Gas";"Schwabach";"09565";14;37,1928571428571;520,7
+"Gas";"Schwäbisch Hall";"08127";39;43,9493076923077;1714,023
+"Gas";"Schwalm-Eder-Kreis";"06634";32;46,9915625;1503,73
+"Gas";"Schwandorf";"09376";26;73,9515384615385;1922,74
+"Gas";"Schwarzwald-Baar-Kreis";"08326";103;33,2867475728155;3428,535
+"Gas";"Schweinfurt";"09662";39;45,5887179487179;1777,96
+"Gas";"Schweinfurt";"09678";25;5,5308;138,27
+"Gas";"Schwerin";"13004";4;16977,975;67911,9
+"Gas";"Segeberg";"01060";78;385,645769230769;30080,37
+"Gas";"Siegen-Wittgenstein";"05970";45;63,6206666666667;2862,93
+"Gas";"Sigmaringen";"08437";37;27,8372972972973;1029,98
+"Gas";"Soest";"05974";61;62,0129180327869;3782,788
+"Gas";"Solingen, Klingenstadt";"05122";45;39,4065777777778;1773,296
+"Gas";"Sömmerda";"16068";10;407,781;4077,81
+"Gas";"Sonneberg";"16072";17;104,489411764706;1776,32
+"Gas";"Speyer, kreisfreie Stadt";"07318";33;31,8121212121212;1049,8
+"Gas";"Spree-Neiße";"12071";12;56,6941666666667;680,33
+"Gas";"St. Wendel";"10046";14;50,7685714285714;710,76
+"Gas";"Stade";"03359";52;48,1254807692308;2502,525
+"Gas";"Städteregion Aachen";"05334";103;234,133776699029;24115,779
+"Gas";"Starnberg";"09188";41;31,5682926829268;1294,3
+"Gas";"Steinburg";"01061";35;13,6562857142857;477,97
+"Gas";"Steinfurt";"05566";149;171,415691275168;25540,938
+"Gas";"Stendal";"15090";29;678,602068965517;19679,46
+"Gas";"Stormarn";"01062";56;220,668267857143;12357,423
+"Gas";"Straubing";"09263";11;55,6254545454545;611,88
+"Gas";"Straubing-Bogen";"09278";17;32,5;552,5
+"Gas";"Stuttgart, Stadtkreis";"08111";151;274,519033112583;41452,374
+"Gas";"Südliche Weinstraße";"07337";21;19,9019047619048;417,94
+"Gas";"Südwestpfalz";"07340";13;61,6061538461538;800,88
+"Gas";"Suhl, Stadt";"16054";13;1055,41923076923;13720,45
+"Gas";"Teltow-Fläming";"12072";29;6328,00517241379;183512,15
+"Gas";"Tirschenreuth";"09377";13;123,034615384615;1599,45
+"Gas";"Traunstein";"09189";20;41,845;836,9
+"Gas";"Trier-Saarburg";"07235";13;39,2230769230769;509,9
+"Gas";"Trier, kreisfreie Stadt";"07211";33;153,534848484848;5066,65
+"Gas";"Tübingen";"08416";76;20,4981842105263;1557,862
+"Gas";"Tuttlingen";"08327";40;83,29;3331,6
+"Gas";"Uckermark";"12073";18;35,6294444444444;641,33
+"Gas";"Uelzen";"03360";24;23,485;563,64
+"Gas";"Ulm, Stadtkreis";"08421";25;63,572;1589,3
+"Gas";"Unna";"05978";49;49,7361632653061;2437,072
+"Gas";"Unstrut-Hainich-Kreis";"16064";31;205,263870967742;6363,18
+"Gas";"Unterallgäu";"09778";33;156,620303030303;5168,47
+"Gas";"Vechta";"03460";47;78,766170212766;3702,01
+"Gas";"Verden";"03361";32;15,586875;498,78
+"Gas";"Viersen";"05166";61;255,31393442623;15574,15
+"Gas";"Vogelsbergkreis";"06535";13;48,0803076923077;625,044
+"Gas";"Vogtlandkreis";"14523";31;233,924516129032;7251,66
+"Gas";"Vorpommern-Greifswald";"13075";34;1831,47564705882;62270,172
+"Gas";"Vorpommern-Rügen";"13073";45;322,960044444444;14533,202
+"Gas";"Vulkaneifel";"07233";7;205,214285714286;1436,5
+"Gas";"Waldeck-Frankenberg";"06635";48;56,3521875;2704,905
+"Gas";"Waldshut";"08337";68;73,3870588235294;4990,32
+"Gas";"Warendorf";"05570";70;281,491614285714;19704,413
+"Gas";"Wartburgkreis";"16063";31;650,504838709677;20165,65
+"Gas";"Weiden i.d.OPf.";"09363";11;9,88636363636364;108,75
+"Gas";"Weilheim-Schongau";"09190";25;300,35;7508,75
+"Gas";"Weimar, Stadt";"16055";14;326,864285714286;4576,1
+"Gas";"Weimarer Land";"16071";18;123,711111111111;2226,8
+"Gas";"Weißenburg-Gunzenhausen";"09577";26;41,3915384615385;1076,18
+"Gas";"Werra-Meißner-Kreis";"06636";34;32,8367647058824;1116,45
+"Gas";"Wesel";"05170";65;899,182815384615;58446,883
+"Gas";"Wesermarsch";"03461";10;14,049;140,49
+"Gas";"Westerwaldkreis";"07143";41;27,8012195121951;1139,85
+"Gas";"Wetteraukreis";"06440";90;37,2458888888889;3352,13
+"Gas";"Wiesbaden, Landeshauptstadt";"06414";57;85,0240877192983;4846,373
+"Gas";"Wilhelmshaven, Stadt";"03405";9;301,583333333333;2714,25
+"Gas";"Wittenberg";"15091";22;352,243181818182;7749,35
+"Gas";"Wittmund";"03462";13;17,8192307692308;231,65
+"Gas";"Wolfenbüttel";"03158";27;6,13222222222222;165,57
+"Gas";"Wolfsburg, Stadt";"03103";5;12,966;64,83
+"Gas";"Worms, kreisfreie Stadt";"07319";16;958,971875;15343,55
+"Gas";"Wunsiedel i.Fichtelgebirge";"09479";20;715,8785;14317,57
+"Gas";"Wuppertal, Stadt";"05124";31;2931,03274193548;90862,015
+"Gas";"Würzburg";"09663";16;171,47675;2743,628
+"Gas";"Würzburg";"09679";21;25,7819047619048;541,42
+"Gas";"Zollernalbkreis";"08417";47;37,021914893617;1740,03
+"Gas";"Zweibrücken, kreisfreie Stadt";"07320";32;36,928125;1181,7
+"Gas";"Zwickau";"14524";77;67,981961038961;5234,611
 "Gaserzeugungseinheit";"Altenburger Land";"16077";1;NA;NA
 "Gaserzeugungseinheit";"Anhalt-Bitterfeld";"15082";1;NA;NA
 "Gaserzeugungseinheit";"Aurich";"03452";1;NA;NA
@@ -566,6 +973,350 @@
 "Geothermie";"Würzburg";"09663";3;526;1578
 "Geothermie";"Zollernalbkreis";"08417";1;7,425;7,425
 "Geothermie";"Zwickau";"14524";1;80;80
+"Mineralölprodukte";"Ahrweiler";"07131";1;176;176
+"Mineralölprodukte";"Aichach-Friedberg";"09771";3;50;150
+"Mineralölprodukte";"Alb-Donau-Kreis";"08425";9;220,1;1980,9
+"Mineralölprodukte";"Altenburger Land";"16077";4;506;2024
+"Mineralölprodukte";"Altmarkkreis Salzwedel";"15081";4;205,075;820,3
+"Mineralölprodukte";"Altötting";"09171";4;54,9;219,6
+"Mineralölprodukte";"Alzey-Worms";"07331";2;208;416
+"Mineralölprodukte";"Amberg";"09361";3;130,166666666667;390,5
+"Mineralölprodukte";"Amberg-Sulzbach";"09371";6;6,585;39,51
+"Mineralölprodukte";"Ammerland";"03451";2;800;1600
+"Mineralölprodukte";"Anhalt-Bitterfeld";"15082";12;76,7298333333333;920,758
+"Mineralölprodukte";"Ansbach";"09561";3;397,333333333333;1192
+"Mineralölprodukte";"Ansbach";"09571";4;126,15;504,6
+"Mineralölprodukte";"Aschaffenburg";"09671";2;14,965;29,93
+"Mineralölprodukte";"Augsburg";"09761";6;1110;6660
+"Mineralölprodukte";"Augsburg";"09772";5;490;2450
+"Mineralölprodukte";"Bad Dürkheim";"07332";3;179,533333333333;538,6
+"Mineralölprodukte";"Bad Kissingen";"09672";5;5,26;26,3
+"Mineralölprodukte";"Baden-Baden, Stadtkreis";"08211";4;653;2612
+"Mineralölprodukte";"Bamberg";"09461";1;5,5;5,5
+"Mineralölprodukte";"Bamberg";"09471";5;4,43;22,15
+"Mineralölprodukte";"Barnim";"12060";1;180;180
+"Mineralölprodukte";"Bautzen";"14625";9;114,955555555556;1034,6
+"Mineralölprodukte";"Bayreuth";"09462";4;705,5;2822
+"Mineralölprodukte";"Bayreuth";"09472";2;19,1;38,2
+"Mineralölprodukte";"Bergstraße";"06431";9;515,746111111111;4641,715
+"Mineralölprodukte";"Berlin, Stadt";"11000";28;680,214285714286;19046
+"Mineralölprodukte";"Bernkastel-Wittlich";"07231";3;193,533333333333;580,6
+"Mineralölprodukte";"Biberach";"08426";13;561,907692307692;7304,8
+"Mineralölprodukte";"Bielefeld, Stadt";"05711";1;5,3;5,3
+"Mineralölprodukte";"Birkenfeld";"07134";1;625;625
+"Mineralölprodukte";"Böblingen";"08115";59;471,974576271186;27846,5
+"Mineralölprodukte";"Bochum, Stadt";"05911";5;736,8;3684
+"Mineralölprodukte";"Bodenseekreis";"08435";17;504,429411764706;8575,3
+"Mineralölprodukte";"Bonn, Stadt";"05314";2;236;472
+"Mineralölprodukte";"Borken";"05554";10;104,11;1041,1
+"Mineralölprodukte";"Bottrop, Stadt";"05512";2;560;1120
+"Mineralölprodukte";"Brandenburg an der Havel, Stadt";"12051";1;300;300
+"Mineralölprodukte";"Braunschweig, Stadt";"03101";5;33,04;165,2
+"Mineralölprodukte";"Breisgau-Hochschwarzwald";"08315";21;36,2961904761905;762,22
+"Mineralölprodukte";"Bremen, Stadt";"04011";14;367,114285714286;5139,6
+"Mineralölprodukte";"Bremerhaven, Stadt";"04012";2;95,25;190,5
+"Mineralölprodukte";"Burgenlandkreis";"15084";3;84;252
+"Mineralölprodukte";"Calw";"08235";11;194,692727272727;2141,62
+"Mineralölprodukte";"Celle";"03351";11;5,31818181818182;58,5
+"Mineralölprodukte";"Cham";"09372";6;37,7766666666667;226,66
+"Mineralölprodukte";"Chemnitz, Stadt";"14511";6;303,616666666667;1821,7
+"Mineralölprodukte";"Cloppenburg";"03453";2;120,5;241
+"Mineralölprodukte";"Coburg";"09463";1;5,1;5,1
+"Mineralölprodukte";"Coburg";"09473";1;3,5;3,5
+"Mineralölprodukte";"Cochem-Zell";"07135";3;64,4333333333333;193,3
+"Mineralölprodukte";"Coesfeld";"05558";3;115,05;345,15
+"Mineralölprodukte";"Cuxhaven";"03352";3;243,433333333333;730,3
+"Mineralölprodukte";"Dahme-Spreewald";"12061";1;730;730
+"Mineralölprodukte";"Darmstadt-Dieburg";"06432";3;123,533333333333;370,6
+"Mineralölprodukte";"Darmstadt, Wissenschaftsstadt";"06411";18;317,566666666667;5716,2
+"Mineralölprodukte";"Deggendorf";"09271";2;5,4;10,8
+"Mineralölprodukte";"Dessau-Roßlau, Stadt";"15001";1;24;24
+"Mineralölprodukte";"Diepholz";"03251";1;5,2;5,2
+"Mineralölprodukte";"Dillingen a.d.Donau";"09773";4;143,9;575,6
+"Mineralölprodukte";"Dingolfing-Landau";"09279";5;202,12;1010,6
+"Mineralölprodukte";"Dithmarschen";"01051";7;6359,64285714286;44517,5
+"Mineralölprodukte";"Donau-Ries";"09779";4;137,6;550,4
+"Mineralölprodukte";"Donnersbergkreis";"07333";1;288;288
+"Mineralölprodukte";"Dortmund, Stadt";"05913";3;41,8666666666667;125,6
+"Mineralölprodukte";"Dresden, Stadt";"14612";10;247,3;2473
+"Mineralölprodukte";"Duisburg, Stadt";"05112";12;351,208333333333;4214,5
+"Mineralölprodukte";"Düren";"05358";8;149,0375;1192,3
+"Mineralölprodukte";"Düsseldorf, Stadt";"05111";12;455,708333333333;5468,5
+"Mineralölprodukte";"Ebersberg";"09175";4;280,2;1120,8
+"Mineralölprodukte";"Eichsfeld";"16061";3;18;54
+"Mineralölprodukte";"Eichstätt";"09176";6;93,1666666666667;559
+"Mineralölprodukte";"Eifelkreis Bitburg-Prüm";"07232";4;10,15;40,6
+"Mineralölprodukte";"Elbe-Elster";"12062";5;9,2;46
+"Mineralölprodukte";"Emmendingen";"08316";9;749,164444444444;6742,48
+"Mineralölprodukte";"Emsland";"03454";6;259,5;1557
+"Mineralölprodukte";"Ennepe-Ruhr-Kreis";"05954";8;52,2375;417,9
+"Mineralölprodukte";"Enzkreis";"08236";5;5,23;26,15
+"Mineralölprodukte";"Erding";"09177";5;183,68;918,4
+"Mineralölprodukte";"Erfurt, Stadt";"16051";4;401;1604
+"Mineralölprodukte";"Erlangen";"09562";1;1;1
+"Mineralölprodukte";"Erlangen-Höchstadt";"09572";8;717,425;5739,4
+"Mineralölprodukte";"Erzgebirgskreis";"14521";8;11,14;89,12
+"Mineralölprodukte";"Essen, Stadt";"05113";4;629,5;2518
+"Mineralölprodukte";"Esslingen";"08116";9;155,811111111111;1402,3
+"Mineralölprodukte";"Euskirchen";"05366";3;70,8333333333333;212,5
+"Mineralölprodukte";"Flensburg, Stadt";"01001";1;500;500
+"Mineralölprodukte";"Forchheim";"09474";3;6,03333333333333;18,1
+"Mineralölprodukte";"Frankfurt am Main, Stadt";"06412";34;1159,36176470588;39418,3
+"Mineralölprodukte";"Freiburg im Breisgau, Stadtkreis";"08311";4;50,54;202,16
+"Mineralölprodukte";"Freising";"09178";4;7,15;28,6
+"Mineralölprodukte";"Freudenstadt";"08237";13;7,08615384615385;92,12
+"Mineralölprodukte";"Fulda";"06631";8;42,9475;343,58
+"Mineralölprodukte";"Fürstenfeldbruck";"09179";2;85,5;171
+"Mineralölprodukte";"Fürth";"09563";2;249,15;498,3
+"Mineralölprodukte";"Fürth";"09573";5;61,56;307,8
+"Mineralölprodukte";"Garmisch-Partenkirchen";"09180";6;471,3;2827,8
+"Mineralölprodukte";"Gelsenkirchen, Stadt";"05513";4;66,4;265,6
+"Mineralölprodukte";"Gera, Stadt";"16052";1;468;468
+"Mineralölprodukte";"Germersheim";"07334";3;833,333333333333;2500
+"Mineralölprodukte";"Gießen";"06531";16;593,5125;9496,2
+"Mineralölprodukte";"Gifhorn";"03151";12;9,00833333333333;108,1
+"Mineralölprodukte";"Göppingen";"08117";8;73,725;589,8
+"Mineralölprodukte";"Görlitz";"14626";6;11,5;69
+"Mineralölprodukte";"Goslar";"03153";7;555,831428571429;3890,82
+"Mineralölprodukte";"Gotha";"16067";1;24;24
+"Mineralölprodukte";"Göttingen";"03159";13;405,3;5268,9
+"Mineralölprodukte";"Grafschaft Bentheim";"03456";3;83,8666666666667;251,6
+"Mineralölprodukte";"Groß-Gerau";"06433";12;502,266666666667;6027,2
+"Mineralölprodukte";"Günzburg";"09774";1;32;32
+"Mineralölprodukte";"Gütersloh";"05754";8;123,04375;984,35
+"Mineralölprodukte";"Halle (Saale), Stadt";"15002";4;307,3;1229,2
+"Mineralölprodukte";"Hamburg, Freie und Hansestadt";"02000";21;549,733333333333;11544,4
+"Mineralölprodukte";"Hameln-Pyrmont";"03252";7;151,628571428571;1061,4
+"Mineralölprodukte";"Hamm, Stadt";"05915";7;368,742857142857;2581,2
+"Mineralölprodukte";"Harburg";"03353";4;5,075;20,3
+"Mineralölprodukte";"Harz";"15085";9;404,888888888889;3644
+"Mineralölprodukte";"Haßberge";"09674";3;5,3;15,9
+"Mineralölprodukte";"Heidekreis";"03358";4;600,25;2401
+"Mineralölprodukte";"Heidelberg, Stadtkreis";"08221";2;112;224
+"Mineralölprodukte";"Heidenheim";"08135";1;432;432
+"Mineralölprodukte";"Heilbronn";"08125";10;751,93;7519,3
+"Mineralölprodukte";"Heilbronn, Stadtkreis";"08121";4;300;1200
+"Mineralölprodukte";"Heinsberg";"05370";10;138,04;1380,4
+"Mineralölprodukte";"Herford";"05758";5;9,94;49,7
+"Mineralölprodukte";"Hersfeld-Rotenburg";"06632";6;8,5;51
+"Mineralölprodukte";"Hildesheim";"03254";6;5,2;31,2
+"Mineralölprodukte";"Hochsauerlandkreis";"05958";4;278,75;1115
+"Mineralölprodukte";"Hochtaunuskreis";"06434";3;629,333333333333;1888
+"Mineralölprodukte";"Hof";"09475";6;320,061666666667;1920,37
+"Mineralölprodukte";"Hohenlohekreis";"08126";9;142,355555555556;1281,2
+"Mineralölprodukte";"Holzminden";"03255";3;604;1812
+"Mineralölprodukte";"Höxter";"05762";1;5,3;5,3
+"Mineralölprodukte";"Ilm-Kreis";"16070";3;278,666666666667;836
+"Mineralölprodukte";"Ingolstadt";"09161";1;2480;2480
+"Mineralölprodukte";"Jena, Stadt";"16053";4;717,75;2871
+"Mineralölprodukte";"Kaiserslautern, kreisfreie Stadt";"07312";3;274;822
+"Mineralölprodukte";"Karlsruhe";"08215";13;48,2784615384615;627,62
+"Mineralölprodukte";"Karlsruhe, Stadtkreis";"08212";12;7982,91666666667;95795
+"Mineralölprodukte";"Kassel";"06633";6;169,333333333333;1016
+"Mineralölprodukte";"Kassel, documenta-Stadt";"06611";16;194,3125;3109
+"Mineralölprodukte";"Kaufbeuren";"09762";2;102,5;205
+"Mineralölprodukte";"Kempten (Allgäu)";"09763";2;288;576
+"Mineralölprodukte";"Kiel, Landeshauptstadt";"01002";2;477;954
+"Mineralölprodukte";"Kitzingen";"09675";12;239,533333333333;2874,4
+"Mineralölprodukte";"Kleve";"05154";3;12,6666666666667;38
+"Mineralölprodukte";"Koblenz, kreisfreie Stadt";"07111";3;273,333333333333;820
+"Mineralölprodukte";"Köln, Stadt";"05315";18;486,5;8757
+"Mineralölprodukte";"Konstanz";"08335";6;4,52;27,12
+"Mineralölprodukte";"Krefeld, Stadt";"05114";6;803,833333333333;4823
+"Mineralölprodukte";"Kronach";"09476";5;5,274;26,37
+"Mineralölprodukte";"Kyffhäuserkreis";"16065";4;14,605;58,42
+"Mineralölprodukte";"Lahn-Dill-Kreis";"06532";7;5,28142857142857;36,97
+"Mineralölprodukte";"Landau in der Pfalz, kreisfreie Stadt";"07313";1;640;640
+"Mineralölprodukte";"Landkreis Rostock";"13072";2;10,3;20,6
+"Mineralölprodukte";"Landsberg am Lech";"09181";2;6,4;12,8
+"Mineralölprodukte";"Landshut";"09274";3;5,3;15,9
+"Mineralölprodukte";"Leer";"03457";8;828,25;6626
+"Mineralölprodukte";"Leipzig, Stadt";"14713";16;544,5;8712
+"Mineralölprodukte";"Leverkusen, Stadt";"05316";1;1395;1395
+"Mineralölprodukte";"Limburg-Weilburg";"06533";1;32;32
+"Mineralölprodukte";"Lindau (Bodensee)";"09776";1;5,1;5,1
+"Mineralölprodukte";"Lippe";"05766";5;14,28;71,4
+"Mineralölprodukte";"Lörrach";"08336";2;26,65;53,3
+"Mineralölprodukte";"Lüchow-Dannenberg";"03354";1;5,3;5,3
+"Mineralölprodukte";"Ludwigsburg";"08118";5;333,442;1667,21
+"Mineralölprodukte";"Ludwigshafen am Rhein, kreisfreie Stadt";"07314";2;972,255;1944,51
+"Mineralölprodukte";"Lüneburg";"03355";1;5,3;5,3
+"Mineralölprodukte";"Magdeburg, Landeshauptstadt";"15003";2;117,65;235,3
+"Mineralölprodukte";"Main-Kinzig-Kreis";"06435";7;87,5142857142857;612,6
+"Mineralölprodukte";"Main-Spessart";"09677";1;5,3;5,3
+"Mineralölprodukte";"Main-Tauber-Kreis";"08128";7;297,757142857143;2084,3
+"Mineralölprodukte";"Main-Taunus-Kreis";"06436";3;407;1221
+"Mineralölprodukte";"Mainz-Bingen";"07339";2;412,5;825
+"Mineralölprodukte";"Mainz, kreisfreie Stadt";"07315";13;467,253846153846;6074,3
+"Mineralölprodukte";"Mannheim, Stadtkreis";"08222";3;320,5;961,5
+"Mineralölprodukte";"Mansfeld-Südharz";"15087";6;484,9;2909,4
+"Mineralölprodukte";"Marburg-Biedenkopf";"06534";6;605,766666666667;3634,6
+"Mineralölprodukte";"Märkisch-Oderland";"12064";2;408;816
+"Mineralölprodukte";"Märkischer Kreis";"05962";17;11792,8476470588;200478,41
+"Mineralölprodukte";"Mayen-Koblenz";"07137";1;5;5
+"Mineralölprodukte";"Mecklenburgische Seenplatte";"13071";5;223,8;1119
+"Mineralölprodukte";"Meißen";"14627";10;94,111;941,11
+"Mineralölprodukte";"Mettmann";"05158";19;837,105263157895;15905
+"Mineralölprodukte";"Miesbach";"09182";5;18705,254;93526,27
+"Mineralölprodukte";"Miltenberg";"09676";1;5,3;5,3
+"Mineralölprodukte";"Minden-Lübbecke";"05770";8;120,775;966,2
+"Mineralölprodukte";"Mittelsachsen";"14522";6;152,433333333333;914,6
+"Mineralölprodukte";"Mönchengladbach, Stadt";"05116";2;444;888
+"Mineralölprodukte";"Mühldorf a.Inn";"09183";3;327,366666666667;982,1
+"Mineralölprodukte";"Mülheim an der Ruhr, Stadt";"05117";7;232,871428571429;1630,1
+"Mineralölprodukte";"München";"09184";9;748,333333333333;6735
+"Mineralölprodukte";"München, Landeshauptstadt";"09162";33;552,290909090909;18225,6
+"Mineralölprodukte";"Münster, Stadt";"05515";15;575,486666666667;8632,3
+"Mineralölprodukte";"Neckar-Odenwald-Kreis";"08225";5;3604,28;18021,4
+"Mineralölprodukte";"Neu-Ulm";"09775";11;880,254545454545;9682,8
+"Mineralölprodukte";"Neuburg-Schrobenhausen";"09185";4;117,575;470,3
+"Mineralölprodukte";"Neumarkt i.d.OPf.";"09373";6;175,766666666667;1054,6
+"Mineralölprodukte";"Neumünster, Stadt";"01004";1;320;320
+"Mineralölprodukte";"Neustadt a.d.Aisch-Bad Windsheim";"09575";2;5,6;11,2
+"Mineralölprodukte";"Neustadt a.d.Waldnaab";"09374";3;5,27;15,81
+"Mineralölprodukte";"Neustadt an der Weinstraße, kreisfreie Stadt";"07316";7;193,457142857143;1354,2
+"Mineralölprodukte";"Neuwied";"07138";1;160;160
+"Mineralölprodukte";"Nienburg (Weser)";"03256";1;5,3;5,3
+"Mineralölprodukte";"Nordfriesland";"01054";6;20,2;121,2
+"Mineralölprodukte";"Nordhausen";"16062";1;5,3;5,3
+"Mineralölprodukte";"Nordsachsen";"14730";3;57,7666666666667;173,3
+"Mineralölprodukte";"Northeim";"03155";2;129,75;259,5
+"Mineralölprodukte";"Nürnberg";"09564";13;433,946153846154;5641,3
+"Mineralölprodukte";"Nürnberger Land";"09574";1;115;115
+"Mineralölprodukte";"Oberallgäu";"09780";4;14,925;59,7
+"Mineralölprodukte";"Oberbergischer Kreis";"05374";3;300;900
+"Mineralölprodukte";"Oberhausen, Stadt";"05119";1;5,3;5,3
+"Mineralölprodukte";"Oberhavel";"12065";1;600;600
+"Mineralölprodukte";"Oberspreewald-Lausitz";"12066";3;5,36666666666667;16,1
+"Mineralölprodukte";"Odenwaldkreis";"06437";2;257;514
+"Mineralölprodukte";"Oder-Spree";"12067";2;28;56
+"Mineralölprodukte";"Offenbach";"06438";3;332,1;996,3
+"Mineralölprodukte";"Offenbach am Main, Stadt";"06413";2;450;900
+"Mineralölprodukte";"Oldenburg";"03458";2;642,75;1285,5
+"Mineralölprodukte";"Olpe";"05966";3;5,2;15,6
+"Mineralölprodukte";"Ortenaukreis";"08317";32;113,8284375;3642,51
+"Mineralölprodukte";"Osnabrück";"03459";22;11,2636363636364;247,8
+"Mineralölprodukte";"Osnabrück, Stadt";"03404";2;5,15;10,3
+"Mineralölprodukte";"Ostalbkreis";"08136";8;54,015;432,12
+"Mineralölprodukte";"Ostallgäu";"09777";3;138,366666666667;415,1
+"Mineralölprodukte";"Osterholz";"03356";1;80;80
+"Mineralölprodukte";"Ostholstein";"01055";5;319,12;1595,6
+"Mineralölprodukte";"Ostprignitz-Ruppin";"12068";2;20;40
+"Mineralölprodukte";"Paderborn";"05774";3;315;945
+"Mineralölprodukte";"Passau";"09262";1;640;640
+"Mineralölprodukte";"Passau";"09275";7;93,5714285714286;655
+"Mineralölprodukte";"Peine";"03157";3;5,3;15,9
+"Mineralölprodukte";"Pfaffenhofen a.d.Ilm";"09186";8;472,8125;3782,5
+"Mineralölprodukte";"Pforzheim, Stadtkreis";"08231";4;22,525;90,1
+"Mineralölprodukte";"Pinneberg";"01056";5;167,72;838,6
+"Mineralölprodukte";"Pirmasens, kreisfreie Stadt";"07317";3;513,333333333333;1540
+"Mineralölprodukte";"Plön";"01057";2;5,275;10,55
+"Mineralölprodukte";"Potsdam-Mittelmark";"12069";4;358;1432
+"Mineralölprodukte";"Potsdam, Stadt";"12054";3;1040;3120
+"Mineralölprodukte";"Rastatt";"08216";6;455,043333333333;2730,26
+"Mineralölprodukte";"Ravensburg";"08436";13;439,030769230769;5707,4
+"Mineralölprodukte";"Recklinghausen";"05562";9;849,588888888889;7646,3
+"Mineralölprodukte";"Regen";"09276";2;5,2;10,4
+"Mineralölprodukte";"Regensburg";"09362";17;324,723529411765;5520,3
+"Mineralölprodukte";"Regensburg";"09375";6;684,133333333333;4104,8
+"Mineralölprodukte";"Region Hannover";"03241";25;171,284;4282,1
+"Mineralölprodukte";"Regionalverband Saarbrücken";"10041";5;273,2;1366
+"Mineralölprodukte";"Rems-Murr-Kreis";"08119";3;186,433333333333;559,3
+"Mineralölprodukte";"Rendsburg-Eckernförde";"01058";1;115;115
+"Mineralölprodukte";"Reutlingen";"08415";4;191,825;767,3
+"Mineralölprodukte";"Rhein-Erft-Kreis";"05362";14;6726,52142857143;94171,3
+"Mineralölprodukte";"Rhein-Hunsrück-Kreis";"07140";1;17;17
+"Mineralölprodukte";"Rhein-Kreis Neuss";"05162";6;542,166666666667;3253
+"Mineralölprodukte";"Rhein-Lahn-Kreis";"07141";1;18;18
+"Mineralölprodukte";"Rhein-Neckar-Kreis";"08226";4;173,975;695,9
+"Mineralölprodukte";"Rhein-Sieg-Kreis";"05382";8;133,65625;1069,25
+"Mineralölprodukte";"Rheingau-Taunus-Kreis";"06439";1;5,3;5,3
+"Mineralölprodukte";"Rheinisch-Bergischer Kreis";"05378";1;21,14;21,14
+"Mineralölprodukte";"Rhön-Grabfeld";"09673";3;5,3;15,9
+"Mineralölprodukte";"Rosenheim";"09187";4;109,025;436,1
+"Mineralölprodukte";"Rostock";"13003";2;210,5;421
+"Mineralölprodukte";"Rotenburg (Wümme)";"03357";1;5,3;5,3
+"Mineralölprodukte";"Roth";"09576";3;331,1;993,3
+"Mineralölprodukte";"Rottal-Inn";"09277";4;223,325;893,3
+"Mineralölprodukte";"Rottweil";"08325";3;88,4333333333333;265,3
+"Mineralölprodukte";"Saale-Holzland-Kreis";"16074";3;108,433333333333;325,3
+"Mineralölprodukte";"Saalekreis";"15088";9;100,133333333333;901,2
+"Mineralölprodukte";"Saalfeld-Rudolstadt";"16073";2;14,65;29,3
+"Mineralölprodukte";"Saarlouis";"10044";3;306,916666666667;920,75
+"Mineralölprodukte";"Saarpfalz-Kreis";"10045";2;122,75;245,5
+"Mineralölprodukte";"Sächsische Schweiz-Osterzgebirge";"14628";3;19,1;57,3
+"Mineralölprodukte";"Salzgitter, Stadt";"03102";6;1241,65;7449,9
+"Mineralölprodukte";"Salzlandkreis";"15089";4;316,325;1265,3
+"Mineralölprodukte";"Schaumburg";"03257";2;5,3;10,6
+"Mineralölprodukte";"Schleswig-Flensburg";"01059";3;5,3;15,9
+"Mineralölprodukte";"Schmalkalden-Meiningen";"16066";5;14,168;70,84
+"Mineralölprodukte";"Schwabach";"09565";2;7,65;15,3
+"Mineralölprodukte";"Schwäbisch Hall";"08127";8;44,17875;353,43
+"Mineralölprodukte";"Schwalm-Eder-Kreis";"06634";7;5,22857142857143;36,6
+"Mineralölprodukte";"Schwandorf";"09376";4;73,96;295,84
+"Mineralölprodukte";"Schwarzwald-Baar-Kreis";"08326";9;284,988888888889;2564,9
+"Mineralölprodukte";"Schweinfurt";"09662";8;238,15;1905,2
+"Mineralölprodukte";"Schweinfurt";"09678";4;5,275;21,1
+"Mineralölprodukte";"Schwerin";"13004";2;380;760
+"Mineralölprodukte";"Segeberg";"01060";5;853,2;4266
+"Mineralölprodukte";"Sigmaringen";"08437";9;5,87555555555556;52,88
+"Mineralölprodukte";"Soest";"05974";5;155,9;779,5
+"Mineralölprodukte";"Solingen, Klingenstadt";"05122";3;6,86666666666667;20,6
+"Mineralölprodukte";"Sonneberg";"16072";2;289;578
+"Mineralölprodukte";"St. Wendel";"10046";1;5,3;5,3
+"Mineralölprodukte";"Stade";"03359";4;183,125;732,5
+"Mineralölprodukte";"Städteregion Aachen";"05334";10;157,635;1576,35
+"Mineralölprodukte";"Steinfurt";"05566";17;122,194117647059;2077,3
+"Mineralölprodukte";"Stendal";"15090";3;17,7666666666667;53,3
+"Mineralölprodukte";"Stormarn";"01062";6;292,716666666667;1756,3
+"Mineralölprodukte";"Straubing-Bogen";"09278";4;60,655;242,62
+"Mineralölprodukte";"Stuttgart, Stadtkreis";"08111";25;318,992;7974,8
+"Mineralölprodukte";"Tirschenreuth";"09377";3;165,166666666667;495,5
+"Mineralölprodukte";"Traunstein";"09189";5;205,06;1025,3
+"Mineralölprodukte";"Trier-Saarburg";"07235";10;323,2;3232
+"Mineralölprodukte";"Trier, kreisfreie Stadt";"07211";2;226;452
+"Mineralölprodukte";"Tübingen";"08416";7;362,228571428571;2535,6
+"Mineralölprodukte";"Tuttlingen";"08327";7;25,6857142857143;179,8
+"Mineralölprodukte";"Uckermark";"12073";3;78005,3333333333;234016
+"Mineralölprodukte";"Uelzen";"03360";10;5,225;52,25
+"Mineralölprodukte";"Ulm, Stadtkreis";"08421";4;198,5;794
+"Mineralölprodukte";"Unna";"05978";5;391,92;1959,6
+"Mineralölprodukte";"Unstrut-Hainich-Kreis";"16064";2;14,65;29,3
+"Mineralölprodukte";"Unterallgäu";"09778";5;259,06;1295,3
+"Mineralölprodukte";"Vechta";"03460";1;25;25
+"Mineralölprodukte";"Verden";"03361";7;89,4428571428571;626,1
+"Mineralölprodukte";"Viersen";"05166";6;268,05;1608,3
+"Mineralölprodukte";"Vogelsbergkreis";"06535";2;5,3;10,6
+"Mineralölprodukte";"Vogtlandkreis";"14523";10;203,2;2032
+"Mineralölprodukte";"Vorpommern-Greifswald";"13075";1;320;320
+"Mineralölprodukte";"Vorpommern-Rügen";"13073";5;18,8;94
+"Mineralölprodukte";"Vulkaneifel";"07233";2;71,5;143
+"Mineralölprodukte";"Waldeck-Frankenberg";"06635";4;53,9;215,6
+"Mineralölprodukte";"Waldshut";"08337";20;20,948;418,96
+"Mineralölprodukte";"Warendorf";"05570";8;83,9375;671,5
+"Mineralölprodukte";"Wartburgkreis";"16063";12;275,833333333333;3310
+"Mineralölprodukte";"Weiden i.d.OPf.";"09363";3;433,333333333333;1300
+"Mineralölprodukte";"Weilheim-Schongau";"09190";9;866,167777777778;7795,51
+"Mineralölprodukte";"Weimar, Stadt";"16055";2;24;48
+"Mineralölprodukte";"Weimarer Land";"16071";1;80;80
+"Mineralölprodukte";"Weißenburg-Gunzenhausen";"09577";3;5,2;15,6
+"Mineralölprodukte";"Werra-Meißner-Kreis";"06636";2;18,05;36,1
+"Mineralölprodukte";"Wesel";"05170";3;1841,76666666667;5525,3
+"Mineralölprodukte";"Wesermarsch";"03461";1;400;400
+"Mineralölprodukte";"Westerwaldkreis";"07143";3;248;744
+"Mineralölprodukte";"Wetteraukreis";"06440";3;250,1;750,3
+"Mineralölprodukte";"Wiesbaden, Landeshauptstadt";"06414";3;30,2666666666667;90,8
+"Mineralölprodukte";"Wittenberg";"15091";2;372;744
+"Mineralölprodukte";"Wittmund";"03462";1;5;5
+"Mineralölprodukte";"Wolfenbüttel";"03158";5;500,28;2501,4
+"Mineralölprodukte";"Wolfsburg, Stadt";"03103";30;300,196666666667;9005,9
+"Mineralölprodukte";"Worms, kreisfreie Stadt";"07319";1;930;930
+"Mineralölprodukte";"Wunsiedel i.Fichtelgebirge";"09479";1;475;475
+"Mineralölprodukte";"Wuppertal, Stadt";"05124";7;9344,35585714286;65410,491
+"Mineralölprodukte";"Würzburg";"09663";23;664,765217391304;15289,6
+"Mineralölprodukte";"Würzburg";"09679";3;165,2;495,6
+"Mineralölprodukte";"Zollernalbkreis";"08417";8;100,6625;805,3
+"Mineralölprodukte";"Zwickau";"14524";6;119,1;714,6
 "Solareinheit";"Ahrweiler";"07131";623;15,9925056179775;9963,331
 "Solareinheit";"Aichach-Friedberg";"09771";920;31,298;28794,16
 "Solareinheit";"Alb-Donau-Kreis";"08425";5089;61,7543289447829;314267,78
@@ -967,6 +1718,18 @@
 "Solareinheit";"Zollernalbkreis";"08417";2141;19,7924978981784;42375,738
 "Solareinheit";"Zweibrücken, kreisfreie Stadt";"07320";523;14,3446156787763;7502,234
 "Solareinheit";"Zwickau";"14524";875;38,7490365714286;33905,407
+"Steinkohle";"Berlin, Stadt";"11000";1;9500;9500
+"Steinkohle";"Duisburg, Stadt";"05112";1;370000;370000
+"Steinkohle";"Frankfurt am Main, Stadt";"06412";2;61500;123000
+"Steinkohle";"Minden-Lübbecke";"05770";1;875000;875000
+"Steinkohle";"München";"09184";1;333000;333000
+"Steinkohle";"Peine";"03157";1;690;690
+"Steinkohle";"Pforzheim, Stadtkreis";"08231";1;26900;26900
+"Steinkohle";"Regionalverband Saarbrücken";"10041";1;53000;53000
+"Steinkohle";"Rheinisch-Bergischer Kreis";"05378";1;21060;21060
+"Steinkohle";"Schweinfurt";"09662";1;24400;24400
+"Steinkohle";"Unna";"05978";1;746000;746000
+"Steinkohle";"Wolfsburg, Stadt";"03103";4;100500;402000
 "Stromspeichereinheit";"Ahrweiler";"07131";81;60,7472839506173;4920,53
 "Stromspeichereinheit";"Aichach-Friedberg";"09771";159;4,38070440251572;696,532
 "Stromspeichereinheit";"Alb-Donau-Kreis";"08425";334;3,97845508982036;1328,804
@@ -1421,407 +2184,80 @@
 "Stromverbrauchseinheit";"Unna";"05978";2;NA;NA
 "Stromverbrauchseinheit";"Vorpommern-Greifswald";"13075";1;NA;NA
 "Stromverbrauchseinheit";"Wesel";"05170";2;NA;NA
-"Verbrennung";"Ahrweiler";"07131";29;163,582413793103;4743,89
-"Verbrennung";"Aichach-Friedberg";"09771";45;43,2855555555556;1947,85
-"Verbrennung";"Alb-Donau-Kreis";"08425";101;48,919504950495;4940,87
-"Verbrennung";"Altenburger Land";"16077";24;117,517083333333;2820,41
-"Verbrennung";"Altenkirchen (Westerwald)";"07132";25;21,7048;542,62
-"Verbrennung";"Altmarkkreis Salzwedel";"15081";19;94,5184210526316;1795,85
-"Verbrennung";"Altötting";"09171";20;114,836;2296,72
-"Verbrennung";"Alzey-Worms";"07331";47;40,8042553191489;1917,8
-"Verbrennung";"Amberg";"09361";21;68,6990476190476;1442,68
-"Verbrennung";"Amberg-Sulzbach";"09371";13;5,28230769230769;68,67
-"Verbrennung";"Ammerland";"03451";34;61,3913235294118;2087,305
-"Verbrennung";"Anhalt-Bitterfeld";"15082";36;132,017777777778;4752,64
-"Verbrennung";"Ansbach";"09561";32;194,4515625;6222,45
-"Verbrennung";"Ansbach";"09571";52;125,721538461538;6537,52
-"Verbrennung";"Aschaffenburg";"09661";16;36,45125;583,22
-"Verbrennung";"Aschaffenburg";"09671";41;9,12073170731707;373,95
-"Verbrennung";"Augsburg";"09761";28;2110,53928571429;59095,1
-"Verbrennung";"Augsburg";"09772";44;84,325;3710,3
-"Verbrennung";"Aurich";"03452";34;20,125;684,25
-"Verbrennung";"Bad Dürkheim";"07332";42;21,9771428571429;923,04
-"Verbrennung";"Bad Kissingen";"09672";35;23,4757142857143;821,65
-"Verbrennung";"Bad Kreuznach";"07133";27;16,1685185185185;436,55
-"Verbrennung";"Bad Tölz-Wolfratshausen";"09173";10;37,535;375,35
-"Verbrennung";"Baden-Baden, Stadtkreis";"08211";20;275,71025;5514,205
-"Verbrennung";"Bamberg";"09461";41;35,9455609756098;1473,768
-"Verbrennung";"Bamberg";"09471";24;45,5333333333333;1092,8
-"Verbrennung";"Barnim";"12060";26;199,304615384615;5181,92
-"Verbrennung";"Bautzen";"14625";63;287,234777777778;18095,791
-"Verbrennung";"Bayreuth";"09462";17;406,306764705882;6907,215
-"Verbrennung";"Bayreuth";"09472";15;16,4733333333333;247,1
-"Verbrennung";"Berchtesgadener Land";"09172";21;109,319047619048;2295,7
-"Verbrennung";"Bergstraße";"06431";46;282,085108695652;12975,915
-"Verbrennung";"Berlin, Stadt";"11000";464;819,790234913793;380382,669
-"Verbrennung";"Bernkastel-Wittlich";"07231";18;124,496277777778;2240,933
-"Verbrennung";"Biberach";"08426";101;151,319405940594;15283,26
-"Verbrennung";"Bielefeld, Stadt";"05711";105;60,5047619047619;6353
-"Verbrennung";"Birkenfeld";"07134";4;335,25;1341
-"Verbrennung";"Böblingen";"08115";201;687,977074626866;138283,392
-"Verbrennung";"Bochum, Stadt";"05911";51;1207,19490196078;61566,94
-"Verbrennung";"Bodenseekreis";"08435";111;193,650630630631;21495,22
-"Verbrennung";"Bonn, Stadt";"05314";43;39,3573953488372;1692,368
-"Verbrennung";"Börde";"15083";59;204,141016949153;12044,32
-"Verbrennung";"Borken";"05554";133;107,008120300752;14232,08
-"Verbrennung";"Bottrop, Stadt";"05512";75;346,157733333333;25961,83
-"Verbrennung";"Brandenburg an der Havel, Stadt";"12051";13;13737,4038461538;178586,25
-"Verbrennung";"Braunschweig, Stadt";"03101";34;323,786764705882;11008,75
-"Verbrennung";"Breisgau-Hochschwarzwald";"08315";124;56,7362096774194;7035,29
-"Verbrennung";"Bremen, Stadt";"04011";123;74,1084878048781;9115,344
-"Verbrennung";"Bremerhaven, Stadt";"04012";18;37,1388888888889;668,5
-"Verbrennung";"Burgenlandkreis";"15084";40;2433,8945;97355,78
-"Verbrennung";"Calw";"08235";57;73,0041228070175;4161,235
-"Verbrennung";"Celle";"03351";65;21,58;1402,7
-"Verbrennung";"Cham";"09372";43;22,1853488372093;953,97
-"Verbrennung";"Chemnitz, Stadt";"14511";42;3704,39202380952;155584,465
-"Verbrennung";"Cloppenburg";"03453";65;201,784369230769;13115,984
-"Verbrennung";"Coburg";"09463";25;159,1584;3978,96
-"Verbrennung";"Coburg";"09473";29;112,835172413793;3272,22
-"Verbrennung";"Cochem-Zell";"07135";8;28,1575;225,26
-"Verbrennung";"Coesfeld";"05558";40;44,9194;1796,776
-"Verbrennung";"Cottbus, Stadt";"12052";9;8062,41222222222;72561,71
-"Verbrennung";"Cuxhaven";"03352";39;43,6281025641026;1701,496
-"Verbrennung";"Dachau";"09174";21;330,178571428571;6933,75
-"Verbrennung";"Dahme-Spreewald";"12061";47;255,017106382979;11985,804
-"Verbrennung";"Darmstadt-Dieburg";"06432";66;27,4431818181818;1811,25
-"Verbrennung";"Darmstadt, Wissenschaftsstadt";"06411";78;1605,67230769231;125242,44
-"Verbrennung";"Deggendorf";"09271";30;47,258;1417,74
-"Verbrennung";"Delmenhorst, Stadt";"03401";6;13,8333333333333;83
-"Verbrennung";"Dessau-Roßlau, Stadt";"15001";20;1964,705;39294,1
-"Verbrennung";"Diepholz";"03251";52;26,1973269230769;1362,261
-"Verbrennung";"Dillingen a.d.Donau";"09773";21;190,635714285714;4003,35
-"Verbrennung";"Dingolfing-Landau";"09279";44;761,290454545455;33496,78
-"Verbrennung";"Dithmarschen";"01051";71;641,571549295775;45551,58
-"Verbrennung";"Donau-Ries";"09779";31;240,437096774194;7453,55
-"Verbrennung";"Donnersbergkreis";"07333";28;52,8341071428571;1479,355
-"Verbrennung";"Dortmund, Stadt";"05913";69;79,501;5485,569
-"Verbrennung";"Dresden, Stadt";"14612";117;187,824017094017;21975,41
-"Verbrennung";"Duisburg, Stadt";"05112";57;11646,0038596491;663822,22
-"Verbrennung";"Düren";"05358";40;103,8495;4153,98
-"Verbrennung";"Düsseldorf, Stadt";"05111";68;271,414176470588;18456,164
-"Verbrennung";"Ebersberg";"09175";24;120,98;2903,52
-"Verbrennung";"Eichsfeld";"16061";44;91,2084090909091;4013,17
-"Verbrennung";"Eichstätt";"09176";39;535,841025641026;20897,8
-"Verbrennung";"Eifelkreis Bitburg-Prüm";"07232";22;63,7331818181818;1402,13
-"Verbrennung";"Eisenach, Stadt";"16056";9;2467,06666666667;22203,6
-"Verbrennung";"Elbe-Elster";"12062";14;36,9285714285714;517
-"Verbrennung";"Emden, Stadt";"03402";8;21,40625;171,25
-"Verbrennung";"Emmendingen";"08316";77;131,626103896104;10135,21
-"Verbrennung";"Emsland";"03454";100;74,99205;7499,205
-"Verbrennung";"Ennepe-Ruhr-Kreis";"05954";94;4541,73626595745;426923,209
-"Verbrennung";"Enzkreis";"08236";45;35,0997777777778;1579,49
-"Verbrennung";"Erding";"09177";33;96,5493939393939;3186,13
-"Verbrennung";"Erfurt, Stadt";"16051";41;2752,3887804878;112847,94
-"Verbrennung";"Erlangen";"09562";32;43,3875;1388,4
-"Verbrennung";"Erlangen-Höchstadt";"09572";37;358,418378378378;13261,48
-"Verbrennung";"Erzgebirgskreis";"14521";85;69,7212941176471;5926,31
-"Verbrennung";"Essen, Stadt";"05113";46;127,48347826087;5864,24
-"Verbrennung";"Esslingen";"08116";140;65,1974;9127,636
-"Verbrennung";"Euskirchen";"05366";48;42,8120833333333;2054,98
-"Verbrennung";"Flensburg, Stadt";"01001";6;8560,16666666667;51361
-"Verbrennung";"Forchheim";"09474";24;40,4766666666667;971,44
-"Verbrennung";"Frankenthal (Pfalz), kreisfreie Stadt";"07311";8;6,25;50
-"Verbrennung";"Frankfurt (Oder), Stadt";"12053";2;12,75;25,5
-"Verbrennung";"Frankfurt am Main, Stadt";"06412";203;2460,69990147783;499522,08
-"Verbrennung";"Freiburg im Breisgau, Stadtkreis";"08311";83;71,7494578313253;5955,205
-"Verbrennung";"Freising";"09178";30;169,681666666667;5090,45
-"Verbrennung";"Freudenstadt";"08237";71;81,221338028169;5766,715
-"Verbrennung";"Freyung-Grafenau";"09272";18;1925,37833333333;34656,81
-"Verbrennung";"Friesland";"03455";16;154,526875;2472,43
-"Verbrennung";"Fulda";"06631";108;90,7501296296296;9801,014
-"Verbrennung";"Fürstenfeldbruck";"09179";51;46,2123529411765;2356,83
-"Verbrennung";"Fürth";"09563";33;49,7957575757576;1643,26
-"Verbrennung";"Fürth";"09573";24;93,98125;2255,55
-"Verbrennung";"Garmisch-Partenkirchen";"09180";26;185,171153846154;4814,45
-"Verbrennung";"Gelsenkirchen, Stadt";"05513";32;123,313125;3946,02
-"Verbrennung";"Gera, Stadt";"16052";18;2248,84166666667;40479,15
-"Verbrennung";"Germersheim";"07334";24;117,664958333333;2823,959
-"Verbrennung";"Gießen";"06531";161;335,441739130435;54006,12
-"Verbrennung";"Gifhorn";"03151";61;14,2081967213115;866,7
-"Verbrennung";"Göppingen";"08117";104;69,2770192307692;7204,81
-"Verbrennung";"Görlitz";"14626";58;42689,1051724138;2475968,1
-"Verbrennung";"Goslar";"03153";89;104,626966292135;9311,8
-"Verbrennung";"Gotha";"16067";31;193,944516129032;6012,28
-"Verbrennung";"Göttingen";"03159";112;318,216517857143;35640,25
-"Verbrennung";"Grafschaft Bentheim";"03456";39;207,638461538462;8097,9
-"Verbrennung";"Greiz";"16076";10;108,985;1089,85
-"Verbrennung";"Groß-Gerau";"06433";63;2018,7473015873;127181,08
-"Verbrennung";"Günzburg";"09774";35;211,929714285714;7417,54
-"Verbrennung";"Gütersloh";"05754";165;233,65123030303;38552,453
-"Verbrennung";"Hagen, Stadt der FernUniversität";"05914";12;20832,975;249995,7
-"Verbrennung";"Halle (Saale), Stadt";"15002";19;2637,7;50116,3
-"Verbrennung";"Hamburg, Freie und Hansestadt";"02000";359;173,850997214485;62412,508
-"Verbrennung";"Hameln-Pyrmont";"03252";29;97,9886206896552;2841,67
-"Verbrennung";"Hamm, Stadt";"05915";48;17199,36625;825569,58
-"Verbrennung";"Harburg";"03353";61;41,3570655737705;2522,781
-"Verbrennung";"Harz";"15085";63;222,021587301587;13987,36
-"Verbrennung";"Haßberge";"09674";11;239,815181818182;2637,967
-"Verbrennung";"Havelland";"12063";18;83,75;1507,5
-"Verbrennung";"Heidekreis";"03358";50;473,35884;23667,942
-"Verbrennung";"Heidelberg, Stadtkreis";"08221";13;19,9538461538462;259,4
-"Verbrennung";"Heidenheim";"08135";35;631,812;22113,42
-"Verbrennung";"Heilbronn";"08125";94;124,734042553191;11725
-"Verbrennung";"Heilbronn, Stadtkreis";"08121";53;56,8667924528302;3013,94
-"Verbrennung";"Heinsberg";"05370";66;53,9063636363636;3557,82
-"Verbrennung";"Helmstedt";"03154";40;205,52875;8221,15
-"Verbrennung";"Herford";"05758";83;78,7777108433735;6538,55
-"Verbrennung";"Herne, Stadt";"05916";12;6,43416666666667;77,21
-"Verbrennung";"Hersfeld-Rotenburg";"06632";30;32,2083333333333;966,25
-"Verbrennung";"Herzogtum Lauenburg";"01053";61;28,4503114754098;1735,469
-"Verbrennung";"Hildburghausen";"16069";12;65,69;788,28
-"Verbrennung";"Hildesheim";"03254";74;65,4;4839,6
-"Verbrennung";"Hochsauerlandkreis";"05958";50;243,49532;12174,766
-"Verbrennung";"Hochtaunuskreis";"06434";53;97,0512452830189;5143,716
-"Verbrennung";"Hof";"09464";18;322,677777777778;5808,2
-"Verbrennung";"Hof";"09475";40;56,40925;2256,37
-"Verbrennung";"Hohenlohekreis";"08126";35;95,5084285714286;3342,795
-"Verbrennung";"Holzminden";"03255";12;214,266666666667;2571,2
-"Verbrennung";"Höxter";"05762";26;87,8115384615385;2283,1
-"Verbrennung";"Ilm-Kreis";"16070";21;216,168571428571;4539,54
-"Verbrennung";"Ingolstadt";"09161";19;158,157894736842;3005
-"Verbrennung";"Jena, Stadt";"16053";22;199,453181818182;4387,97
-"Verbrennung";"Jerichower Land";"15086";22;64,3375909090909;1415,427
-"Verbrennung";"Kaiserslautern";"07335";16;909,769625;14556,314
-"Verbrennung";"Kaiserslautern, kreisfreie Stadt";"07312";10;108,885;1088,85
-"Verbrennung";"Karlsruhe";"08215";121;42,4740578512397;5139,361
-"Verbrennung";"Karlsruhe, Stadtkreis";"08212";29;3310,37379310345;96000,84
-"Verbrennung";"Kassel";"06633";46;1597,22260869565;73472,24
-"Verbrennung";"Kassel, documenta-Stadt";"06611";45;143,188222222222;6443,47
-"Verbrennung";"Kaufbeuren";"09762";23;38,5917391304348;887,61
-"Verbrennung";"Kelheim";"09273";32;835,12203125;26723,905
-"Verbrennung";"Kempten (Allgäu)";"09763";16;146,684375;2346,95
-"Verbrennung";"Kiel, Landeshauptstadt";"01002";72;3035,89305555556;218584,3
-"Verbrennung";"Kitzingen";"09675";42;148,420714285714;6233,67
-"Verbrennung";"Kleve";"05154";68;167,680647058824;11402,284
-"Verbrennung";"Koblenz, kreisfreie Stadt";"07111";27;159,864814814815;4316,35
-"Verbrennung";"Köln, Stadt";"05315";155;521,205077419355;80786,787
-"Verbrennung";"Konstanz";"08335";79;67,9544303797468;5368,4
-"Verbrennung";"Krefeld, Stadt";"05114";21;255,085285714286;5356,791
-"Verbrennung";"Kronach";"09476";11;873,004545454545;9603,05
-"Verbrennung";"Kulmbach";"09477";37;126,209459459459;4669,75
-"Verbrennung";"Kusel";"07336";11;7,49090909090909;82,4
-"Verbrennung";"Kyffhäuserkreis";"16065";22;110,852272727273;2438,75
-"Verbrennung";"Lahn-Dill-Kreis";"06532";133;26,2696616541353;3493,865
-"Verbrennung";"Landau in der Pfalz, kreisfreie Stadt";"07313";18;73,1616666666667;1316,91
-"Verbrennung";"Landkreis Rostock";"13072";30;87,6557333333333;2629,672
-"Verbrennung";"Landsberg am Lech";"09181";15;15,1773333333333;227,66
-"Verbrennung";"Landshut";"09261";33;36,5121212121212;1204,9
-"Verbrennung";"Landshut";"09274";29;52,3534482758621;1518,25
-"Verbrennung";"Leer";"03457";36;223,002777777778;8028,1
-"Verbrennung";"Leipzig";"14729";58;15444,5894827586;895786,19
-"Verbrennung";"Leipzig, Stadt";"14713";103;144,936398058252;14928,449
-"Verbrennung";"Leverkusen, Stadt";"05316";22;797,437727272727;17543,63
-"Verbrennung";"Lichtenfels";"09478";13;44,6923076923077;581
-"Verbrennung";"Limburg-Weilburg";"06533";32;39,62375;1267,96
-"Verbrennung";"Lindau (Bodensee)";"09776";9;5,91222222222222;53,21
-"Verbrennung";"Lippe";"05766";105;138,515952380952;14544,175
-"Verbrennung";"Lörrach";"08336";55;56,9214545454545;3130,68
-"Verbrennung";"Lübeck, Hansestadt";"01003";53;78,7067358490566;4171,457
-"Verbrennung";"Lüchow-Dannenberg";"03354";14;53,65;751,1
-"Verbrennung";"Ludwigsburg";"08118";129;101,513682170543;13095,265
-"Verbrennung";"Ludwigshafen am Rhein, kreisfreie Stadt";"07314";39;910,362564102564;35504,14
-"Verbrennung";"Ludwigslust-Parchim";"13076";40;308,71575;12348,63
-"Verbrennung";"Lüneburg";"03355";31;90,8187096774193;2815,38
-"Verbrennung";"Magdeburg, Landeshauptstadt";"15003";85;47,3965882352941;4028,71
-"Verbrennung";"Main-Kinzig-Kreis";"06435";122;37,679737704918;4596,928
-"Verbrennung";"Main-Spessart";"09677";19;45,4078947368421;862,75
-"Verbrennung";"Main-Tauber-Kreis";"08128";50;228,527;11426,35
-"Verbrennung";"Main-Taunus-Kreis";"06436";63;38,0923809523809;2399,82
-"Verbrennung";"Mainz-Bingen";"07339";47;47,6710425531915;2240,539
-"Verbrennung";"Mainz, kreisfreie Stadt";"07315";61;229,635081967213;14007,74
-"Verbrennung";"Mannheim, Stadtkreis";"08222";25;100,3596;2508,99
-"Verbrennung";"Mansfeld-Südharz";"15087";28;283,773214285714;7945,65
-"Verbrennung";"Marburg-Biedenkopf";"06534";61;169,19868852459;10321,12
-"Verbrennung";"Märkisch-Oderland";"12064";25;79,0052;1975,13
-"Verbrennung";"Märkischer Kreis";"05962";125;1728,24708;216030,885
-"Verbrennung";"Mayen-Koblenz";"07137";36;21,7527777777778;783,1
-"Verbrennung";"Mecklenburgische Seenplatte";"13071";24;83,22;1997,28
-"Verbrennung";"Meißen";"14627";86;107,381046511628;9234,77
-"Verbrennung";"Memmingen";"09764";6;6,875;41,25
-"Verbrennung";"Merzig-Wadern";"10042";12;34,3258333333333;411,91
-"Verbrennung";"Mettmann";"05158";80;266,3758875;21310,071
-"Verbrennung";"Miesbach";"09182";27;3563,16;96205,32
-"Verbrennung";"Miltenberg";"09676";31;52,6725806451613;1632,85
-"Verbrennung";"Minden-Lübbecke";"05770";91;9733,21;885722,11
-"Verbrennung";"Mittelsachsen";"14522";58;53,6391379310345;3111,07
-"Verbrennung";"Mönchengladbach, Stadt";"05116";24;171,669208333333;4120,061
-"Verbrennung";"Mühldorf a.Inn";"09183";29;103,205586206897;2992,962
-"Verbrennung";"Mülheim an der Ruhr, Stadt";"05117";35;137,019142857143;4795,67
-"Verbrennung";"München";"09184";60;6446,89916666667;386813,95
-"Verbrennung";"München, Landeshauptstadt";"09162";124;5552,09387096774;688459,64
-"Verbrennung";"Münster, Stadt";"05515";159;808,304679245283;128520,444
-"Verbrennung";"Neckar-Odenwald-Kreis";"08225";24;761,204166666667;18268,9
-"Verbrennung";"Neu-Ulm";"09775";32;606,678125;19413,7
-"Verbrennung";"Neuburg-Schrobenhausen";"09185";12;55,54;666,48
-"Verbrennung";"Neumarkt i.d.OPf.";"09373";66;48,1901515151515;3180,55
-"Verbrennung";"Neumünster, Stadt";"01004";8;195,46875;1563,75
-"Verbrennung";"Neunkirchen";"10043";11;12,1772727272727;133,95
-"Verbrennung";"Neustadt a.d.Aisch-Bad Windsheim";"09575";27;52,4885185185185;1417,19
-"Verbrennung";"Neustadt a.d.Waldnaab";"09374";11;3,21918181818182;35,411
-"Verbrennung";"Neustadt an der Weinstraße, kreisfreie Stadt";"07316";28;147,526785714286;4130,75
-"Verbrennung";"Neuwied";"07138";61;67,0896721311475;4092,47
-"Verbrennung";"Nienburg (Weser)";"03256";33;6,68484848484848;220,6
-"Verbrennung";"Nordfriesland";"01054";93;23,9685376344086;2229,074
-"Verbrennung";"Nordhausen";"16062";18;309,169444444444;5565,05
-"Verbrennung";"Nordsachsen";"14730";51;118,947941176471;6066,345
-"Verbrennung";"Nordwestmecklenburg";"13074";31;175,579677419355;5442,97
-"Verbrennung";"Northeim";"03155";35;266,982857142857;9344,4
-"Verbrennung";"Nürnberg";"09564";55;680,177272727273;37409,75
-"Verbrennung";"Nürnberger Land";"09574";34;96,7758823529412;3290,38
-"Verbrennung";"Oberallgäu";"09780";43;88,6790697674419;3813,2
-"Verbrennung";"Oberbergischer Kreis";"05374";64;48,32171875;3092,59
-"Verbrennung";"Oberhausen, Stadt";"05119";18;1368,83611111111;24639,05
-"Verbrennung";"Oberhavel";"12065";23;82,8869565217391;1906,4
-"Verbrennung";"Oberspreewald-Lausitz";"12066";33;163,025757575758;5379,85
-"Verbrennung";"Odenwaldkreis";"06437";13;862,737153846154;11215,583
-"Verbrennung";"Oder-Spree";"12067";28;2538,76217857143;71085,341
-"Verbrennung";"Offenbach";"06438";75;45,7037333333333;3427,78
-"Verbrennung";"Offenbach am Main, Stadt";"06413";13;75,3730769230769;979,85
-"Verbrennung";"Oldenburg";"03458";37;871,873513513514;32259,32
-"Verbrennung";"Oldenburg (Oldenburg), Stadt";"03403";33;46,9430303030303;1549,12
-"Verbrennung";"Olpe";"05966";35;28,6716857142857;1003,509
-"Verbrennung";"Ortenaukreis";"08317";162;58,2312654320988;9433,465
-"Verbrennung";"Osnabrück";"03459";157;130,755885350318;20528,674
-"Verbrennung";"Osnabrück, Stadt";"03404";54;89,8083333333333;4849,65
-"Verbrennung";"Ostalbkreis";"08136";127;270,211708661417;34316,887
-"Verbrennung";"Ostallgäu";"09777";56;122,97875;6886,81
-"Verbrennung";"Osterholz";"03356";14;13,3071428571429;186,3
-"Verbrennung";"Ostholstein";"01055";85;128,250541176471;10901,296
-"Verbrennung";"Ostprignitz-Ruppin";"12068";12;653,666666666667;7844
-"Verbrennung";"Paderborn";"05774";61;155,920983606557;9511,18
-"Verbrennung";"Passau";"09262";19;140,089473684211;2661,7
-"Verbrennung";"Passau";"09275";50;78,2654;3913,27
-"Verbrennung";"Peine";"03157";48;41,81625;2007,18
-"Verbrennung";"Pfaffenhofen a.d.Ilm";"09186";20;247,1025;4942,05
-"Verbrennung";"Pforzheim, Stadtkreis";"08231";36;1911,95063888889;68830,223
-"Verbrennung";"Pinneberg";"01056";64;102,18734375;6539,99
-"Verbrennung";"Pirmasens, kreisfreie Stadt";"07317";11;747,886363636364;8226,75
-"Verbrennung";"Plön";"01057";25;22,55872;563,968
-"Verbrennung";"Potsdam-Mittelmark";"12069";41;77,588487804878;3181,128
-"Verbrennung";"Potsdam, Stadt";"12054";30;1651,08433333333;49532,53
-"Verbrennung";"Prignitz";"12070";8;118,7375;949,9
-"Verbrennung";"Rastatt";"08216";58;85,7591896551724;4974,033
-"Verbrennung";"Ravensburg";"08436";91;212,466043956044;19334,41
-"Verbrennung";"Recklinghausen";"05562";74;1027,77878378378;76055,63
-"Verbrennung";"Regen";"09276";18;66,2111111111111;1191,8
-"Verbrennung";"Regensburg";"09362";74;102,447405405405;7581,108
-"Verbrennung";"Regensburg";"09375";26;181,040384615385;4707,05
-"Verbrennung";"Region Hannover";"03241";305;48,7655114754098;14873,481
-"Verbrennung";"Regionalverband Saarbrücken";"10041";26;5265,69230769231;136908
-"Verbrennung";"Rems-Murr-Kreis";"08119";136;64,0108088235294;8705,47
-"Verbrennung";"Remscheid, Stadt";"05120";12;10,3708333333333;124,45
-"Verbrennung";"Rendsburg-Eckernförde";"01058";72;22,8241666666667;1643,34
-"Verbrennung";"Reutlingen";"08415";83;169,924698795181;14103,75
-"Verbrennung";"Rhein-Erft-Kreis";"05362";81;2195,05635802469;177799,565
-"Verbrennung";"Rhein-Hunsrück-Kreis";"07140";12;49,0833333333333;589
-"Verbrennung";"Rhein-Kreis Neuss";"05162";76;95,928552631579;7290,57
-"Verbrennung";"Rhein-Lahn-Kreis";"07141";19;43,571052631579;827,85
-"Verbrennung";"Rhein-Neckar-Kreis";"08226";80;146,549225;11723,938
-"Verbrennung";"Rhein-Pfalz-Kreis";"07338";26;14,2926923076923;371,61
-"Verbrennung";"Rhein-Sieg-Kreis";"05382";112;80,6695982142857;9034,995
-"Verbrennung";"Rheingau-Taunus-Kreis";"06439";69;214,222753623188;14781,37
-"Verbrennung";"Rheinisch-Bergischer Kreis";"05378";57;385,925087719298;21997,73
-"Verbrennung";"Rhön-Grabfeld";"09673";29;35,1820689655172;1020,28
-"Verbrennung";"Rosenheim";"09163";6;18,7083333333333;112,25
-"Verbrennung";"Rosenheim";"09187";44;91,5425;4027,87
-"Verbrennung";"Rostock";"13003";15;44,5533333333333;668,3
-"Verbrennung";"Rotenburg (Wümme)";"03357";58;86,8537586206897;5037,518
-"Verbrennung";"Roth";"09576";38;98,8105263157895;3754,8
-"Verbrennung";"Rottal-Inn";"09277";25;93,7904;2344,76
-"Verbrennung";"Rottweil";"08325";47;85,6955319148936;4027,69
-"Verbrennung";"Saale-Holzland-Kreis";"16074";15;81,0253333333333;1215,38
-"Verbrennung";"Saale-Orla-Kreis";"16075";15;155,810666666667;2337,16
-"Verbrennung";"Saalekreis";"15088";32;329,8165625;10554,13
-"Verbrennung";"Saalfeld-Rudolstadt";"16073";16;100,596875;1609,55
-"Verbrennung";"Saarlouis";"10044";19;1202,36842105263;22845
-"Verbrennung";"Saarpfalz-Kreis";"10045";42;268,034523809524;11257,45
-"Verbrennung";"Sächsische Schweiz-Osterzgebirge";"14628";70;92,707;6489,49
-"Verbrennung";"Salzgitter, Stadt";"03102";25;13201,366;330034,15
-"Verbrennung";"Salzlandkreis";"15089";43;2822,61162790698;121372,3
-"Verbrennung";"Schaumburg";"03257";34;38,6647058823529;1314,6
-"Verbrennung";"Schleswig-Flensburg";"01059";72;38,0239583333333;2737,725
-"Verbrennung";"Schmalkalden-Meiningen";"16066";38;496,775526315789;18877,47
-"Verbrennung";"Schwabach";"09565";16;33,5;536
-"Verbrennung";"Schwäbisch Hall";"08127";47;43,9883617021277;2067,453
-"Verbrennung";"Schwalm-Eder-Kreis";"06634";39;39,495641025641;1540,33
-"Verbrennung";"Schwandorf";"09376";30;73,9526666666667;2218,58
-"Verbrennung";"Schwarzwald-Baar-Kreis";"08326";112;53,5128125;5993,435
-"Verbrennung";"Schweinfurt";"09662";48;585,065833333333;28083,16
-"Verbrennung";"Schweinfurt";"09678";29;5,49551724137931;159,37
-"Verbrennung";"Schwerin";"13004";6;11445,3166666667;68671,9
-"Verbrennung";"Segeberg";"01060";83;413,811686746988;34346,37
-"Verbrennung";"Siegen-Wittgenstein";"05970";45;63,6206666666667;2862,93
-"Verbrennung";"Sigmaringen";"08437";46;23,5404347826087;1082,86
-"Verbrennung";"Soest";"05974";66;69,1255757575758;4562,288
-"Verbrennung";"Solingen, Klingenstadt";"05122";48;37,3728333333333;1793,896
-"Verbrennung";"Sömmerda";"16068";10;407,781;4077,81
-"Verbrennung";"Sonneberg";"16072";19;123,911578947368;2354,32
-"Verbrennung";"Speyer, kreisfreie Stadt";"07318";33;31,8121212121212;1049,8
-"Verbrennung";"Spree-Neiße";"12071";21;215627,634761905;4528180,33
-"Verbrennung";"St. Wendel";"10046";15;47,7373333333333;716,06
-"Verbrennung";"Stade";"03359";56;57,7683035714286;3235,025
-"Verbrennung";"Städteregion Aachen";"05334";113;227,363973451327;25692,129
-"Verbrennung";"Starnberg";"09188";41;31,5682926829268;1294,3
-"Verbrennung";"Steinburg";"01061";35;13,6562857142857;477,97
-"Verbrennung";"Steinfurt";"05566";166;166,374927710843;27618,238
-"Verbrennung";"Stendal";"15090";32;616,64875;19732,76
-"Verbrennung";"Stormarn";"01062";62;227,640693548387;14113,723
-"Verbrennung";"Straubing";"09263";11;55,6254545454545;611,88
-"Verbrennung";"Straubing-Bogen";"09278";21;37,8628571428571;795,12
-"Verbrennung";"Stuttgart, Stadtkreis";"08111";176;280,836215909091;49427,174
-"Verbrennung";"Südliche Weinstraße";"07337";21;19,9019047619048;417,94
-"Verbrennung";"Südwestpfalz";"07340";14;57,7714285714286;808,8
-"Verbrennung";"Suhl, Stadt";"16054";13;1055,41923076923;13720,45
-"Verbrennung";"Teltow-Fläming";"12072";29;6328,00517241379;183512,15
-"Verbrennung";"Tirschenreuth";"09377";16;130,934375;2094,95
-"Verbrennung";"Traunstein";"09189";25;74,488;1862,2
-"Verbrennung";"Trier-Saarburg";"07235";23;162,691304347826;3741,9
-"Verbrennung";"Trier, kreisfreie Stadt";"07211";35;157,675714285714;5518,65
-"Verbrennung";"Tübingen";"08416";84;48,8150238095238;4100,462
-"Verbrennung";"Tuttlingen";"08327";47;74,7106382978723;3511,4
-"Verbrennung";"Uckermark";"12073";21;11174,1585714286;234657,33
-"Verbrennung";"Uelzen";"03360";34;18,1144117647059;615,89
-"Verbrennung";"Ulm, Stadtkreis";"08421";30;100,023333333333;3000,7
-"Verbrennung";"Unna";"05978";56;13489,2262857143;755396,672
-"Verbrennung";"Unstrut-Hainich-Kreis";"16064";33;193,711515151515;6392,48
-"Verbrennung";"Unterallgäu";"09778";38;170,099210526316;6463,77
-"Verbrennung";"Vechta";"03460";49;86,2451020408163;4226,01
-"Verbrennung";"Verden";"03361";39;28,8430769230769;1124,88
-"Verbrennung";"Viersen";"05166";67;256,45447761194;17182,45
-"Verbrennung";"Vogelsbergkreis";"06535";15;42,3762666666667;635,644
-"Verbrennung";"Vogtlandkreis";"14523";41;226,430731707317;9283,66
-"Verbrennung";"Vorpommern-Greifswald";"13075";35;1788,29062857143;62590,172
-"Verbrennung";"Vorpommern-Rügen";"13073";50;292,54404;14627,202
-"Verbrennung";"Vulkaneifel";"07233";9;175,5;1579,5
-"Verbrennung";"Waldeck-Frankenberg";"06635";53;55,207641509434;2926,005
-"Verbrennung";"Waldshut";"08337";88;61,4690909090909;5409,28
-"Verbrennung";"Warendorf";"05570";78;261,229653846154;20375,913
-"Verbrennung";"Wartburgkreis";"16063";43;545,945348837209;23475,65
-"Verbrennung";"Weiden i.d.OPf.";"09363";14;100,625;1408,75
-"Verbrennung";"Weilheim-Schongau";"09190";34;450,125294117647;15304,26
-"Verbrennung";"Weimar, Stadt";"16055";16;289,00625;4624,1
-"Verbrennung";"Weimarer Land";"16071";19;121,410526315789;2306,8
-"Verbrennung";"Weißenburg-Gunzenhausen";"09577";30;36,5456666666667;1096,37
-"Verbrennung";"Werra-Meißner-Kreis";"06636";36;32,0152777777778;1152,55
-"Verbrennung";"Wesel";"05170";72;1822,05809722222;131188,183
-"Verbrennung";"Wesermarsch";"03461";11;49,1354545454545;540,49
-"Verbrennung";"Westerwaldkreis";"07143";44;42,8147727272727;1883,85
-"Verbrennung";"Wetteraukreis";"06440";93;44,1121505376344;4102,43
-"Verbrennung";"Wiesbaden, Landeshauptstadt";"06414";60;82,2862166666667;4937,173
-"Verbrennung";"Wilhelmshaven, Stadt";"03405";9;301,583333333333;2714,25
-"Verbrennung";"Wittenberg";"15091";24;353,889583333333;8493,35
-"Verbrennung";"Wittmund";"03462";14;16,9035714285714;236,65
-"Verbrennung";"Wolfenbüttel";"03158";34;80,1461764705882;2724,97
-"Verbrennung";"Wolfsburg, Stadt";"03103";39;10540,2751282051;411070,73
-"Verbrennung";"Worms, kreisfreie Stadt";"07319";17;957,267647058824;16273,55
-"Verbrennung";"Wunsiedel i.Fichtelgebirge";"09479";21;704,408095238095;14792,57
-"Verbrennung";"Wuppertal, Stadt";"05124";41;5015,8172195122;205648,506
-"Verbrennung";"Würzburg";"09663";41;944,71287804878;38733,228
-"Verbrennung";"Würzburg";"09679";24;43,2091666666667;1037,02
-"Verbrennung";"Zollernalbkreis";"08417";56;49,3808928571429;2765,33
-"Verbrennung";"Zweibrücken, kreisfreie Stadt";"07320";32;36,928125;1181,7
-"Verbrennung";"Zwickau";"14524";83;71,6772409638554;5949,211
+"Verbrennung";"Aichach-Friedberg";"09771";1;1;1
+"Verbrennung";"Altötting";"09171";1;40;40
+"Verbrennung";"Alzey-Worms";"07331";1;4,6;4,6
+"Verbrennung";"Aschaffenburg";"09661";1;4,1;4,1
+"Verbrennung";"Bad Kissingen";"09672";1;20;20
+"Verbrennung";"Bautzen";"14625";1;6320;6320
+"Verbrennung";"Berlin, Stadt";"11000";3;2232;6696
+"Verbrennung";"Börde";"15083";2;1615;3230
+"Verbrennung";"Borken";"05554";1;5,5;5,5
+"Verbrennung";"Cham";"09372";3;63,5333333333333;190,6
+"Verbrennung";"Cloppenburg";"03453";1;0,4;0,4
+"Verbrennung";"Cochem-Zell";"07135";1;4,7;4,7
+"Verbrennung";"Duisburg, Stadt";"05112";2;42600;85200
+"Verbrennung";"Düren";"05358";1;5;5
+"Verbrennung";"Eichstätt";"09176";2;5,94;11,88
+"Verbrennung";"Emsland";"03454";1;1;1
+"Verbrennung";"Erfurt, Stadt";"16051";1;30000;30000
+"Verbrennung";"Esslingen";"08116";1;200;200
+"Verbrennung";"Frankfurt am Main, Stadt";"06412";3;16612,3333333333;49837
+"Verbrennung";"Freiburg im Breisgau, Stadtkreis";"08311";1;8;8
+"Verbrennung";"Gießen";"06531";1;1810,6;1810,6
+"Verbrennung";"Greiz";"16076";1;65;65
+"Verbrennung";"Groß-Gerau";"06433";1;3500;3500
+"Verbrennung";"Günzburg";"09774";1;162,31;162,31
+"Verbrennung";"Gütersloh";"05754";1;6358;6358
+"Verbrennung";"Hamburg, Freie und Hansestadt";"02000";2;3095;6190
+"Verbrennung";"Harz";"15085";1;0,75;0,75
+"Verbrennung";"Hochsauerlandkreis";"05958";1;3500;3500
+"Verbrennung";"Ingolstadt";"09161";1;5;5
+"Verbrennung";"Kaiserslautern";"07335";1;6,4;6,4
+"Verbrennung";"Kassel";"06633";1;5,5;5,5
+"Verbrennung";"Kiel, Landeshauptstadt";"01002";1;4000;4000
+"Verbrennung";"Kitzingen";"09675";1;4,84;4,84
+"Verbrennung";"Köln, Stadt";"05315";2;32000;64000
+"Verbrennung";"Lahn-Dill-Kreis";"06532";1;1;1
+"Verbrennung";"Landsberg am Lech";"09181";1;14,6;14,6
+"Verbrennung";"Landshut";"09274";2;5,15;10,3
+"Verbrennung";"Leverkusen, Stadt";"05316";1;15730;15730
+"Verbrennung";"Ludwigshafen am Rhein, kreisfreie Stadt";"07314";3;8900,30333333333;26700,91
+"Verbrennung";"Ludwigslust-Parchim";"13076";1;5280;5280
+"Verbrennung";"Mansfeld-Südharz";"15087";1;5,3;5,3
+"Verbrennung";"Minden-Lübbecke";"05770";1;9,56;9,56
+"Verbrennung";"Mittelsachsen";"14522";1;990;990
+"Verbrennung";"Mühldorf a.Inn";"09183";2;37;74
+"Verbrennung";"München";"09184";2;20000;40000
+"Verbrennung";"Münster, Stadt";"05515";1;38000;38000
+"Verbrennung";"Neu-Ulm";"09775";1;8000;8000
+"Verbrennung";"Nordfriesland";"01054";1;3;3
+"Verbrennung";"Nordhausen";"16062";1;1;1
+"Verbrennung";"Oberallgäu";"09780";1;15;15
+"Verbrennung";"Oberhausen, Stadt";"05119";3;8008,33333333333;24025
+"Verbrennung";"Olpe";"05966";1;1;1
+"Verbrennung";"Ortenaukreis";"08317";1;0,93;0,93
+"Verbrennung";"Ostholstein";"01055";1;5292;5292
+"Verbrennung";"Pinneberg";"01056";1;5;5
+"Verbrennung";"Recklinghausen";"05562";3;17753,3333333333;53260
+"Verbrennung";"Region Hannover";"03241";1;1;1
+"Verbrennung";"Rhein-Erft-Kreis";"05362";1;29900;29900
+"Verbrennung";"Rhein-Hunsrück-Kreis";"07140";1;13,5;13,5
+"Verbrennung";"Rhön-Grabfeld";"09673";2;7,99;15,98
+"Verbrennung";"Schmalkalden-Meiningen";"16066";1;12100;12100
+"Verbrennung";"Spree-Neiße";"12071";1;17500;17500
+"Verbrennung";"Südwestpfalz";"07340";1;7,92;7,92
+"Verbrennung";"Tübingen";"08416";1;7;7
+"Verbrennung";"Ulm, Stadtkreis";"08421";1;617,4;617,4
+"Verbrennung";"Unna";"05978";1;5000;5000
+"Verbrennung";"Vechta";"03460";1;499;499
+"Verbrennung";"Waldeck-Frankenberg";"06635";1;5,5;5,5
+"Verbrennung";"Weißenburg-Gunzenhausen";"09577";1;4,59;4,59
+"Verbrennung";"Wesel";"05170";4;16804;67216
+"Verbrennung";"Wolfenbüttel";"03158";2;29;58
+"Verbrennung";"Wuppertal, Stadt";"05124";3;16458,6666666667;49376
+"Verbrennung";"Würzburg";"09663";2;10350;20700
+"Verbrennung";"Zollernalbkreis";"08417";1;220;220
 "Wasser";"Ahrweiler";"07131";3;15;45
 "Wasser";"Aichach-Friedberg";"09771";3;14,5;43,5
 "Wasser";"Alb-Donau-Kreis";"08425";22;195,590909090909;4303

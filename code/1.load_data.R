@@ -195,7 +195,7 @@ enh2 <- enh2[!(enh2$Betriebsstatus == "Dauerhaft stillgelegt" & is.na(enh2$Endgu
 table(enh2[enh2$Betriebsstatus == "Dauerhaft stillgelegt", c("VoruebergehendeStilllegungBeginn")])
 enh2[enh2$Betriebsstatus == "Dauerhaft stillgelegt", c("EinheitenTyp")]
 table(enh2[enh2$Betriebsstatus == "Dauerhaft stillgelegt", c("GeplantesInbetriebnahmeDatum")])
-enh2 <- enh2[enh2$Betriebsstatus == "Dauerhaft stillgelegt",]
+enh2 <- enh2[enh2$Betriebsstatus != "Dauerhaft stillgelegt",]
 
 # delete those that are planned
 enh2 <- enh2[enh2$Betriebsstatus != "In Planung",]
