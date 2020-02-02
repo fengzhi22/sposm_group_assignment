@@ -184,7 +184,7 @@ ui <- dashboardPage(
       # Second tab content
       tabItem(tabName = "data_explorer",
               fluidRow(
-                column(width = 3,
+                column(width = 4,
                        fluidRow(
                          column(width = 12,
                                 h3("German Power Plants Explorer", align = "center"),
@@ -206,7 +206,7 @@ ui <- dashboardPage(
                        )
                        
                 ),
-                column(width = 9,
+                column(width = 8,
                        mainPanel(
                          h3("Germany in geographical zones"),
                          leafletOutput('plot2')#,
