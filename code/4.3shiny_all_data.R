@@ -2,7 +2,7 @@
 #### installing, loading libraries ####
 library("utils")
 
-packages <- c("here", "shiny", "zip", "sf", "tmap", "tmaptools", "ggplot2", "dplyr", "shinydashboard", "leaflet")
+packages <- c()#"here", "shiny", "zip", "sf", "tmap", "tmaptools", "ggplot2", "dplyr", "shinydashboard", "leaflet")
 
 ### install if necessary
 lapply(packages, 
@@ -102,6 +102,10 @@ server <- function(input, output) {
     dataset() %>% filter(EinheitenTyp == input$source)
   })
   
+  dataset_city <- reactive({
+    dataset() %>% filter(regionid == input$map_shape_click$id)
+  })
+  
   coloring <- reactive({
     if (input$source == "Solareinheit"){"YlOrRd"}else{
       if (input$source == "Windeinheit"){"Blues"}else{
@@ -119,9 +123,22 @@ server <- function(input, output) {
   title_legend <- reactive({
     if (input$out_var == "n"){"Number of power plants"}else{
       if (input$out_var == "sum"){"Power in kw(p)"} else{
-      if (input$out_var == "mean"){"Power in kw(p)"}
+        if (input$out_var == "mean"){"Power in kw(p)"}
       }
     }
+  })
+  
+  output$title_bar_chart <- renderText({
+    state_county <- input$map_shape_click$id
+    if (!is.null(state_county)){
+      if (input$out_var == "n"){paste("Total number of power plants in", state_county)}else{
+        if (input$out_var == "sum"){paste("Total power production in", state_county)}else{
+          if (input$out_var == "mean"){paste("Average power production per plant in", state_county)}
+        }
+      }
+    }
+    
+    
   })
   
   output$plot1 <- renderPlot({
@@ -138,7 +155,7 @@ server <- function(input, output) {
     
   })
   
-  output$plot2 <- renderLeaflet({
+  output$map <- renderLeaflet({
     
     p2 <- tm_shape(Energy()) +
       tm_polygons(input$out_var, palette = coloring(), n = input$scale, title = title_legend(), id = "regionid", popup.vars = c("Value:" = input$out_var)) +
@@ -148,7 +165,15 @@ server <- function(input, output) {
       tmap_leaflet(p2)
     
   })
-  
+
+  output$plot_energy_bar_chart <- renderPlot({
+    if (!is.null(input$map_shape_click)) {
+      ggplot(dataset_city(), aes(x = EinheitenTyp, y = get(input$out_var))) +
+        labs(y = title_legend(), x = "Energy Source") +
+        geom_bar(stat="identity") +
+        coord_flip()
+    }
+  }, bg="transparent")
 }
 
 # ***********************************************************************************************
@@ -197,10 +222,17 @@ ui <- dashboardPage(
                        
                 ),
                 column(width = 8,
-                       mainPanel(
-                         h3("Germany in geographical zones"),
-                         leafletOutput('plot2')#,
-                         #plotOutput('plot1')
+                       fluidRow(
+                         column(width = 12,
+                                h3("Germany in geographical zones"),
+                                leafletOutput('map')
+                         )
+                       ),
+                       fluidRow(
+                         column(width = 12,
+                                h3(textOutput("title_bar_chart")),
+                                plotOutput('plot_energy_bar_chart')
+                         )
                        )
                 )
               )
