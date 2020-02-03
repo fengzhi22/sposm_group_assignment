@@ -105,10 +105,18 @@ server <- function(input, output) {
   coloring <- reactive({
     if (input$source == "Solareinheit"){"YlOrRd"}else{
       if (input$source == "Windeinheit"){"Blues"}else{
-        if(input$source == "Verbrennung"){"Greys"}else{
+        if(input$source == "Braunkohle"){"Greys"}else{
           if(input$source == "Biomasse"){"Greens"}else{
             if(input$source == "Wasser"){"Blues"}else{
-              if(input$source == "Geothermie"){"Oranges"}
+              if(input$source == "Geothermie"){"Oranges"}else{
+                if(input$source == "Steinkohle"){"Greys"}else{
+                  if(input$source == "Gas"){"Greys"}else{
+                    if(input$source == "Mineralölprodukte"){"PuBuGn"}else{
+                      if(input$source == "Stromspeichereinheit"){"YlOrBr"}
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -183,8 +191,10 @@ ui <- dashboardPage(
                                 #titlePanel("German Power Plants Explorer"),
                                 sidebarPanel(width = 12,
                                              selectInput('source', 'Energy Source', c("Solar Energy" = "Solareinheit", "Wind Energy" = "Windeinheit", 
-                                                                                      "Coal Energy" = "Verbrennung", "Biomass Energy" = "Biomasse", 
-                                                                                      "Water Energy" = "Wasser", "Geothermal Energy" = "Geothermie")),
+                                                                                      "Biomass Energy" = "Biomasse", "Water Energy" = "Wasser",
+                                                                                      "Brown Coal Energy" = "Braunkohle", "Black Coal Energy" = "Steinkohle",
+                                                                                      "Gas Energy" = "Gas", "Mineral Oil Energy" = "Mineralölprodukte",
+                                                                                      "Electrical energy" = "Stromspeichereinheit", "Geothermal Energy" = "Geothermie")),
                                              selectInput('geo_level', 'Geographical Level', c("State" = "state", "County" = "county")),
                                              selectInput('out_var', 'Output Variable', c("Total number of power plants" = "n", 
                                                                                          "Total power production" = "sum", 

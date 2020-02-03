@@ -52,7 +52,7 @@ file_ger_shape_county <- here("data", "raw", "shape_ger", subfolder, "vg2500", "
 # ***********************************************************************************************
 #### load data ####
 enh <- read.csv2(here("data", "raw", file_to_load), row.names = NULL, encoding = "UTF-8")
-enh2 <- read.csv2(here("data", "raw", file_to_load2), row.names = NULL, encoding = "UTF-8")
+enh2 <- read.csv2(here("data", "raw", file_to_load2), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 
 ger_shape <- st_read(file_ger_shape, options = "ENCODING=UTF-8", stringsAsFactors = FALSE)
 ger_shape_state <- st_read(file_ger_shape_state, options = "ENCODING=UTF-8", stringsAsFactors = FALSE)
@@ -237,6 +237,15 @@ table(ger_shape_county$GEN[!(ger_shape_county$RS %in% enh3$ags_county)])
 # The names re-appear with the shape-file later
 drops <- c("Bundesland", "Landkreis")
 enh3 <- enh3[, !(names(enh3) %in% drops)]
+
+# split Verbrennung into Braunkohle, Steinkohle, Gas and Mineralölprodukte
+enh3$EinheitenTyp[enh3$Energietraeger == "Braunkohle"] <- "Braunkohle"
+enh3$EinheitenTyp[enh3$Energietraeger == "Steinkohle"] <- "Steinkohle"
+enh3$EinheitenTyp[enh3$Energietraeger == "Erdgas"] <- "Gas"
+enh3$EinheitenTyp[enh3$Energietraeger == "andere Gase"] <- "Gas"
+enh3$EinheitenTyp[enh3$Energietraeger == "Mineralölprodukte"] <- "Mineralölprodukte"
+View(enh3[enh3$EinheitenTyp == "Verbrennung", ])
+length(which(enh3$EinheitenTyp == "Verbrennung"))
 
 
 
