@@ -2,7 +2,7 @@
 #### installing, loading libraries ####
 library("utils")
 
-packages <- c()#"here", "shiny", "zip", "sf", "tmap", "tmaptools", "ggplot2", "dplyr", "shinydashboard", "leaflet")
+packages <- c("here", "shiny", "zip", "sf", "tmap", "tmaptools", "ggplot2", "dplyr", "shinydashboard", "leaflet")
 
 ### install if necessary
 lapply(packages, 
