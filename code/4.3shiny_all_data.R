@@ -30,15 +30,15 @@ file_ger_shape_county <- here("data", "raw", "shape_ger", subfolder, "vg2500", "
 # ***********************************************************************************************
 #### load data ####
 # read all data files
-data_state <- read.csv2(here("data", "processed", paste0("data_state", ".csv")), row.names = NULL, encoding = "UTF-8")
-data_state_yearly <- read.csv2(here("data", "processed", paste0("data_state_yearly", ".csv")), row.names = NULL, encoding = "UTF-8")
-data_state_yearly_extended <- read.csv2(here("data", "processed", paste0("data_state_yearly_extended", ".csv")), row.names = NULL, encoding = "UTF-8")
+data_state <- read.csv2(here("data", "processed", paste0("data_state", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
+data_state_yearly <- read.csv2(here("data", "processed", paste0("data_state_yearly", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
+data_state_yearly_extended <- read.csv2(here("data", "processed", paste0("data_state_yearly_extended", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 
-data_county <- read.csv2(here("data", "processed", paste0("data_county", ".csv")), row.names = NULL, encoding = "UTF-8")
-data_county_yearly <- read.csv2(here("data", "processed", paste0("data_county_yearly", ".csv")), row.names = NULL, encoding = "UTF-8")
-data_county_yearly_extended <- read.csv2(here("data", "processed", paste0("data_county_yearly_extended", ".csv")), row.names = NULL, encoding = "UTF-8")
+data_county <- read.csv2(here("data", "processed", paste0("data_county", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
+data_county_yearly <- read.csv2(here("data", "processed", paste0("data_county_yearly", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
+data_county_yearly_extended <- read.csv2(here("data", "processed", paste0("data_county_yearly_extended", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 
-data_offshore <- read.csv2(here("data", "processed", paste0("data_offshore", ".csv")), row.names = NULL, encoding = "UTF-8")
+data_offshore <- read.csv2(here("data", "processed", paste0("data_offshore", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 
 
 # read all shape files
@@ -102,8 +102,21 @@ server <- function(input, output) {
     dataset() %>% filter(EinheitenTyp == input$source)
   })
   
-  dataset_city <- reactive({
-    dataset() %>% filter(regionid == input$map_shape_click$id)
+  dataset_region <- reactive({
+    columns <- c("Solareinheit", "Windeinheit", "Biomasse", "Wasser", "Braunkohle", "Steinkohle", "Gas", "Mineralölprodukte", "Stromspeichereinheit", "Geothermie")
+    
+    selected_regionid <- input$map_shape_click$id
+    
+    # Turn "." back into "-" in the state names. e.g. Nordrhein.Westfalen to Nordrhein-Westfalen
+    selected_regionid <- sub(".","-",selected_regionid, fixed = TRUE)
+    
+    dataset <- dataset() %>% 
+      filter(regionid == selected_regionid) %>% 
+      filter(EinheitenTyp %in% columns)
+    
+    # Highlight the chosen energy type in the bar chart
+    dataset$EinheitenTyp[dataset$EinheitenTyp == input$source] <- paste0(input$source, "*")
+    dataset
   })
   
   coloring <- reactive({
@@ -129,7 +142,7 @@ server <- function(input, output) {
   })
   
   title_legend <- reactive({
-    if (input$out_var == "n"){"Number of power plants"}else{
+    if (input$out_var == "n"){"Number of Power Plants"}else{
       if (input$out_var == "sum"){"Power in kw(p)"} else{
         if (input$out_var == "mean"){"Power in kw(p)"}
       }
@@ -137,11 +150,11 @@ server <- function(input, output) {
   })
   
   output$title_bar_chart <- renderText({
-    state_county <- input$map_shape_click$id
-    if (!is.null(state_county)){
-      if (input$out_var == "n"){paste("Total number of power plants in", state_county)}else{
-        if (input$out_var == "sum"){paste("Total power production in", state_county)}else{
-          if (input$out_var == "mean"){paste("Average power production per plant in", state_county)}
+    regionid <- input$map_shape_click$id
+    if (!is.null(regionid)){
+      if (input$out_var == "n"){paste("Total number of power plants in", regionid)}else{
+        if (input$out_var == "sum"){paste("Total power production in", regionid)}else{
+          if (input$out_var == "mean"){paste("Average power production per plant in", regionid)}
         }
       }
     }
@@ -176,10 +189,22 @@ server <- function(input, output) {
 
   output$plot_energy_bar_chart <- renderPlot({
     if (!is.null(input$map_shape_click)) {
-      ggplot(dataset_city(), aes(x = EinheitenTyp, y = get(input$out_var))) +
+      ggplot(dataset_region(), aes(x = reorder(EinheitenTyp, get(input$out_var)), y = get(input$out_var))) +
         labs(y = title_legend(), x = "Energy Source") +
-        geom_bar(stat="identity") +
-        coord_flip()
+        geom_bar(stat="identity", fill="steelblue") + theme_minimal(base_size = 16) + 
+        theme(axis.text.y = element_text(size=12, face="bold")) +
+        scale_x_discrete(labels=c("Solareinheit" = "Solar",  "Windeinheit" = "Wind", 
+                                  "Biomasse" = "Biomass", "Wasser" = "Water",
+                                  "Braunkohle" = "Brown Coal", "Steinkohle" = "Black Coal",
+                                  "Gas" = "Gas" , "Mineralölprodukte" = "Mineral Oil",
+                                  "Stromspeichereinheit" = "Electricity", "Geothermie" = "Geothermal", 
+                                  "Solareinheit*" = "Solar*",  "Windeinheit*" = "Wind*", 
+                                  "Biomasse*" = "Biomass*", "Wasser*" = "Water*",
+                                  "Braunkohle*" = "Brown Coal*", "Steinkohle*" = "Black Coal*",
+                                  "Gas*" = "Gas*" , "Mineralölprodukte*" = "Mineral Oil*",
+                                  "Stromspeichereinheit*" = "Electricity*", "Geothermie*" = "Geothermal*")) +
+        coord_flip() 
+       # scale_x_discrete(labels=c("Gas"=expression(bold(Gas))))
     }
   }, bg="transparent")
 }
@@ -219,7 +244,7 @@ ui <- dashboardPage(
                                                                                       "Biomass Energy" = "Biomasse", "Water Energy" = "Wasser",
                                                                                       "Brown Coal Energy" = "Braunkohle", "Black Coal Energy" = "Steinkohle",
                                                                                       "Gas Energy" = "Gas", "Mineral Oil Energy" = "Mineralölprodukte",
-                                                                                      "Electrical energy" = "Stromspeichereinheit", "Geothermal Energy" = "Geothermie")),
+                                                                                      "Electrical Energy" = "Stromspeichereinheit", "Geothermal Energy" = "Geothermie")),
                                              selectInput('geo_level', 'Geographical Level', c("State" = "state", "County" = "county")),
                                              selectInput('out_var', 'Output Variable', c("Total number of power plants" = "n", 
                                                                                          "Total power production" = "sum", 
