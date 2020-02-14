@@ -31,10 +31,12 @@ file_ger_shape_county <- here("data", "raw", "shape_ger", subfolder, "vg2500", "
 #### load data ####
 # read all data files
 data_state <- read.csv2(here("data", "processed", paste0("data_state", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
+data_state_combined_all_sources <- read.csv2(here("data", "processed", paste0("data_state_combined_all_sources", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 data_state_yearly <- read.csv2(here("data", "processed", paste0("data_state_yearly", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 data_state_yearly_extended <- read.csv2(here("data", "processed", paste0("data_state_yearly_extended", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 
 data_county <- read.csv2(here("data", "processed", paste0("data_county", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
+data_county_combined_all_sources <- read.csv2(here("data", "processed", paste0("data_county_combined_all_sources", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 data_county_yearly <- read.csv2(here("data", "processed", paste0("data_county_yearly", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 data_county_yearly_extended <- read.csv2(here("data", "processed", paste0("data_county_yearly_extended", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 
@@ -74,18 +76,27 @@ ger_shape_state$ags <- as.numeric(ger_shape_state$ags)
 #### merge shape file after aggregation ####
 ## general maps for data exploration
 map_and_data_state <- inner_join(ger_shape_state, data_state, by = c("ags" = "ags_federal_state"))
+map_data_state_combined_all_sources <- inner_join(ger_shape_state, data_state_combined_all_sources, by = c("ags" = "ags_federal_state"))
 map_and_data_county <- inner_join(ger_shape_county, data_county, by = c("ags" = "ags_county"))
+map_data_county_combined_all_sources <- inner_join(ger_shape_state, data_county_combined_all_sources, by = c("ags" = "ags_county"))
+
 # Lage "Windkraft auf See" dropped
 names(map_and_data_state)[names(map_and_data_state) == "Bundesland"] <- "regionid"
+names(map_data_state_combined_all_sources)[names(map_data_state_combined_all_sources) == "Bundesland"] <- "regionid"
 names(map_and_data_county)[names(map_and_data_county) == "name"] <- "regionid"
+names(map_data_county_combined_all_sources)[names(map_data_county_combined_all_sources) == "name"] <- "regionid"
 
 saveRDS(map_and_data_state, file = here("data", "processed","map_and_data_state.rds"))
+saveRDS(map_data_state_combined_all_sources, file = here("data", "processed","map_data_state_combined_all_sources.rds"))
 saveRDS(map_and_data_county, file = here("data", "processed","map_and_data_county.rds"))
+saveRDS(map_data_county_combined_all_sources, file = here("data", "processed","map_data_county_combined_all_sources.rds"))
+
 # missing ags_federal_state dropped
 table(data_state$ags_federal_state, useNA = "always")
 data_state[is.na(data_state$ags_federal_state),]
-# related to offshore (always if ags_federal_state is missing)
+map_data_state_combined_all_sources[is.na(map_data_state_combined_all_sources$ags_federal_state),]
 
+# related to offshore (always if ags_federal_state is missing)
 
 ## ...
 
@@ -97,9 +108,25 @@ server <- function(input, output) {
   dataset <- reactive({
     get(paste0("map_and_data_", input$geo_level))
   })
+
+  dataset_combined <- reactive({
+    get(paste0("map_data_", input$geo_level, "_combined_all_sources"))
+  })
   
   Energy <- reactive({
-    dataset() %>% filter(EinheitenTyp == input$source)
+    if (input$source == "All") {
+      dataset_combined()
+    } else{
+      dataset() %>% filter(EinheitenTyp == input$source)
+    }
+  })
+   
+  data_to_download <- reactive({
+    if (input$source == "All") {
+      dataset()
+    } else{
+      dataset() %>% filter(EinheitenTyp == input$source)
+    }
   })
   
   dataset_region <- reactive({
@@ -107,9 +134,9 @@ server <- function(input, output) {
     
     selected_regionid <- input$map_shape_click$id
     
-    # Turn "." back into "-" in the state names. e.g. Nordrhein.Westfalen to Nordrhein-Westfalen
+    # Turn the generated "." back into "-" in the state names. e.g. Nordrhein.Westfalen to Nordrhein-Westfalen
     selected_regionid <- sub(".","-",selected_regionid, fixed = TRUE)
-    
+
     dataset <- dataset() %>% 
       filter(regionid == selected_regionid) %>% 
       filter(EinheitenTyp %in% columns)
@@ -162,24 +189,11 @@ server <- function(input, output) {
     
   })
   
-  output$plot1 <- renderPlot({
-    
-    p1 <- ggplot(Energy(), aes(geometry = geometry)) +
-      geom_sf(aes(fill = get(input$out_var))) +
-      scale_fill_gradient(low = "#B6FF52", high = "#3B5518", name = "Quantity") +
-      theme(axis.title = element_blank(),
-            axis.text = element_blank(),
-            axis.ticks = element_blank(),
-            panel.background = element_blank())
-
-    print(p1)
-    
-  })
-  
   output$map <- renderLeaflet({
     
     p2 <- tm_shape(Energy()) +
-      tm_polygons(input$out_var, palette = coloring(), n = input$scale, title = title_legend(), id = "regionid", popup.vars = c("Value:" = input$out_var)) +
+      tm_polygons(input$out_var, palette = coloring(), n = input$scale, title = title_legend(), 
+                  id = "regionid", popup.vars = c("Value:" = input$out_var)) +
       tm_layout(legend.outside = TRUE) +
       tm_layout(frame = FALSE)
     
@@ -207,6 +221,21 @@ server <- function(input, output) {
        # scale_x_discrete(labels=c("Gas"=expression(bold(Gas))))
     }
   }, bg="transparent")
+  
+  # Downloadable csv of selected dataset ----
+  output$downloadData <- downloadHandler(
+    filename = function() {
+      # data_state_solar.csv
+      paste0("data_",input$geo_level,"_",input$source, ".csv")
+    },
+    content = function(file) {
+      data_to_download <- data_to_download()
+      # geometry data is too big and messsies up with the csv file. can't drop it so this is the solution
+      data_to_download$geometry <- NULL
+      write.csv(data_to_download, file, row.names = FALSE)
+    }
+  )
+  
 }
 
 # ***********************************************************************************************
@@ -240,7 +269,7 @@ ui <- dashboardPage(
                                 h3("German Power Plants Explorer", align = "center"),
                                 #titlePanel("German Power Plants Explorer"),
                                 sidebarPanel(width = 12,
-                                             selectInput('source', 'Energy Source', c("Solar Energy" = "Solareinheit", "Wind Energy" = "Windeinheit", 
+                                             selectInput('source', 'Energy Source', c("All" = "All", "Solar Energy" = "Solareinheit", "Wind Energy" = "Windeinheit", 
                                                                                       "Biomass Energy" = "Biomasse", "Water Energy" = "Wasser",
                                                                                       "Brown Coal Energy" = "Braunkohle", "Black Coal Energy" = "Steinkohle",
                                                                                       "Gas Energy" = "Gas", "Mineral Oil Energy" = "Mineralölprodukte",
@@ -251,6 +280,9 @@ ui <- dashboardPage(
                                                                                          "Average power production per plant" = "mean" )),
                                              sliderInput("scale", "Rough Number of Legend Classes",
                                                          min = 2, max = 10, value = 6),
+                                             
+                                             # Button
+                                             downloadButton("downloadData", "Download Data"),
                                 ),
                          )
                        )
