@@ -40,6 +40,8 @@ data_county_yearly_extended <- read.csv2(here("data", "processed", paste0("data_
 
 data_offshore <- read.csv2(here("data", "processed", paste0("data_offshore", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 
+new_data_state <- subset(data_state_yearly, start_year >= "2000")
+# trim data before 2000 for the new plots
 
 # read all shape files
 ger_shape <- st_read(file_ger_shape, options = "ENCODING=UTF-8", stringsAsFactors = FALSE)
@@ -171,7 +173,7 @@ server <- function(input, output) {
             axis.text = element_blank(),
             axis.ticks = element_blank(),
             panel.background = element_blank())
-
+    
     print(p1)
     
   })
@@ -183,10 +185,10 @@ server <- function(input, output) {
       tm_layout(legend.outside = TRUE) +
       tm_layout(frame = FALSE)
     
-      tmap_leaflet(p2)
+    tmap_leaflet(p2)
     
   })
-
+  
   output$plot_energy_bar_chart <- renderPlot({
     if (!is.null(input$map_shape_click)) {
       ggplot(dataset_region(), aes(x = reorder(EinheitenTyp, get(input$out_var)), y = get(input$out_var))) +
@@ -204,9 +206,43 @@ server <- function(input, output) {
                                   "Gas*" = "Gas*" , "Mineralölprodukte*" = "Mineral Oil*",
                                   "Stromspeichereinheit*" = "Electricity*", "Geothermie*" = "Geothermal*")) +
         coord_flip() 
-       # scale_x_discrete(labels=c("Gas"=expression(bold(Gas))))
+      # scale_x_discrete(labels=c("Gas"=expression(bold(Gas))))
     }
   }, bg="transparent")
+  output$plot_regional <- renderPlot({
+    if (!is.null(input$map_shape_click)) {
+      if (input$out_var == "n"){
+        ggplot(new_data_state, aes(x=start_year,y=n, fill=EinheitenTyp))+
+          geom_line(size=1.5) + geom_bar(stat="identity") +
+          xlab('Year') + ylab('National total number of plants') +
+          theme_minimal(base_size = 16) +
+          theme(axis.text.x=element_text(angle=90, hjust=1),
+                axis.title=element_text(size=18,face="bold"),
+                legend.title = element_blank())
+      }else{
+        if (input$out_var == "sum"){
+          ggplot(new_data_state, aes(x=start_year,y=sum, fill=EinheitenTyp))+
+            geom_line(size=1.5) + geom_bar(stat="identity") +
+            xlab('Year') + ylab('National total power production') +
+            theme_minimal(base_size = 16) +
+            theme(axis.text.x=element_text(angle=90, hjust=1),
+                  axis.title=element_text(size=18,face="bold"),
+                  legend.title = element_blank())
+        } else{
+          if (input$out_var == "mean"){
+            ggplot(new_data_state, aes(x=start_year,y=mean, fill=EinheitenTyp))+
+              geom_line(size=1.5) + geom_bar(stat="identity") +
+              xlab('Year') + ylab('National average power production') +
+              theme_minimal(base_size = 16) +
+              theme(axis.text.x=element_text(angle=90, hjust=1),
+                    axis.title=element_text(size=18,face="bold"),
+                    legend.title = element_blank())
+          }
+        }
+      }
+      
+    }
+  })
 }
 
 # ***********************************************************************************************
@@ -266,7 +302,8 @@ ui <- dashboardPage(
                        fluidRow(
                          column(width = 12,
                                 h3(textOutput("title_bar_chart")),
-                                plotOutput('plot_energy_bar_chart')
+                                plotOutput('plot_energy_bar_chart'),
+                                plotOutput('plot_regional')
                          )
                        )
                 )
@@ -283,7 +320,7 @@ ui <- dashboardPage(
                     tags$li(tags$b("License"), ": What should we write about data license? Should we translate some relevant sections of the data usage policy of Bundesnetzagentur?")
                   )
               )
-     )
+      )
     )
   )
 )
