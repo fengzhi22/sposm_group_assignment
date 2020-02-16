@@ -329,7 +329,7 @@ ui <- dashboardPage(
   dashboardSidebar(
     sidebarMenu(
       menuItem("Storyline", tabName = "storyline", icon = icon("dashboard")),
-      menuItem("Data", tabName = "data_explorer", icon = icon("th")),
+      menuItem("Data Explorer", tabName = "data_explorer", icon = icon("th")),
       menuItem("Reference", tabName = "reference", icon = icon("th"))
     )
   ),
@@ -367,8 +367,8 @@ ui <- dashboardPage(
                                              sliderInput("years", "Period of interest for yearly change",
                                                          min = 1970, max = 2019, value = c(2000, 2019)),
                                              # Button
-                                             downloadButton("downloadData", "Download Data"),
-                                ),
+                                             downloadButton("downloadData", "Download Data")
+                                )
                          )
                        )
                        
@@ -397,9 +397,9 @@ ui <- dashboardPage(
               h2("Reference"),
               div(class = "list",
                   tags$ul(
-                    tags$li(tags$b("Data"), ": German power plants raw data is downloaded from official register Marktstammdatenregister through following link:", tags$a(href="https://www.bundesnetzagentur.de/SharedDocs/Downloads/DE/Sachgebiete/Energie/Unternehmen_Institutionen/ErneuerbareEnergien/ZahlenDatenInformationen/VOeFF_Registerdaten/DatenAb310119.zip", "https://www.bundesnetzagentur.de/SharedDocs/Downloads/DE/Sachgebiete/Energie/", tags$br("Unternehmen_Institutionen/ErneuerbareEnergien/ZahlenDatenInformationen/VOeFF_Registerdaten/DatenAb310119.zip"))),
-                    p("The register includes the potential production of power plants in Germany including renewables like wind, solar and biomass as well as coal and nuclear. The source provides more than 100 variables for various purposes."),
-                    tags$li(tags$b("License"), ": What should we write about data license? Should we translate some relevant sections of the data usage policy of Bundesnetzagentur?")
+                    tags$li(tags$b("Data"), ": German power plants raw data is downloaded from official register", tags$a(href="https://www.bundesnetzagentur.de/SharedDocs/Downloads/DE/Sachgebiete/Energie/Unternehmen_Institutionen/ErneuerbareEnergien/ZahlenDatenInformationen/VOeFF_Registerdaten/DatenAb310119.zip", "Marktstammdatenregister"),"."),
+                    p("The source provides more than 100 variables for various purposes and we have only used a few of them."),
+                    tags$li(tags$b("License"), ": Term of use of MaStR data is subject to", tags$a(href="http://www.gesetze-im-internet.de/mastrv/index.html", "Ordinance on the central electronic directory of energy management data"), "under", tags$a(href="http://www.gesetze-im-internet.de/mastrv/__15.html","Section 15 Public Accessibility of the Data"), "and", tags$a(href="http://www.gesetze-im-internet.de/mastrv/__20.html", "Section 20 Terms of Use"),".")
                   )
               )
       )
