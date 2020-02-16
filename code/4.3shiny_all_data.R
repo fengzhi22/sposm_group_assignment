@@ -269,11 +269,9 @@ server <- function(input, output) {
     }
   )
   
-  output$plot_regional <- renderPlot({
+  output$plot_change_over_time <- renderPlot({
     if (!is.null(input$map_shape_click)) {
       Period() %>%
-      #data_state_yearly_after_2000 %>%
-        #filter(EinheitenTyp == input$source) %>%
         ggplot(., aes(x=start_year, y=get(input$out_var), fill=EinheitenTyp))+
         geom_line(size=1.5) + geom_bar(stat="identity") +
         xlab('Year') + ylab(title_legend()) +
@@ -332,6 +330,8 @@ ui <- dashboardPage(
                                                          min = 2, max = 10, value = 6),
                                              sliderInput("years", "Period of interest for yearly change",
                                                          min = 1970, max = 2019, value = c(2000, 2019)),
+                                             # Button
+                                             downloadButton("downloadData", "Download Data"),
                                 ),
                          )
                        )
