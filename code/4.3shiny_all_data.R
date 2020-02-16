@@ -80,18 +80,23 @@ ger_shape_state$ags <- as.numeric(ger_shape_state$ags)
 map_and_data_state <- inner_join(ger_shape_state, data_state, by = c("ags" = "ags_federal_state"))
 map_data_state_combined_all_sources <- inner_join(ger_shape_state, data_state_combined_all_sources, by = c("ags" = "ags_federal_state"))
 map_and_data_county <- inner_join(ger_shape_county, data_county, by = c("ags" = "ags_county"))
-map_data_county_combined_all_sources <- inner_join(ger_shape_state, data_county_combined_all_sources, by = c("ags" = "ags_county"))
+map_data_county_combined_all_sources <- inner_join(ger_shape_county, data_county_combined_all_sources, by = c("ags" = "ags_county"))
+
+# yearly datasets
+map_and_data_state_yearly <- inner_join(ger_shape_state, data_state_yearly, by = c("ags" = "ags_federal_state"))
+map_and_data_county_yearly <- inner_join(ger_shape_county, data_county_yearly, by = c("ags" = "ags_county"))
+
 
 # Lage "Windkraft auf See" dropped
+
+# create region IDs
 names(map_and_data_state)[names(map_and_data_state) == "Bundesland"] <- "regionid"
 names(map_data_state_combined_all_sources)[names(map_data_state_combined_all_sources) == "Bundesland"] <- "regionid"
 names(map_and_data_county)[names(map_and_data_county) == "name"] <- "regionid"
 names(map_data_county_combined_all_sources)[names(map_data_county_combined_all_sources) == "name"] <- "regionid"
 
-saveRDS(map_and_data_state, file = here("data", "processed","map_and_data_state.rds"))
-saveRDS(map_data_state_combined_all_sources, file = here("data", "processed","map_data_state_combined_all_sources.rds"))
-saveRDS(map_and_data_county, file = here("data", "processed","map_and_data_county.rds"))
-saveRDS(map_data_county_combined_all_sources, file = here("data", "processed","map_data_county_combined_all_sources.rds"))
+names(map_and_data_state_yearly)[names(map_and_data_state_yearly) == "Bundesland"] <- "regionid"
+names(map_and_data_county_yearly)[names(map_and_data_county_yearly) == "name"] <- "regionid"
 
 # missing ags_federal_state dropped
 table(data_state$ags_federal_state, useNA = "always")
@@ -131,12 +136,38 @@ server <- function(input, output) {
     }
   })
   
-  Period <- reactive({
-    df <- get(paste0("data_", input$geo_level, "_yearly"))
-    df %>% filter(EinheitenTyp == input$source) %>%
-      filter(start_year >= input$years[1]) %>%
-      filter(start_year <= input$years[2]) 
+  dataset_yearly <- reactive({
+    get(paste0("map_and_data_", input$geo_level, "_yearly"))
   })
+  
+  Period <- reactive({
+    selected_regionid <- input$map_shape_click$id
+    
+    # Turn the generated "." back into "-" in the state names. e.g. Nordrhein.Westfalen to Nordrhein-Westfalen
+    selected_regionid <- sub(".","-",selected_regionid, fixed = TRUE)
+    
+    if (input$source == "All"){
+      df$EinheitenTyp <- "All"
+        df %>% group_by(start_year, EinheitenTyp, regionid) %>%
+          summarize(n = sum(n), mean = mean(mean), sum = sum(sum)) %>%
+          ungroup() %>%
+          filter(start_year >= input$years[1]) %>%
+          filter(start_year <= input$years[2])# %>%
+          #filter(regionid == selected_regionid)
+        df
+    }else{
+      df <- dataset_yearly() %>%
+        filter(EinheitenTyp == input$source) %>%
+        filter(start_year >= input$years[1]) %>%
+        filter(start_year <= input$years[2]) %>%
+        filter(regionid == selected_regionid)
+      df
+    }
+    
+  })
+  
+  
+  
   
   dataset_region <- reactive({
     columns <- c("Solareinheit", "Windeinheit", "Biomasse", "Wasser", "Braunkohle", "Steinkohle", "Gas", "Mineralölprodukte", "Stromspeichereinheit", "Geothermie")
@@ -209,17 +240,23 @@ server <- function(input, output) {
   })
   
   
-  output$title_bar_chart <- renderText({
+  output$title_change_over_time <- renderText({
     regionid <- input$map_shape_click$id
-    if(is.null(regionid)){paste("Please select a region in the map")}else{
-      if (input$out_var == "n"){paste("Total number of power plants in", regionid)}else{
-        if (input$out_var == "sum"){paste("Total power production in", regionid)}else{
-          if (input$out_var == "mean"){paste("Average power production per plant in", regionid)}
+    if(input$source == "All"){
+      if (input$out_var == "n"){paste("Total number of power plants in Germany")}else{
+        if (input$out_var == "sum"){paste("Total power production in Germany")}else{
+          if (input$out_var == "mean"){paste("Average power production per plant in Germany")}
+        }
+      }
+    }else{
+      if(is.null(regionid)){paste("Please select a region in the map")}else{
+        if (input$out_var == "n"){paste("Total number of power plants in", regionid)}else{
+          if (input$out_var == "sum"){paste("Total power production in", regionid)}else{
+            if (input$out_var == "mean"){paste("Average power production per plant in", regionid)}
+          }
         }
       }
     }
-    
-    
   })
   
   output$map <- renderLeaflet({
@@ -271,19 +308,18 @@ server <- function(input, output) {
   
   output$plot_change_over_time <- renderPlot({
     if (!is.null(input$map_shape_click)) {
-      Period() %>%
-        ggplot(., aes(x=start_year, y=get(input$out_var), fill=EinheitenTyp))+
-        geom_line(size=1.5) + geom_bar(stat="identity") +
-        xlab('Year') + ylab(title_legend()) +
+      
+      ggplot(Period(), aes(x=start_year, y=get(input$out_var), fill=EinheitenTyp))+
+        geom_line(size=1.5) + geom_bar(stat="identity", fill = "yellow") +
         theme_minimal(base_size = 16) +
+        xlab('Year') + ylab(title_legend()) +
         theme(axis.text.x=element_text(angle=90, hjust=1),
               axis.title=element_text(size=18,face="bold"),
               legend.title = element_blank()) +
         theme(legend.position="bottom") +
         scale_fill_discrete(labels = label_energy())
-      
     }
-  })
+  }, bg="transparent")
 }
 
 # ***********************************************************************************************
@@ -346,7 +382,7 @@ ui <- dashboardPage(
                        ),
                        fluidRow(
                          column(width = 12,
-                                h3("Yearly change: ", textOutput("title_bar_chart")),
+                                h3("Yearly change: ", textOutput("title_change_over_time")),
                                 plotOutput('plot_change_over_time'),
                                 h3("Comparison of energy sources for this region"),
                                 plotOutput('plot_energy_bar_chart')
