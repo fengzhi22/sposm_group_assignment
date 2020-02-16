@@ -212,3 +212,9 @@ Period <- reactive({
   #}
 })    
 
+# ----------------------------- missing region id -----------------
+map_data_county_yearly_combined_all_sources %>%
+  filter(start_year >= 2000) %>%
+  filter(start_year <= 2019) %>%
+  filter(regionid == selected_regionid) -> test
+names(map_data_county_yearly_combined_all_sources)

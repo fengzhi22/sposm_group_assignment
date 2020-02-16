@@ -28,24 +28,30 @@ file_ger_shape_county <- here("data", "raw", "shape_ger", subfolder, "vg2500", "
 
 
 # ***********************************************************************************************
-#### load data ####
+#### load data and prepare data####
 # read all data files
 data_state <- read.csv2(here("data", "processed", paste0("data_state", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 data_state_combined_all_sources <- read.csv2(here("data", "processed", paste0("data_state_combined_all_sources", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 data_state_yearly <- read.csv2(here("data", "processed", paste0("data_state_yearly", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
-data_state_yearly_combined_all_sources<- read.csv2(here("data", "processed", paste0("data_state_yearly_combined_all_sources", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
+df <- data_state_yearly
+df$EinheitenTyp <- "All"
+data_state_yearly_combined_all_sources <- df %>% group_by(start_year, ags_federal_state) %>%
+  summarize(n = sum(n), mean = mean(mean), sum = sum(sum)) %>%
+  ungroup()
 data_state_yearly_extended <- read.csv2(here("data", "processed", paste0("data_state_yearly_extended", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 
 data_county <- read.csv2(here("data", "processed", paste0("data_county", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 data_county_combined_all_sources <- read.csv2(here("data", "processed", paste0("data_county_combined_all_sources", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 data_county_yearly <- read.csv2(here("data", "processed", paste0("data_county_yearly", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
-data_county_yearly_combined_all_sources<- read.csv2(here("data", "processed", paste0("data_county_yearly_combined_all_sources", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
+df <- data_county_yearly
+df$EinheitenTyp <- "All"
+data_county_yearly_combined_all_sources <- df %>% group_by(start_year, ags_county) %>%
+  summarize(n = sum(n), mean = mean(mean), sum = sum(sum)) %>%
+  ungroup()
 data_county_yearly_extended <- read.csv2(here("data", "processed", paste0("data_county_yearly_extended", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 
 data_offshore <- read.csv2(here("data", "processed", paste0("data_offshore", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 
-
-# trim data before 2000 for the new plots
 
 # read all shape files
 ger_shape <- st_read(file_ger_shape, options = "ENCODING=UTF-8", stringsAsFactors = FALSE)
@@ -103,7 +109,7 @@ names(map_data_county_combined_all_sources)[names(map_data_county_combined_all_s
 names(map_and_data_state_yearly)[names(map_and_data_state_yearly) == "Bundesland"] <- "regionid"
 names(map_data_state_yearly_combined_all_sources)[names(map_data_state_yearly_combined_all_sources) == "Bundesland"] <- "regionid"
 names(map_and_data_county_yearly)[names(map_and_data_county_yearly) == "name"] <- "regionid"
-names(map_data_county_yearly_combined_all_sources)[names(map_data_county_yearly_combined_all_sources) == "name"] <- "regionid"
+names(map_data_county_yearly_combined_all_sources)[names(map_data_county_yearly_combined_all_sources) == "Landkreis"] <- "regionid"
 
 
 # missing ags_federal_state dropped
@@ -165,7 +171,8 @@ server <- function(input, output) {
     if (input$source == "All"){
       dataset_yearly_combined() %>%
         filter(start_year >= input$years[1]) %>%
-        filter(start_year <= input$years[2])
+        filter(start_year <= input$years[2]) %>%
+        filter(regionid == selected_regionid)
     } else{
       dataset_yearly() %>%
         filter(EinheitenTyp == input$source) %>%
@@ -310,21 +317,35 @@ server <- function(input, output) {
   
   
   output$title_change_over_time <- renderText({
-    regionid <- input$map_shape_click$id
-    if(input$source == "All"){
-      if (input$out_var == "n"){paste("Total number of power plants in Germany")}else{
-        if (input$out_var == "sum"){paste("Total power production in Germany")}else{
-          if (input$out_var == "mean"){paste("Average power production per plant in Germany")}
-        }
+    selected_regionid <- input$map_shape_click$id
+    
+    # Turn the generated "." back into "-" in the state names. e.g. Nordrhein.Westfalen to Nordrhein-Westfalen
+    selected_regionid <- sub(".","-", selected_regionid, fixed = TRUE)
+    
+    # prepare a check for region id to be in
+    if (input$geo_level == "state"){
+      if (input$source == "All"){
+        check <- map_data_state_yearly_combined_all_sources$regionid
+      }else{
+        check <- map_and_data_state_yearly$regionid
       }
     }else{
-      if(is.null(regionid)){paste("Please select a region in the map")}else{
-        if (input$out_var == "n"){paste("Total number of power plants in", regionid)}else{
-          if (input$out_var == "sum"){paste("Total power production in", regionid)}else{
-            if (input$out_var == "mean"){paste("Average power production per plant in", regionid)}
+      if (input$source == "All"){
+        check <- map_data_county_yearly_combined_all_sources$regionid
+      }else{
+        check <- map_and_data_county_yearly$regionid
+      }
+    }
+    
+    if(is.null(selected_regionid)){paste("Please select a region in the map")}else{
+      if (!(any(selected_regionid %in% check))){paste("Please select a region in the map")}else{
+        if (input$out_var == "n"){paste("Total number of power plants in", selected_regionid)}else{
+          if (input$out_var == "sum"){paste("Total power production in", selected_regionid)}else{
+            if (input$out_var == "mean"){paste("Average power production per plant in", selected_regionid)}
           }
         }
       }
+      
     }
   })
   
@@ -379,7 +400,8 @@ server <- function(input, output) {
     if (!is.null(input$map_shape_click)) {
       
       ggplot(Period(), aes(x=start_year, y=get(input$out_var), fill=EinheitenTyp))+
-        geom_line(size=1.5) + geom_bar(stat="identity", fill = coloring_yearly_graph()) +
+        #geom_line(size=1.5) + 
+        geom_bar(stat="identity", fill = coloring_yearly_graph()) +
         theme_minimal(base_size = 16) +
         xlab('Year') + ylab(title_legend()) +
         theme(axis.text.x=element_text(angle=90, hjust=1),
@@ -451,9 +473,9 @@ ui <- dashboardPage(
                        ),
                        fluidRow(
                          column(width = 12,
-                                h3("Yearly change: ", textOutput("title_change_over_time")),
+                                h3("Yearly change (flow variable): ", textOutput("title_change_over_time")),
                                 plotOutput('plot_change_over_time'),
-                                h3("Comparison of energy sources for this region"),
+                                h3("Comparison of energy sources for this region (stock variable)"),
                                 plotOutput('plot_energy_bar_chart')
                          )
                        )
