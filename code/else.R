@@ -147,6 +147,68 @@ unzip(zipF, exdir = outDir)
 # -> fucking messy
 
 
+df <- data_state_yearly
+df$EinheitenTyp <- "All"
+df %>% group_by(start_year, EinheitenTyp, ags_federal_state) %>%
+  summarize(n = sum(n), mean = mean(mean), sum = sum(sum)) %>%
+  ungroup() -> test
 
-### 
+
+Period <- reactive({
+  df <- get(paste0("data_", input$geo_level, "_yearly"))
+  if (input$source == "All"){
+    df$EinheitenTyp <- "All"
+    if(input$geo_level == "state"){
+      df %>% group_by(start_year, EinheitenTyp, ags_federal_state) %>%
+        summarize(n = sum(n), mean = mean(mean), sum = sum(sum)) %>%
+        ungroup() %>%
+        filter(start_year >= input$years[1]) %>%
+        filter(start_year <= input$years[2]) %>%
+        filter(ags_federal_state == input$map_shape_click$id) -> df
+    }else{
+      df %>% group_by(start_year, EinheitenTyp, ags_county) %>%
+        summarize(n = sum(n), mean = mean(mean), sum = sum(sum)) %>%
+        ungroup() %>%
+        filter(start_year >= input$years[1]) %>%
+        filter(start_year <= input$years[2]) %>%
+        filter(ags_county == input$map_shape_click$id) -> df
+    }
+  }else{
+    if(input$geo_level == "state"){
+      df %>% filter(EinheitenTyp == input$source) %>%
+        filter(start_year >= input$years[1]) %>%
+        filter(start_year <= input$years[2]) %>%
+        filter(ags_federal_state == input$map_shape_click$id) -> df
+    }else{
+      df %>% filter(EinheitenTyp == input$source) %>%
+        filter(start_year >= input$years[1]) %>%
+        filter(start_year <= input$years[2]) %>%
+        filter(ags_county == input$map_shape_click$id) -> df
+    }
+  }
+})    
+
+
+
+#### test 2
+Period <- reactive({
+  df <- get(paste0("data_", input$geo_level, "_yearly"))
+  
+  selected_regionid <- input$map_shape_click$id
+  
+  # Turn the generated "." back into "-" in the state names. e.g. Nordrhein.Westfalen to Nordrhein-Westfalen
+  selected_regionid <- sub(".","-",selected_regionid, fixed = TRUE)
+  
+  if(input$geo_level == "state"){
+    df %>% filter(EinheitenTyp == input$source) %>%
+      filter(start_year >= input$years[1]) %>%
+      filter(start_year <= input$years[2]) %>%
+      filter(ags_federal_state == selected_regionid)
+  }#else{
+  #  df %>% filter(EinheitenTyp == input$source) %>%
+  #    filter(start_year >= input$years[1]) %>%
+  #   filter(start_year <= input$years[2]) %>%
+  #  filter(ags_county == input$map_shape_click$id) -> df
+  #}
+})    
 
