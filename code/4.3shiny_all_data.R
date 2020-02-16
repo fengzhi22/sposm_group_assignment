@@ -40,7 +40,7 @@ data_county_yearly_extended <- read.csv2(here("data", "processed", paste0("data_
 
 data_offshore <- read.csv2(here("data", "processed", paste0("data_offshore", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 
-new_data_state <- subset(data_state_yearly, start_year >= "2000")
+
 # trim data before 2000 for the new plots
 
 # read all shape files
@@ -104,6 +104,13 @@ server <- function(input, output) {
     dataset() %>% filter(EinheitenTyp == input$source)
   })
   
+  Period <- reactive({
+    df <- get(paste0("data_", input$geo_level, "_yearly"))
+    df %>% filter(EinheitenTyp == input$source) %>%
+      filter(start_year >= input$years[1]) %>%
+      filter(start_year <= input$years[2]) 
+  })
+  
   dataset_region <- reactive({
     columns <- c("Solareinheit", "Windeinheit", "Biomasse", "Wasser", "Braunkohle", "Steinkohle", "Gas", "Mineralölprodukte", "Stromspeichereinheit", "Geothermie")
     
@@ -151,19 +158,42 @@ server <- function(input, output) {
     }
   })
   
+  label_energy <- reactive({
+    if (input$source == "Solareinheit"){"Solar"}else{
+      if (input$source == "Windeinheit"){"Wind"}else{
+        if (input$source == "Biomasse"){"Biomass"}else{
+          if (input$source == "Wasser"){"Water"}else{
+            if (input$source == "Braunkohle"){"Brown Coal"}else{
+              if (input$source == "Steinkohle"){"Black Coal"}else{
+                if (input$source == "Gas"){"Gas"}else{
+                  if (input$source == "Mineralölprodukte"){"Mineral Oil"}else{
+                    if (input$source == "Stromspeichereinheit"){"Battery"}else{
+                      if (input$source == "Geothermie"){"Geothermal"}else{
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  })
+  
+  
   output$title_bar_chart <- renderText({
     regionid <- input$map_shape_click$id
-    if (!is.null(regionid)){
+    if(is.null(regionid)){paste("Please select a region in the map")}else{
       if (input$out_var == "n"){paste("Total number of power plants in", regionid)}else{
         if (input$out_var == "sum"){paste("Total power production in", regionid)}else{
           if (input$out_var == "mean"){paste("Average power production per plant in", regionid)}
         }
       }
     }
-    
-    
   })
   
+
   output$plot1 <- renderPlot({
     
     p1 <- ggplot(Energy(), aes(geometry = geometry)) +
@@ -199,47 +229,31 @@ server <- function(input, output) {
                                   "Biomasse" = "Biomass", "Wasser" = "Water",
                                   "Braunkohle" = "Brown Coal", "Steinkohle" = "Black Coal",
                                   "Gas" = "Gas" , "Mineralölprodukte" = "Mineral Oil",
-                                  "Stromspeichereinheit" = "Electricity", "Geothermie" = "Geothermal", 
+                                  "Stromspeichereinheit" = "Battery", "Geothermie" = "Geothermal", 
                                   "Solareinheit*" = "Solar*",  "Windeinheit*" = "Wind*", 
                                   "Biomasse*" = "Biomass*", "Wasser*" = "Water*",
                                   "Braunkohle*" = "Brown Coal*", "Steinkohle*" = "Black Coal*",
                                   "Gas*" = "Gas*" , "Mineralölprodukte*" = "Mineral Oil*",
-                                  "Stromspeichereinheit*" = "Electricity*", "Geothermie*" = "Geothermal*")) +
+                                  "Stromspeichereinheit*" = "Battery*", "Geothermie*" = "Geothermal*")) +
         coord_flip() 
       # scale_x_discrete(labels=c("Gas"=expression(bold(Gas))))
     }
   }, bg="transparent")
-  output$plot_regional <- renderPlot({
+  
+  output$plot_change_over_time <- renderPlot({
     if (!is.null(input$map_shape_click)) {
-      if (input$out_var == "n"){
-        ggplot(new_data_state, aes(x=start_year,y=n, fill=EinheitenTyp))+
-          geom_line(size=1.5) + geom_bar(stat="identity") +
-          xlab('Year') + ylab('National total number of plants') +
-          theme_minimal(base_size = 16) +
-          theme(axis.text.x=element_text(angle=90, hjust=1),
-                axis.title=element_text(size=18,face="bold"),
-                legend.title = element_blank())
-      }else{
-        if (input$out_var == "sum"){
-          ggplot(new_data_state, aes(x=start_year,y=sum, fill=EinheitenTyp))+
-            geom_line(size=1.5) + geom_bar(stat="identity") +
-            xlab('Year') + ylab('National total power production') +
-            theme_minimal(base_size = 16) +
-            theme(axis.text.x=element_text(angle=90, hjust=1),
-                  axis.title=element_text(size=18,face="bold"),
-                  legend.title = element_blank())
-        } else{
-          if (input$out_var == "mean"){
-            ggplot(new_data_state, aes(x=start_year,y=mean, fill=EinheitenTyp))+
-              geom_line(size=1.5) + geom_bar(stat="identity") +
-              xlab('Year') + ylab('National average power production') +
-              theme_minimal(base_size = 16) +
-              theme(axis.text.x=element_text(angle=90, hjust=1),
-                    axis.title=element_text(size=18,face="bold"),
-                    legend.title = element_blank())
-          }
-        }
-      }
+      Period() %>%
+      #data_state_yearly_after_2000 %>%
+        #filter(EinheitenTyp == input$source) %>%
+        ggplot(., aes(x=start_year, y=get(input$out_var), fill=EinheitenTyp))+
+        geom_line(size=1.5) + geom_bar(stat="identity") +
+        xlab('Year') + ylab(title_legend()) +
+        theme_minimal(base_size = 16) +
+        theme(axis.text.x=element_text(angle=90, hjust=1),
+              axis.title=element_text(size=18,face="bold"),
+              legend.title = element_blank()) +
+        theme(legend.position="bottom") +
+        scale_fill_discrete(labels = label_energy())
       
     }
   })
@@ -280,13 +294,15 @@ ui <- dashboardPage(
                                                                                       "Biomass Energy" = "Biomasse", "Water Energy" = "Wasser",
                                                                                       "Brown Coal Energy" = "Braunkohle", "Black Coal Energy" = "Steinkohle",
                                                                                       "Gas Energy" = "Gas", "Mineral Oil Energy" = "Mineralölprodukte",
-                                                                                      "Electrical Energy" = "Stromspeichereinheit", "Geothermal Energy" = "Geothermie")),
+                                                                                      "Battery" = "Stromspeichereinheit", "Geothermal Energy" = "Geothermie")),
                                              selectInput('geo_level', 'Geographical Level', c("State" = "state", "County" = "county")),
                                              selectInput('out_var', 'Output Variable', c("Total number of power plants" = "n", 
                                                                                          "Total power production" = "sum", 
                                                                                          "Average power production per plant" = "mean" )),
                                              sliderInput("scale", "Rough Number of Legend Classes",
                                                          min = 2, max = 10, value = 6),
+                                             sliderInput("years", "Period of interest for yearly change",
+                                                         min = 1970, max = 2019, value = c(2000, 2019)),
                                 ),
                          )
                        )
@@ -301,9 +317,10 @@ ui <- dashboardPage(
                        ),
                        fluidRow(
                          column(width = 12,
-                                h3(textOutput("title_bar_chart")),
-                                plotOutput('plot_energy_bar_chart'),
-                                plotOutput('plot_regional')
+                                h3("Yearly change: ", textOutput("title_bar_chart")),
+                                plotOutput('plot_change_over_time'),
+                                h3("Comparison of energy sources for this region"),
+                                plotOutput('plot_energy_bar_chart')
                          )
                        )
                 )
