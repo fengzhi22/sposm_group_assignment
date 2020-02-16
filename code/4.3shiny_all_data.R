@@ -129,6 +129,11 @@ server <- function(input, output) {
     get(paste0("map_data_", input$geo_level, "_combined_all_sources"))
   })
   
+  dataset_yearly <- reactive({
+    get(paste0("map_and_data_", input$geo_level, "_yearly"))
+  })
+  
+  
   dataset_yearly_combined <- reactive({
     get(paste0("map_data_", input$geo_level, "_yearly_combined_all_sources"))
   })
@@ -162,7 +167,7 @@ server <- function(input, output) {
         filter(start_year >= input$years[1]) %>%
         filter(start_year <= input$years[2])
     } else{
-      dataset_yearly_combined() %>%
+      dataset_yearly() %>%
         filter(EinheitenTyp == input$source) %>%
         filter(start_year >= input$years[1]) %>%
         filter(start_year <= input$years[2]) %>%
