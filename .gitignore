@@ -29,3 +29,4 @@
 rsconnect/
 .DS_Store
 *.Rproj
+*.rds

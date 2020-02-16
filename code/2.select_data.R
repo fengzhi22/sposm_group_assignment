@@ -264,6 +264,15 @@ table(data_state_yearly$start_year)
 
 write.csv2(data_state_yearly, file = here("data", "processed", "data_state_yearly.csv"), row.names = FALSE, fileEncoding="UTF-8")
 
+# ***********************************************************************************************
+#### aggregate yearly data on state level combining all enegery sources ####
+data_state_yearly_combined_all_sources <- enh3 %>%
+  group_by(start_year, EinheitenTyp, ags_federal_state) %>%
+  summarize(n = length(ags_federal_state), mean = mean(Nettonennleistung), sum = sum(Nettonennleistung)) %>%
+  ungroup()
+
+write.csv2(data_state_yearly_combined_all_sources, file = here("data", "processed", "data_state_yearly_combined_all_sources.csv"), row.names = FALSE, fileEncoding="UTF-8")
+
 
 # ***********************************************************************************************
 #### aggregate data on state level ####
@@ -295,6 +304,17 @@ data_county_yearly <- enh3 %>%
 
 # save as csv
 write.csv2(data_county_yearly, file = here("data", "processed", "data_county_yearly.csv"), row.names = FALSE, fileEncoding="UTF-8")
+
+#### aggregate yearly data on county level combining all enegery sources ####
+data_county_yearly_combined_all_sources <- enh3 %>%
+  group_by(start_year, EinheitenTyp, ags_county) %>%
+  summarize(n = length(ags_county), mean = mean(Nettonennleistung), sum = sum(Nettonennleistung)) %>%
+  ungroup()
+
+write.csv2(data_county_yearly_combined_all_sources, file = here("data", "processed", "data_county_yearly_combined_all_sources.csv"), row.names = FALSE, fileEncoding="UTF-8")
+
+
+
 
 
 # ***********************************************************************************************
