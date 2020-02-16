@@ -186,16 +186,50 @@ server <- function(input, output) {
     dataset
   })
   
+  order_coloring <- reactive({
+    colors_bar_graph <- data.frame(EinheitenTyp = character(),
+                                   colors = character(),
+                                   stringsAsFactors = F)
+    colors_bar_graph[1:10, ] <- NA
+    colors_bar_graph$EinheitenTyp[1:10] <- c("Solareinheit",
+                                             "Windeinheit",
+                                             "Braunkohle",
+                                             "Biomasse",
+                                             "Wasser",
+                                             "Geothermie",
+                                             "Steinkohle",
+                                             "Gas",
+                                             "Mineralölprodukte",
+                                             "Stromspeichereinheit")
+    colors_bar_graph$colors <- c("#FFCC33",
+                                 "#99CCFF",
+                                 "#663300",
+                                 "#336633",
+                                 "#003366",
+                                 "#AA5500", 
+                                 "#000000", 
+                                 "#999999", 
+                                 "#000000", 
+                                 "#FFCC00")
+    
+    colors_merged <- dataset_region() %>%
+      reorder(EinheitenTyp, get(input$out_var)) %>%
+      inner_join(colors_bar_graph, by = "EinheitenTyp")
+    
+    colors_merged$colors
+    
+  })
+  
   coloring <- reactive({
     if (input$source == "Solareinheit"){"YlOrRd"}else{
       if (input$source == "Windeinheit"){"Blues"}else{
-        if(input$source == "Braunkohle"){"Greys"}else{
+        if(input$source == "Braunkohle"){"YlOrBr"}else{
           if(input$source == "Biomasse"){"Greens"}else{
             if(input$source == "Wasser"){"Blues"}else{
               if(input$source == "Geothermie"){"Oranges"}else{
                 if(input$source == "Steinkohle"){"Greys"}else{
                   if(input$source == "Gas"){"Greys"}else{
-                    if(input$source == "Mineralölprodukte"){"PuBuGn"}else{
+                    if(input$source == "Mineralölprodukte"){"Greys"}else{
                       if(input$source == "Stromspeichereinheit"){"YlOrBr"}
                     }
                   }
@@ -207,6 +241,31 @@ server <- function(input, output) {
       }
     }
   })
+  
+  coloring_yearly_graph <- reactive({
+    if (input$source == "All"){"#FF6600"}else{
+      if (input$source == "Solareinheit"){"#FFCC33"}else{
+        if (input$source == "Windeinheit"){"#99CCFF"}else{
+          if(input$source == "Braunkohle"){"#663300"}else{
+            if(input$source == "Biomasse"){"#336633"}else{
+              if(input$source == "Wasser"){"#003366"}else{
+                if(input$source == "Geothermie"){"#AA5500"}else{
+                  if(input$source == "Steinkohle"){"#000000"}else{
+                    if(input$source == "Gas"){"#999999"}else{
+                      if(input$source == "Mineralölprodukte"){"#000000"}else{
+                        if(input$source == "Stromspeichereinheit"){"#FFCC00"}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  })
+  
   
   title_legend <- reactive({
     if (input$out_var == "n"){"Number of Power Plants"}else{
@@ -273,9 +332,9 @@ server <- function(input, output) {
   
   output$plot_energy_bar_chart <- renderPlot({
     if (!is.null(input$map_shape_click)) {
-      ggplot(dataset_region(), aes(x = reorder(EinheitenTyp, get(input$out_var)), y = get(input$out_var))) +
+      ggplot(dataset_region(), aes(x = reorder(EinheitenTyp, get(input$out_var)), y = get(input$out_var), fill = EinheitenTyp)) +
         labs(y = title_legend(), x = "Energy Source") +
-        geom_bar(stat="identity", fill="steelblue") + theme_minimal(base_size = 16) + 
+        geom_bar(stat="identity", fill = coloring_yearly_graph()) + theme_minimal(base_size = 16) + 
         theme(axis.text.y = element_text(size=12, face="bold")) +
         scale_x_discrete(labels=c("Solareinheit" = "Solar",  "Windeinheit" = "Wind", 
                                   "Biomasse" = "Biomass", "Wasser" = "Water",
@@ -310,7 +369,7 @@ server <- function(input, output) {
     if (!is.null(input$map_shape_click)) {
       
       ggplot(Period(), aes(x=start_year, y=get(input$out_var), fill=EinheitenTyp))+
-        geom_line(size=1.5) + geom_bar(stat="identity", fill = "yellow") +
+        geom_line(size=1.5) + geom_bar(stat="identity", fill = coloring_yearly_graph()) +
         theme_minimal(base_size = 16) +
         xlab('Year') + ylab(title_legend()) +
         theme(axis.text.x=element_text(angle=90, hjust=1),
