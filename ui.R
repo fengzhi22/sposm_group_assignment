@@ -1,0 +1,111 @@
+library("utils")
+library("here")
+library("shiny")
+library("zip")
+library("sf")
+library("tmap")
+library("tmaptools")
+library("ggplot2")
+library("dplyr")
+library("shinydashboard")
+library("leaflet")
+
+map_data_state_combined_all_sources <- readRDS("data/processed/map_data_state_combined_all_sources.rds")
+map_data_state_yearly_combined_all_sources <- readRDS("data/processed/map_data_state_yearly_combined_all_sources.rds")
+map_data_county_combined_all_sources <- readRDS("data/processed/map_data_county_combined_all_sources.rds")
+map_data_county_yearly_combined_all_sources <- readRDS("data/processed/map_data_county_yearly_combined_all_sources.rds")
+map_data_county <- readRDS("data/processed/map_data_county.rds")
+map_data_state <- readRDS("data/processed/map_data_state.rds")
+map_data_county_yearly <- readRDS("data/processed/map_data_county_yearly.rds")
+map_data_state_yearly <- readRDS("data/processed/map_data_state_yearly.rds")
+
+data_state_yearly <- read.csv2("data/processed/data_state_yearly.csv", row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
+new_data_state <- subset(data_state_yearly, start_year >= "2000")
+
+#### create ui ####
+ui <- dashboardPage(
+  dashboardHeader(title = "Dashboard"),
+  dashboardSidebar(
+    sidebarMenu(
+      menuItem("Data Explorer", tabName = "data_explorer", icon = icon("th")),
+      menuItem("Storyline", tabName = "storyline", icon = icon("dashboard")),
+      menuItem("Reference", tabName = "reference", icon = icon("th"))
+    )
+  ),
+  dashboardBody(
+    tabItems(
+      # First tab content
+      tabItem(tabName = "data_explorer",
+              fluidRow(
+                column(width = 4,
+                       fluidRow(
+                         column(width = 12,
+                                h3("German Power Plants Explorer", align = "center"),
+                                #titlePanel("German Power Plants Explorer"),
+                                sidebarPanel(width = 12,
+                                             selectInput('source', 'Energy Source', c("All" = "All", "Solar Energy" = "Solareinheit", "Wind Energy" = "Windeinheit", 
+                                                                                      "Biomass Energy" = "Biomasse", "Water Energy" = "Wasser",
+                                                                                      "Brown Coal Energy" = "Braunkohle", "Black Coal Energy" = "Steinkohle",
+                                                                                      "Gas Energy" = "Gas", "Mineral Oil Energy" = "Mineralölprodukte",
+                                                                                      "Battery" = "Stromspeichereinheit", "Geothermal Energy" = "Geothermie")),
+                                             selectInput('geo_level', 'Geographical Level', c("State" = "state", "County" = "county")),
+                                             selectInput('out_var', 'Output Variable', c("Total number of power plants" = "n", 
+                                                                                         "Total power production" = "sum", 
+                                                                                         "Average power production per plant" = "mean" )),
+                                             sliderInput("scale", "Rough Number of Legend Classes",
+                                                         min = 2, max = 10, value = 6),
+                                             sliderInput("years", "Period of interest for yearly change",
+                                                         min = 1970, max = 2019, value = c(2000, 2019)),
+                                             # Button
+                                             downloadButton("downloadData", "Download Data")
+                                )
+                         )
+                       )
+                       
+                ),
+                column(width = 8,
+                       fluidRow(
+                         column(width = 12,
+                                h3("Germany in geographical zones"),
+                                leafletOutput('map')
+                         )
+                       ),
+                       fluidRow(
+                         column(width = 12,
+                                h3("Yearly change (flow variable): ", textOutput("title_change_over_time")),
+                                plotOutput('plot_change_over_time'),
+                                h3("Comparison of energy sources for this region (stock variable)"),
+                                plotOutput('plot_energy_bar_chart')
+                         )
+                       )
+                )
+              )
+      ),
+      
+      # Second tab content
+      tabItem(tabName = "storyline",
+              h2("Would you like to participate in adventurous stories?\nJoin our R-Force!"),
+              div(class = "text",
+                  #p("Because we do not have a story yet,", tags$b("the content is left blank intentionally.")),
+                  #p("And I just put these sentences", tags$em("to test the codes."))
+                  p("We have connected the data on energy production in Germany to publicly available regional data at state and county level. So far we have some ideas which stories we could tell and are very open to your suggestions and your support!"),
+                  p("Do rich regions in Germany have more solar panels?"),
+                  p("Are voting results related to protests against wind power plants?"),
+                  p("Which questions would you like to explore?")
+              )
+      ),
+      
+      # Third tab content
+      tabItem(tabName = "reference",
+              h2("Reference"),
+              div(class = "list",
+                  tags$ul(
+                    tags$li(tags$b("Data"), ": German power plants raw data is downloaded from official register", tags$a(href="https://www.bundesnetzagentur.de/SharedDocs/Downloads/DE/Sachgebiete/Energie/Unternehmen_Institutionen/ErneuerbareEnergien/ZahlenDatenInformationen/VOeFF_Registerdaten/DatenAb310119.zip", "Marktstammdatenregister"),"."),
+                    p("The source provides more than 100 variables for various purposes and we have only used a few of them."),
+                    tags$li(tags$b("License"), ": Term of use of MaStR data is subject to", tags$a(href="http://www.gesetze-im-internet.de/mastrv/index.html", "Ordinance on the central electronic directory of energy management data"), "under", tags$a(href="http://www.gesetze-im-internet.de/mastrv/__15.html","Section 15 Public Accessibility of the Data"), "and", tags$a(href="http://www.gesetze-im-internet.de/mastrv/__20.html", "Section 20 Terms of Use"),".")
+                  )
+              )
+      )
+    )
+  )
+)
