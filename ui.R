@@ -96,11 +96,9 @@ ui <- dashboardPage(
               h2("Would you like to participate in adventurous stories?\nJoin our R-Force!"),
               #br(),
               div(class = "text",
-                  #p("Because we do not have a story yet,", tags$b("the content is left blank intentionally.")),
-                  #p("And I just put these sentences", tags$em("to test the codes."))
                   p("We have connected the data on energy production in Germany to publicly available regional data at state and county level. So far we have some ideas which stories we could tell and are very open to your suggestions and your support!"),
                   p(tags$b("Do rich regions in Germany have more solar power plants?")),
-                  p(tags$b("Do rich regions in Germany have larger solar power plants?")),
+                  p(tags$b("Do rich regions in Germany have larger solar power plants?"))
                   #p("Are voting results related to protests against wind power plants?"),
                   #p("Which questions would you like to explore?")
               ),
@@ -108,28 +106,28 @@ ui <- dashboardPage(
               h3("Income and Solar Plants at state level"),
               h4("Average yearly income and total amount of solar power plants"),
               br(),
-              plotOutput("plot_state_income_n", ),
+              plotOutput("plot_state_income_n"),
               br(),
               br(),
               br(),
               
               h4("Average yearly income and mean power of plant in Watt"),
               br(),
-              plotOutput("plot_state_income_mean", ),
+              plotOutput("plot_state_income_mean"),
               br(),
               br(),
               
               h3("Income and Solar Plants at county level"),
               h4("Average yearly income and total amount of solar power plants"),
               br(),
-              plotOutput("plot_county_income_n", ),
+              plotOutput("plot_county_income_n"),
               br(),
               br(),
               br(),
               
               h4("Average yearly income and mean power of plant in Watt"),
               br(),
-              plotOutput("plot_county_income_mean", )
+              plotOutput("plot_county_income_mean")
               
       ),
       
