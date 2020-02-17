@@ -28,24 +28,22 @@ file_ger_shape_county <- here("data", "raw", "shape_ger", subfolder, "vg2500", "
 
 
 # ***********************************************************************************************
-#### load data ####
+#### load data and prepare data####
 # read all data files
 data_state <- read.csv2(here("data", "processed", paste0("data_state", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 data_state_combined_all_sources <- read.csv2(here("data", "processed", paste0("data_state_combined_all_sources", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 data_state_yearly <- read.csv2(here("data", "processed", paste0("data_state_yearly", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
-data_state_yearly_combined_all_sources<- read.csv2(here("data", "processed", paste0("data_state_yearly_combined_all_sources", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
+data_state_yearly_combined_all_sources <- read.csv2(here("data", "processed", paste0("data_state_yearly_combined_all_sources", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 data_state_yearly_extended <- read.csv2(here("data", "processed", paste0("data_state_yearly_extended", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 
 data_county <- read.csv2(here("data", "processed", paste0("data_county", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 data_county_combined_all_sources <- read.csv2(here("data", "processed", paste0("data_county_combined_all_sources", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 data_county_yearly <- read.csv2(here("data", "processed", paste0("data_county_yearly", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
-data_county_yearly_combined_all_sources<- read.csv2(here("data", "processed", paste0("data_county_yearly_combined_all_sources", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
+data_county_yearly_combined_all_sources <- read.csv2(here("data", "processed", paste0("data_county_yearly_combined_all_sources", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 data_county_yearly_extended <- read.csv2(here("data", "processed", paste0("data_county_yearly_extended", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 
 data_offshore <- read.csv2(here("data", "processed", paste0("data_offshore", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 
-
-# trim data before 2000 for the new plots
 
 # read all shape files
 ger_shape <- st_read(file_ger_shape, options = "ENCODING=UTF-8", stringsAsFactors = FALSE)
@@ -103,7 +101,7 @@ names(map_data_county_combined_all_sources)[names(map_data_county_combined_all_s
 names(map_and_data_state_yearly)[names(map_and_data_state_yearly) == "Bundesland"] <- "regionid"
 names(map_data_state_yearly_combined_all_sources)[names(map_data_state_yearly_combined_all_sources) == "Bundesland"] <- "regionid"
 names(map_and_data_county_yearly)[names(map_and_data_county_yearly) == "name"] <- "regionid"
-names(map_data_county_yearly_combined_all_sources)[names(map_data_county_yearly_combined_all_sources) == "name"] <- "regionid"
+names(map_data_county_yearly_combined_all_sources)[names(map_data_county_yearly_combined_all_sources) == "Landkreis"] <- "regionid"
 
 
 # missing ags_federal_state dropped
@@ -155,37 +153,47 @@ server <- function(input, output) {
     }
   })
   
- 
+  # ---------- Period --------------------
   Period <- reactive({
     selected_regionid <- input$map_shape_click$id
     
     # Turn the generated "." back into "-" in the state names. e.g. Nordrhein.Westfalen to Nordrhein-Westfalen
-    selected_regionid <- sub(".","-",selected_regionid, fixed = TRUE)
+    selected_regionid <- gsub(".","-",selected_regionid, fixed = TRUE)
     
-    if (input$source == "All"){
-      dataset_yearly_combined() %>%
+    if(is.null(selected_regionid)){
+      df <- data_state_yearly_combined_all_sources %>% # since combined later, not important if state or county level
         filter(start_year >= input$years[1]) %>%
         filter(start_year <= input$years[2])
-    } else{
-      dataset_yearly() %>%
-        filter(EinheitenTyp == input$source) %>%
-        filter(start_year >= input$years[1]) %>%
-        filter(start_year <= input$years[2]) %>%
-        filter(regionid == selected_regionid)
+      df
+    }else{
+      if (input$source == "All"){
+        dataset_yearly_combined() %>%
+          filter(start_year >= input$years[1]) %>%
+          filter(start_year <= input$years[2]) %>%
+          filter(regionid == selected_regionid)
+      } else{
+        dataset_yearly() %>%
+          filter(EinheitenTyp == input$source) %>%
+          filter(start_year >= input$years[1]) %>%
+          filter(start_year <= input$years[2]) %>%
+          filter(regionid == selected_regionid)
+      }
     }
+    
+    
     
   })
   
   
   
-  
+  # ---------- dataset_region --------------------
   dataset_region <- reactive({
     columns <- c("Solareinheit", "Windeinheit", "Biomasse", "Wasser", "Braunkohle", "Steinkohle", "Gas", "Mineralölprodukte", "Stromspeichereinheit", "Geothermie")
     
     selected_regionid <- input$map_shape_click$id
     
     # Turn the generated "." back into "-" in the state names. e.g. Nordrhein.Westfalen to Nordrhein-Westfalen
-    selected_regionid <- sub(".","-",selected_regionid, fixed = TRUE)
+    selected_regionid <- gsub(".","-",selected_regionid, fixed = TRUE)
 
     dataset <- dataset() %>% 
       filter(regionid == selected_regionid) %>% 
@@ -196,16 +204,50 @@ server <- function(input, output) {
     dataset
   })
   
+  order_coloring <- reactive({
+    colors_bar_graph <- data.frame(EinheitenTyp = character(),
+                                   colors = character(),
+                                   stringsAsFactors = F)
+    colors_bar_graph[1:10, ] <- NA
+    colors_bar_graph$EinheitenTyp[1:10] <- c("Solareinheit",
+                                             "Windeinheit",
+                                             "Braunkohle",
+                                             "Biomasse",
+                                             "Wasser",
+                                             "Geothermie",
+                                             "Steinkohle",
+                                             "Gas",
+                                             "Mineralölprodukte",
+                                             "Stromspeichereinheit")
+    colors_bar_graph$colors <- c("#FFCC33",
+                                 "#99CCFF",
+                                 "#663300",
+                                 "#336633",
+                                 "#003366",
+                                 "#AA5500", 
+                                 "#000000", 
+                                 "#999999", 
+                                 "#000000", 
+                                 "#FFCC00")
+    
+    colors_merged <- dataset_region() %>%
+      reorder(EinheitenTyp, get(input$out_var)) %>%
+      inner_join(colors_bar_graph, by = "EinheitenTyp")
+    
+    colors_merged$colors
+    
+  })
+  
   coloring <- reactive({
     if (input$source == "Solareinheit"){"YlOrRd"}else{
       if (input$source == "Windeinheit"){"Blues"}else{
-        if(input$source == "Braunkohle"){"Greys"}else{
+        if(input$source == "Braunkohle"){"YlOrBr"}else{
           if(input$source == "Biomasse"){"Greens"}else{
             if(input$source == "Wasser"){"Blues"}else{
               if(input$source == "Geothermie"){"Oranges"}else{
                 if(input$source == "Steinkohle"){"Greys"}else{
                   if(input$source == "Gas"){"Greys"}else{
-                    if(input$source == "Mineralölprodukte"){"PuBuGn"}else{
+                    if(input$source == "Mineralölprodukte"){"Greys"}else{
                       if(input$source == "Stromspeichereinheit"){"YlOrBr"}
                     }
                   }
@@ -217,6 +259,31 @@ server <- function(input, output) {
       }
     }
   })
+  
+  coloring_yearly_graph <- reactive({
+    if (input$source == "All"){"#FF6600"}else{
+      if (input$source == "Solareinheit"){"#FFCC33"}else{
+        if (input$source == "Windeinheit"){"#99CCFF"}else{
+          if(input$source == "Braunkohle"){"#663300"}else{
+            if(input$source == "Biomasse"){"#336633"}else{
+              if(input$source == "Wasser"){"#003366"}else{
+                if(input$source == "Geothermie"){"#AA5500"}else{
+                  if(input$source == "Steinkohle"){"#000000"}else{
+                    if(input$source == "Gas"){"#999999"}else{
+                      if(input$source == "Mineralölprodukte"){"#000000"}else{
+                        if(input$source == "Stromspeichereinheit"){"#FFCC00"}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  })
+  
   
   title_legend <- reactive({
     if (input$out_var == "n"){"Number of Power Plants"}else{
@@ -251,21 +318,35 @@ server <- function(input, output) {
   
   
   output$title_change_over_time <- renderText({
-    regionid <- input$map_shape_click$id
-    if(input$source == "All"){
-      if (input$out_var == "n"){paste("Total number of power plants in Germany")}else{
-        if (input$out_var == "sum"){paste("Total power production in Germany")}else{
-          if (input$out_var == "mean"){paste("Average power production per plant in Germany")}
-        }
+    selected_regionid <- input$map_shape_click$id
+    
+    # Turn the generated "." back into "-" in the state names. e.g. Nordrhein.Westfalen to Nordrhein-Westfalen
+    selected_regionid <- gsub(".","-", selected_regionid, fixed = TRUE)
+    
+    # prepare a check for region id to be in
+    if (input$geo_level == "state"){
+      if (input$source == "All"){
+        check <- map_data_state_yearly_combined_all_sources$regionid
+      }else{
+        check <- map_and_data_state_yearly$regionid
       }
     }else{
-      if(is.null(regionid)){paste("Please select a region in the map")}else{
-        if (input$out_var == "n"){paste("Total number of power plants in", regionid)}else{
-          if (input$out_var == "sum"){paste("Total power production in", regionid)}else{
-            if (input$out_var == "mean"){paste("Average power production per plant in", regionid)}
+      if (input$source == "All"){
+        check <- map_data_county_yearly_combined_all_sources$regionid
+      }else{
+        check <- map_and_data_county_yearly$regionid
+      }
+    }
+    
+    if(is.null(selected_regionid)){paste("Please select a region in the map")}else{
+      if (!(any(selected_regionid %in% check))){paste("Please select a region in the map")}else{
+        if (input$out_var == "n"){paste("Total number of power plants in", selected_regionid)}else{
+          if (input$out_var == "sum"){paste("Total power production in", selected_regionid)}else{
+            if (input$out_var == "mean"){paste("Average power production per plant in", selected_regionid)}
           }
         }
       }
+      
     }
   })
   
@@ -283,9 +364,9 @@ server <- function(input, output) {
   
   output$plot_energy_bar_chart <- renderPlot({
     if (!is.null(input$map_shape_click)) {
-      ggplot(dataset_region(), aes(x = reorder(EinheitenTyp, get(input$out_var)), y = get(input$out_var))) +
+      ggplot(dataset_region(), aes(x = reorder(EinheitenTyp, get(input$out_var)), y = get(input$out_var), fill = EinheitenTyp)) +
         labs(y = title_legend(), x = "Energy Source") +
-        geom_bar(stat="identity", fill="steelblue") + theme_minimal(base_size = 16) + 
+        geom_bar(stat="identity", fill = coloring_yearly_graph()) + theme_minimal(base_size = 16) + 
         theme(axis.text.y = element_text(size=12, face="bold")) +
         scale_x_discrete(labels=c("Solareinheit" = "Solar",  "Windeinheit" = "Wind", 
                                   "Biomasse" = "Biomass", "Wasser" = "Water",
@@ -320,7 +401,8 @@ server <- function(input, output) {
     if (!is.null(input$map_shape_click)) {
       
       ggplot(Period(), aes(x=start_year, y=get(input$out_var), fill=EinheitenTyp))+
-        geom_line(size=1.5) + geom_bar(stat="identity", fill = "yellow") +
+        #geom_line(size=1.5) + 
+        geom_bar(stat="identity", fill = coloring_yearly_graph()) +
         theme_minimal(base_size = 16) +
         xlab('Year') + ylab(title_legend()) +
         theme(axis.text.x=element_text(angle=90, hjust=1),
@@ -328,6 +410,22 @@ server <- function(input, output) {
               legend.title = element_blank()) +
         theme(legend.position="bottom") +
         scale_fill_discrete(labels = label_energy())
+    }else{
+      if(FALSE)# work but not fully developed: What about other out_var and other inputs
+      {
+        df <- data_state_yearly_combined_all_sources %>% # since combined later, not important if state or county level
+          filter(start_year >= input$years[1]) %>%
+          filter(start_year <= input$years[2])
+        
+        ggplot(df, aes(x=start_year, y=get(input$out_var)))+
+          geom_bar(stat="identity", fill = "steelblue") +
+          theme_minimal(base_size = 16) +
+          xlab('Year') + ylab(title_legend()) +
+          theme(axis.text.x=element_text(angle=90, hjust=1),
+                axis.title=element_text(size=18,face="bold"),
+                legend.title = element_blank()) +
+          ggtitle("National development for all energy sources")
+      }
     }
   }, bg="transparent")
 }
@@ -392,9 +490,9 @@ ui <- dashboardPage(
                        ),
                        fluidRow(
                          column(width = 12,
-                                h3("Yearly change: ", textOutput("title_change_over_time")),
+                                h3("Yearly change (flow variable): ", textOutput("title_change_over_time")),
                                 plotOutput('plot_change_over_time'),
-                                h3("Comparison of energy sources for this region"),
+                                h3("Comparison of energy sources for this region (stock variable)"),
                                 plotOutput('plot_energy_bar_chart')
                          )
                        )
