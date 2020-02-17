@@ -110,14 +110,15 @@ data_state[is.na(data_state$ags_federal_state),]
 map_data_state_combined_all_sources[is.na(map_data_state_combined_all_sources$ags_federal_state),]
 map_data_state_yearly_combined_all_sources[is.na(map_data_state_yearly_combined_all_sources$ags_federal_state),]
 
-saveRDS(map_data_state_combined_all_sources, file = "data/processed/map_data_state_combined_all_sources.rds")
-saveRDS(map_data_county_combined_all_sources, file = "data/processed/map_data_county_combined_all_sources.rds")
-saveRDS(map_data_state_yearly_combined_all_sources, file = "data/processed/map_data_state_yearly_combined_all_sources.rds")
-saveRDS(map_data_county_yearly_combined_all_sources, file = "data/processed/map_data_county_yearly_combined_all_sources.rds")
-saveRDS(map_data_state, file = "data/processed/map_data_state.rds")
-saveRDS(map_data_county, file = "data/processed/map_data_county.rds")
-saveRDS(map_data_state_yearly, file = "data/processed/map_data_state_yearly.rds")
-saveRDS(map_data_county_yearly, file = "data/processed/map_data_county_yearly.rds")
+saveRDS(map_data_state_combined_all_sources, file = here::here("data", "processed","map_data_state_combined_all_sources.rds"))
+saveRDS(map_data_state_combined_all_sources, file =  here::here("data", "processed","map_data_state_combined_all_sources.rds"))
+saveRDS(map_data_county_combined_all_sources, file =  here::here("data", "processed","map_data_county_combined_all_sources.rds"))
+saveRDS(map_data_state_yearly_combined_all_sources, file =  here::here("data", "processed","map_data_state_yearly_combined_all_sources.rds"))
+saveRDS(map_data_county_yearly_combined_all_sources, file =  here::here("data", "processed","map_data_county_yearly_combined_all_sources.rds"))
+saveRDS(map_data_state, file = here::here("data", "processed","map_data_state.rds"))
+saveRDS(map_data_county, file =  here::here("data", "processed","map_data_county.rds"))
+saveRDS(map_data_state_yearly, file =  here::here("data", "processed","map_data_state_yearly.rds"))
+saveRDS(map_data_county_yearly, file =  here::here("data", "processed","map_data_county_yearly.rds"))
 
 # related to offshore (always if ags_federal_state is missing)
 
