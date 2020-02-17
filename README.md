@@ -6,7 +6,7 @@ Prof. Dr. Gassen
 
 # % % % % % % % % % % % % % % % % % % % % % % % % % % %
 Group Assignment  
-"This is our Topic"  
+"German Power Plant Explorer"  
 
 
 # % % % % % % % % % % % % % % % % % % % % % % % % % % %
