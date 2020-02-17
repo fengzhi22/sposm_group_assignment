@@ -110,6 +110,8 @@ data_state[is.na(data_state$ags_federal_state),]
 map_data_state_combined_all_sources[is.na(map_data_state_combined_all_sources$ags_federal_state),]
 map_data_state_yearly_combined_all_sources[is.na(map_data_state_yearly_combined_all_sources$ags_federal_state),]
 
+saveRDS(map_data_state_combined_all_sources, file = "data/processed/map_data_state_combined_all_sources.rds")
+saveRDS(map_data_state_yearly_combined_all_sources, file = "data/processed/map_data_state_yearly_combined_all_sources.rds")
 # related to offshore (always if ags_federal_state is missing)
 
 ## ...
@@ -122,7 +124,7 @@ server <- function(input, output) {
   dataset <- reactive({
     get(paste0("map_and_data_", input$geo_level))
   })
-
+  
   dataset_combined <- reactive({
     get(paste0("map_data_", input$geo_level, "_combined_all_sources"))
   })
@@ -144,7 +146,7 @@ server <- function(input, output) {
       dataset() %>% filter(EinheitenTyp == input$source)
     }
   })
-   
+  
   data_to_download <- reactive({
     if (input$source == "All") {
       dataset()
@@ -194,7 +196,7 @@ server <- function(input, output) {
     
     # Turn the generated "." back into "-" in the state names. e.g. Nordrhein.Westfalen to Nordrhein-Westfalen
     selected_regionid <- gsub(".","-",selected_regionid, fixed = TRUE)
-
+    
     dataset <- dataset() %>% 
       filter(regionid == selected_regionid) %>% 
       filter(EinheitenTyp %in% columns)
@@ -520,3 +522,4 @@ ui <- dashboardPage(
 )
 
 shinyApp(ui, server)
+
