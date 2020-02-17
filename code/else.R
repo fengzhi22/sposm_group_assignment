@@ -154,6 +154,7 @@ df %>% group_by(start_year, EinheitenTyp, ags_federal_state) %>%
   ungroup() -> test
 
 
+
 Period <- reactive({
   df <- get(paste0("data_", input$geo_level, "_yearly"))
   if (input$source == "All"){
@@ -213,8 +214,16 @@ Period <- reactive({
 })    
 
 # ----------------------------- missing region id -----------------
-map_data_county_yearly_combined_all_sources %>%
+map_data_state_yearly_combined_all_sources %>%
   filter(start_year >= 2000) %>%
-  filter(start_year <= 2019) %>%
-  filter(regionid == selected_regionid) -> test
-names(map_data_county_yearly_combined_all_sources)
+  filter(start_year <= 2019)  -> test
+names(map_data_state_yearly_combined_all_sources)
+
+ggplot(test, aes(x=start_year, y=get("n")))+
+  geom_bar(stat="identity", fill = "yellow") +
+  theme_minimal(base_size = 16) +
+  xlab('Year') + ylab("Number of Power Plants") +
+  theme(axis.text.x=element_text(angle=90, hjust=1),
+        axis.title=element_text(size=18,face="bold"),
+        legend.title = element_blank()) +
+  ggtitle("National development for all energy sources")

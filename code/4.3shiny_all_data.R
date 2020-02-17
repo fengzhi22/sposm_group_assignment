@@ -161,38 +161,47 @@ server <- function(input, output) {
     }
   })
   
- 
+  # ---------- Period --------------------
   Period <- reactive({
     selected_regionid <- input$map_shape_click$id
     
     # Turn the generated "." back into "-" in the state names. e.g. Nordrhein.Westfalen to Nordrhein-Westfalen
-    selected_regionid <- sub(".","-",selected_regionid, fixed = TRUE)
+    selected_regionid <- gsub(".","-",selected_regionid, fixed = TRUE)
     
-    if (input$source == "All"){
-      dataset_yearly_combined() %>%
+    if(is.null(selected_regionid)){
+      df <- data_state_yearly_combined_all_sources %>% # since combined later, not important if state or county level
         filter(start_year >= input$years[1]) %>%
-        filter(start_year <= input$years[2]) %>%
-        filter(regionid == selected_regionid)
-    } else{
-      dataset_yearly() %>%
-        filter(EinheitenTyp == input$source) %>%
-        filter(start_year >= input$years[1]) %>%
-        filter(start_year <= input$years[2]) %>%
-        filter(regionid == selected_regionid)
+        filter(start_year <= input$years[2])
+      df
+    }else{
+      if (input$source == "All"){
+        dataset_yearly_combined() %>%
+          filter(start_year >= input$years[1]) %>%
+          filter(start_year <= input$years[2]) %>%
+          filter(regionid == selected_regionid)
+      } else{
+        dataset_yearly() %>%
+          filter(EinheitenTyp == input$source) %>%
+          filter(start_year >= input$years[1]) %>%
+          filter(start_year <= input$years[2]) %>%
+          filter(regionid == selected_regionid)
+      }
     }
+    
+    
     
   })
   
   
   
-  
+  # ---------- dataset_region --------------------
   dataset_region <- reactive({
     columns <- c("Solareinheit", "Windeinheit", "Biomasse", "Wasser", "Braunkohle", "Steinkohle", "Gas", "Mineralölprodukte", "Stromspeichereinheit", "Geothermie")
     
     selected_regionid <- input$map_shape_click$id
     
     # Turn the generated "." back into "-" in the state names. e.g. Nordrhein.Westfalen to Nordrhein-Westfalen
-    selected_regionid <- sub(".","-",selected_regionid, fixed = TRUE)
+    selected_regionid <- gsub(".","-",selected_regionid, fixed = TRUE)
 
     dataset <- dataset() %>% 
       filter(regionid == selected_regionid) %>% 
@@ -320,7 +329,7 @@ server <- function(input, output) {
     selected_regionid <- input$map_shape_click$id
     
     # Turn the generated "." back into "-" in the state names. e.g. Nordrhein.Westfalen to Nordrhein-Westfalen
-    selected_regionid <- sub(".","-", selected_regionid, fixed = TRUE)
+    selected_regionid <- gsub(".","-", selected_regionid, fixed = TRUE)
     
     # prepare a check for region id to be in
     if (input$geo_level == "state"){
@@ -409,6 +418,22 @@ server <- function(input, output) {
               legend.title = element_blank()) +
         theme(legend.position="bottom") +
         scale_fill_discrete(labels = label_energy())
+    }else{
+      if(FALSE)# work but not fully developed: What about other out_var and other inputs
+      {
+        df <- data_state_yearly_combined_all_sources %>% # since combined later, not important if state or county level
+          filter(start_year >= input$years[1]) %>%
+          filter(start_year <= input$years[2])
+        
+        ggplot(df, aes(x=start_year, y=get(input$out_var)))+
+          geom_bar(stat="identity", fill = "steelblue") +
+          theme_minimal(base_size = 16) +
+          xlab('Year') + ylab(title_legend()) +
+          theme(axis.text.x=element_text(angle=90, hjust=1),
+                axis.title=element_text(size=18,face="bold"),
+                legend.title = element_blank()) +
+          ggtitle("National development for all energy sources")
+      }
     }
   }, bg="transparent")
 }
