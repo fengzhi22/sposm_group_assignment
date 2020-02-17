@@ -436,23 +436,14 @@ ui <- dashboardPage(
   dashboardHeader(title = "Dashboard"),
   dashboardSidebar(
     sidebarMenu(
-      menuItem("Storyline", tabName = "storyline", icon = icon("dashboard")),
       menuItem("Data Explorer", tabName = "data_explorer", icon = icon("th")),
+      menuItem("Storyline", tabName = "storyline", icon = icon("dashboard")),
       menuItem("Reference", tabName = "reference", icon = icon("th"))
     )
   ),
   dashboardBody(
     tabItems(
       # First tab content
-      tabItem(tabName = "storyline",
-              h2("Do rich regions use more renewable energy in Germany? (for example)"),
-              div(class = "text",
-                  p("Because we do not have a story yet,", tags$b("the content is left blank intentionally.")),
-                  p("And I just put these sentences", tags$em("to test the codes."))
-              )
-      ),
-      
-      # Second tab content
       tabItem(tabName = "data_explorer",
               fluidRow(
                 column(width = 4,
@@ -497,6 +488,19 @@ ui <- dashboardPage(
                          )
                        )
                 )
+              )
+      ),
+      
+      # Second tab content
+      tabItem(tabName = "storyline",
+              h2("Would you like to participate in adventurous stories?\nJoin our R-Force!"),
+              div(class = "text",
+                  #p("Because we do not have a story yet,", tags$b("the content is left blank intentionally.")),
+                  #p("And I just put these sentences", tags$em("to test the codes."))
+                  p("We have connected the data on energy production in Germany to publicly available regional data at state and county level. So far we have some ideas which stories we could tell and are very open to your suggestions and your support!"),
+                  p("Do rich regions in Germany have more solar panels?"),
+                  p("Are voting results related to protests against wind power plants?"),
+                  p("Which questions would you like to explore?")
               )
       ),
       
