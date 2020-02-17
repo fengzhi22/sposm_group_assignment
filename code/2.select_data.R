@@ -244,7 +244,7 @@ enh3$EinheitenTyp[enh3$Energietraeger == "Steinkohle"] <- "Steinkohle"
 enh3$EinheitenTyp[enh3$Energietraeger == "Erdgas"] <- "Gas"
 enh3$EinheitenTyp[enh3$Energietraeger == "andere Gase"] <- "Gas"
 enh3$EinheitenTyp[enh3$Energietraeger == "Mineralölprodukte"] <- "Mineralölprodukte"
-View(enh3[enh3$EinheitenTyp == "Verbrennung", ])
+#View(enh3[enh3$EinheitenTyp == "Verbrennung", ])
 length(which(enh3$EinheitenTyp == "Verbrennung"))
 
 
@@ -267,7 +267,7 @@ write.csv2(data_state_yearly, file = here("data", "processed", "data_state_yearl
 # ***********************************************************************************************
 #### aggregate yearly data on state level combining all enegery sources ####
 data_state_yearly_combined_all_sources <- enh3 %>%
-  group_by(start_year, EinheitenTyp, ags_federal_state) %>%
+  group_by(start_year, ags_federal_state) %>%
   summarize(n = length(ags_federal_state), mean = mean(Nettonennleistung), sum = sum(Nettonennleistung)) %>%
   ungroup()
 
@@ -307,7 +307,7 @@ write.csv2(data_county_yearly, file = here("data", "processed", "data_county_yea
 
 #### aggregate yearly data on county level combining all enegery sources ####
 data_county_yearly_combined_all_sources <- enh3 %>%
-  group_by(start_year, EinheitenTyp, ags_county) %>%
+  group_by(start_year, ags_county) %>%
   summarize(n = length(ags_county), mean = mean(Nettonennleistung), sum = sum(Nettonennleistung)) %>%
   ungroup()
 

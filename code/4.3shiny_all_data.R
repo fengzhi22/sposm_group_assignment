@@ -33,21 +33,13 @@ file_ger_shape_county <- here("data", "raw", "shape_ger", subfolder, "vg2500", "
 data_state <- read.csv2(here("data", "processed", paste0("data_state", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 data_state_combined_all_sources <- read.csv2(here("data", "processed", paste0("data_state_combined_all_sources", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 data_state_yearly <- read.csv2(here("data", "processed", paste0("data_state_yearly", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
-df <- data_state_yearly
-df$EinheitenTyp <- "All"
-data_state_yearly_combined_all_sources <- df %>% group_by(start_year, ags_federal_state) %>%
-  summarize(n = sum(n), mean = mean(mean), sum = sum(sum)) %>%
-  ungroup()
+data_state_yearly_combined_all_sources <- read.csv2(here("data", "processed", paste0("data_state_yearly_combined_all_sources", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 data_state_yearly_extended <- read.csv2(here("data", "processed", paste0("data_state_yearly_extended", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 
 data_county <- read.csv2(here("data", "processed", paste0("data_county", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 data_county_combined_all_sources <- read.csv2(here("data", "processed", paste0("data_county_combined_all_sources", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 data_county_yearly <- read.csv2(here("data", "processed", paste0("data_county_yearly", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
-df <- data_county_yearly
-df$EinheitenTyp <- "All"
-data_county_yearly_combined_all_sources <- df %>% group_by(start_year, ags_county) %>%
-  summarize(n = sum(n), mean = mean(mean), sum = sum(sum)) %>%
-  ungroup()
+data_county_yearly_combined_all_sources <- read.csv2(here("data", "processed", paste0("data_county_yearly_combined_all_sources", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 data_county_yearly_extended <- read.csv2(here("data", "processed", paste0("data_county_yearly_extended", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 
 data_offshore <- read.csv2(here("data", "processed", paste0("data_offshore", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
