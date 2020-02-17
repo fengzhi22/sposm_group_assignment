@@ -436,5 +436,57 @@ write.csv2(data_county_yearly_extended, file = here("data", "processed", "data_c
 
 
 
+### -------------------------- First Story on Income and solar panels -------------------------
+## state and income
+data_state_solar_2015 <- enh3 %>% 
+  filter(EinheitenTyp == "Solareinheit") %>%
+  filter(start_year <= 2015) %>%
+  group_by(ags_federal_state) %>%
+  summarize(n = length(ags_federal_state), mean = mean(Nettonennleistung), sum = sum(Nettonennleistung)) %>%
+  ungroup() %>%
+  left_join(ags_federal_states, by = c("ags_federal_state" = "ags"))
+
+# prepare income data
+county_income_2015 <- county_income %>%
+  filter(year == 2015)
+  
+data_state_solar_income_2015 <- data_state_solar_2015 %>%
+  inner_join(county_income_2015, by = c("ags_federal_state" = "ags"))
+
+data_state_solar_income_2015 <- data_state_solar_income_2015 %>%
+  mutate(income_per_tax_person = total_income_in_1000_euro/pop_obliged_to_income_taxes*1000,
+         solar_plants_per_1000_tax_person = n/pop_obliged_to_income_taxes*1000,
+         total_production_per_1000_tax_person = sum/pop_obliged_to_income_taxes*1000)
+
+# save
+write.csv2(data_state_solar_income_2015, file = here("data", "processed", "data_state_solar_income_2015.csv"), row.names = FALSE, fileEncoding="UTF-8")
+
+
+
+## county and income
+data_county_solar_2015 <- enh3 %>% 
+  filter(EinheitenTyp == "Solareinheit") %>%
+  filter(start_year <= 2015) %>%
+  group_by(ags_county) %>%
+  summarize(n = length(ags_county), mean = mean(Nettonennleistung), sum = sum(Nettonennleistung)) %>%
+  ungroup() %>%
+  left_join(ags_counties, by = c("ags_county" = "ags_county"))
+
+# prepare income data
+county_income_2015 <- county_income %>%
+  filter(year == 2015)
+
+data_county_solar_income_2015 <- data_county_solar_2015 %>%
+  inner_join(county_income_2015, by = c("ags_county" = "ags"))
+
+data_county_solar_income_2015 <- data_county_solar_income_2015 %>%
+  mutate(income_per_tax_person = total_income_in_1000_euro/pop_obliged_to_income_taxes*1000,
+         solar_plants_per_1000_tax_person = n/pop_obliged_to_income_taxes*1000,
+         total_production_per_1000_tax_person = sum/pop_obliged_to_income_taxes*1000)
+
+# save
+write.csv2(data_county_solar_income_2015, file = here("data", "processed", "data_county_solar_income_2015.csv"), row.names = FALSE, fileEncoding="UTF-8")
+
+
 # ***********************************************************************************************
 file.edit(here("code", "4.3shiny_all_data.R"))

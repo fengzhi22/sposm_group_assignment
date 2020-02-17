@@ -10,17 +10,24 @@ library("dplyr")
 library("shinydashboard")
 library("leaflet")
 
-map_data_state_combined_all_sources <- readRDS("data/processed/map_data_state_combined_all_sources.rds")
-map_data_state_yearly_combined_all_sources <- readRDS("data/processed/map_data_state_yearly_combined_all_sources.rds")
-map_data_county_combined_all_sources <- readRDS("data/processed/map_data_county_combined_all_sources.rds")
-map_data_county_yearly_combined_all_sources <- readRDS("data/processed/map_data_county_yearly_combined_all_sources.rds")
-map_data_county <- readRDS("data/processed/map_data_county.rds")
-map_data_state <- readRDS("data/processed/map_data_state.rds")
-map_data_county_yearly <- readRDS("data/processed/map_data_county_yearly.rds")
-map_data_state_yearly <- readRDS("data/processed/map_data_state_yearly.rds")
+map_data_state_combined_all_sources <- readRDS(here::here("data","processed","map_data_state_combined_all_sources.rds"))
+map_data_state_yearly_combined_all_sources <- readRDS(here::here("data","processed","map_data_state_yearly_combined_all_sources.rds"))
+map_data_county_combined_all_sources <- readRDS(here::here("data","processed","map_data_county_combined_all_sources.rds"))
+map_data_county_yearly_combined_all_sources <- readRDS(here::here("data","processed","map_data_county_yearly_combined_all_sources.rds"))
+map_data_county <- readRDS(here::here("data","processed","map_data_county.rds"))
+map_data_state <- readRDS(here::here("data","processed","map_data_state.rds"))
+map_data_county_yearly <- readRDS(here::here("data","processed","map_data_county_yearly.rds"))
+map_data_state_yearly <- readRDS(here::here("data","processed","map_data_state_yearly.rds"))
 
-data_state_yearly <- read.csv2("data/processed/data_state_yearly.csv", row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
+data_state_yearly <- read.csv2(here::here("data","processed","data_state_yearly.csv"), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 new_data_state <- subset(data_state_yearly, start_year >= "2000")
+
+
+# ---------------------------------- First Story on Solar and Income ------------------------------
+## load
+data_state_solar_income_2015 <- read.csv2(here::here("data", "processed", paste0("data_state_solar_income_2015", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
+## load
+data_county_solar_income_2015 <- read.csv2(here::here("data", "processed", paste0("data_county_solar_income_2015", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 
 
 #### create server ####
@@ -334,5 +341,64 @@ server <- function(input, output) {
           ggtitle("National development for all energy sources")
       }
     }
+  }, bg="transparent")
+  
+  
+  output$plot_state_income_n <- renderPlot({
+    ggplot(data_state_solar_income_2015, aes(x=income_per_tax_person, y=solar_plants_per_1000_tax_person)) +
+      expand_limits(x = c(25000, 45000), y = 0) +
+      geom_point() +
+      geom_smooth(method = lm, fullrange = T, se = F) +
+      #stat_smooth(method = lm) +
+      ggtitle("Relation of Income and Solar Plants at state level") +
+      ylab("Solar plants per 1000 tax persons") +
+      xlab("Income per tax person in Euros per year") +
+      geom_text(aes(label=name), vjust = 1.2) +
+      theme(panel.background = element_rect(fill = "transparent"), 
+            plot.background = element_rect(fill = "transparent", color = NA))
+  }, bg="transparent")
+  
+  output$plot_state_income_mean <- renderPlot({
+    ggplot(data_state_solar_income_2015, aes(x=income_per_tax_person, y=mean)) +
+      expand_limits(x = c(25000, 45000), y = 0) +
+      geom_point() +
+      geom_smooth(method = lm, fullrange = T, se = F) +
+      #stat_smooth(method = lm) +
+      ggtitle("Relation of Income and Solar Plants at state level") +
+      ylab("Mean power of solar plants in Watt") +
+      xlab("Income per tax person in Euros per year") +
+      geom_text(aes(label=name), vjust = 1.2) +
+      theme(panel.background = element_rect(fill = "transparent"), 
+            plot.background = element_rect(fill = "transparent", color = NA))
+    
+  }, bg="transparent")
+  
+  output$plot_county_income_n <- renderPlot({
+    ggplot(data_county_solar_income_2015, aes(x=income_per_tax_person, y=solar_plants_per_1000_tax_person)) +
+      expand_limits(x = c(25000, 70000), y = 0) +
+      geom_point() +
+      #geom_smooth(fullrange = T, se = F) +
+      #stat_smooth(method = lm) +
+      ggtitle("Relation of Income and Solar Plants at county level") +
+      ylab("Solar plants per 1000 tax persons") +
+      xlab("Income per tax person in Euros per year") +
+      #geom_text(aes(label=name), vjust = 1.2) +
+      theme(panel.background = element_rect(fill = "transparent"), 
+            plot.background = element_rect(fill = "transparent", color = NA))
+    
+  }, bg="transparent")
+  
+  output$plot_county_income_mean <- renderPlot({
+    ggplot(data_county_solar_income_2015, aes(x=income_per_tax_person, y=mean)) +
+      expand_limits(x = c(25000, 70000), y = 0) +
+      geom_point() +
+      geom_smooth(method = lm, fullrange = T, se = F) +
+      #stat_smooth(method = lm) +
+      ggtitle("Relation of Income and Solar Plants at county level") +
+      ylab("Mean power of solar plants in Watt") +
+      xlab("Income per tax person in Euros per year") +
+      #geom_text(aes(label=name), vjust = 1.2) +
+      theme(panel.background = element_rect(fill = "transparent"), 
+            plot.background = element_rect(fill = "transparent", color = NA))
   }, bg="transparent")
 }

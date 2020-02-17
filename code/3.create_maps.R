@@ -284,6 +284,83 @@ tmap_save(tmob_wind_county_power, here("graphs","tmap_wind_county_power.pdf"))
 
 
 
+# ---------------------------------- First Story on Solar and Income ------------------------------
+## load
+data_state_solar_income_2015 <- read.csv2(here("data", "processed", paste0("data_state_solar_income_2015", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
+
+# plot
+ggplot(data_state_solar_income_2015, aes(x=income_per_tax_person, y=solar_plants_per_1000_tax_person)) +
+  expand_limits(x = c(25000, 45000), y = 0) +
+  geom_point() +
+  geom_smooth(method = lm, fullrange = T, se = F) +
+  #stat_smooth(method = lm) +
+  ggtitle("Relation of Income and Solar Plants at state level") +
+  ylab("Solar plants per 1000 tax persons") +
+  xlab("Income per tax person in Euros per year") +
+  geom_text(aes(label=name), vjust = 1.2) +
+  theme(panel.background = element_rect(fill = "transparent"), 
+        plot.background = element_rect(fill = "transparent", color = NA))
+  
+
+ggplot(data_state_solar_income_2015, aes(x=income_per_tax_person, y=mean)) +
+  expand_limits(x = c(25000, 45000), y = 0) +
+  geom_point() +
+  geom_smooth(method = lm, fullrange = T, se = F) +
+  #stat_smooth(method = lm) +
+  ggtitle("Relation of Income and Solar Plants at state level") +
+  ylab("Mean power of solar plants in Watt") +
+  xlab("Income per tax person in Euros per year") +
+  geom_text(aes(label=name), vjust = 1.2) +
+  theme(panel.background = element_rect(fill = "transparent"), 
+        plot.background = element_rect(fill = "transparent", color = NA))
+
+
+if (F) # not this meaningful
+{
+  ggplot(data_state_solar_income_2015, aes(x=income_per_tax_person, y=total_production_per_1000_tax_person)) +
+    expand_limits(x = c(25000, 45000), y = 0) +
+    geom_point() +
+    geom_smooth(method = lm, fullrange = T, se = F) +
+    #stat_smooth(method = lm) +
+    ggtitle("Relation of Income and Solar Plants") +
+    ylab("Total power of solar plants in Watt per 1000 tax person") +
+    xlab("Income per tax person in Euros per year") +
+    geom_text(aes(label=name), vjust = 1.2) +
+    theme(panel.background = element_rect(fill = "transparent"), 
+          plot.background = element_rect(fill = "transparent", color = NA))
+  
+}
+
+
+## load
+data_state_solar_income_2015 <- read.csv2(here("data", "processed", paste0("data_state_solar_income_2015", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
+
+# plot
+ggplot(data_county_solar_income_2015, aes(x=income_per_tax_person, y=solar_plants_per_1000_tax_person)) +
+  expand_limits(x = c(25000, 70000), y = 0) +
+  geom_point() +
+  #geom_smooth(fullrange = T, se = F) +
+  #stat_smooth(method = lm) +
+  ggtitle("Relation of Income and Solar Plants at county level") +
+  ylab("Solar plants per 1000 tax persons") +
+  xlab("Income per tax person in Euros per year") +
+  #geom_text(aes(label=name), vjust = 1.2) +
+  theme(panel.background = element_rect(fill = "transparent"), 
+        plot.background = element_rect(fill = "transparent", color = NA))
+
+
+ggplot(data_county_solar_income_2015, aes(x=income_per_tax_person, y=mean)) +
+  expand_limits(x = c(25000, 70000), y = 0) +
+  geom_point() +
+  geom_smooth(method = lm, fullrange = T, se = F) +
+  #stat_smooth(method = lm) +
+  ggtitle("Relation of Income and Solar Plants at county level") +
+  ylab("Mean power of solar plants in Watt") +
+  xlab("Income per tax person in Euros per year") +
+  #geom_text(aes(label=name), vjust = 1.2) +
+  theme(panel.background = element_rect(fill = "transparent"), 
+        plot.background = element_rect(fill = "transparent", color = NA))
+
 
 
 

@@ -10,17 +10,26 @@ library("dplyr")
 library("shinydashboard")
 library("leaflet")
 
-map_data_state_combined_all_sources <- readRDS("data/processed/map_data_state_combined_all_sources.rds")
-map_data_state_yearly_combined_all_sources <- readRDS("data/processed/map_data_state_yearly_combined_all_sources.rds")
-map_data_county_combined_all_sources <- readRDS("data/processed/map_data_county_combined_all_sources.rds")
-map_data_county_yearly_combined_all_sources <- readRDS("data/processed/map_data_county_yearly_combined_all_sources.rds")
-map_data_county <- readRDS("data/processed/map_data_county.rds")
-map_data_state <- readRDS("data/processed/map_data_state.rds")
-map_data_county_yearly <- readRDS("data/processed/map_data_county_yearly.rds")
-map_data_state_yearly <- readRDS("data/processed/map_data_state_yearly.rds")
+map_data_state_combined_all_sources <- readRDS(here::here("data","processed","map_data_state_combined_all_sources.rds"))
+map_data_state_yearly_combined_all_sources <- readRDS(here::here("data","processed","map_data_state_yearly_combined_all_sources.rds"))
+map_data_county_combined_all_sources <- readRDS(here::here("data","processed","map_data_county_combined_all_sources.rds"))
+map_data_county_yearly_combined_all_sources <- readRDS(here::here("data","processed","map_data_county_yearly_combined_all_sources.rds"))
+map_data_county <- readRDS(here::here("data","processed","map_data_county.rds"))
+map_data_state <- readRDS(here::here("data","processed","map_data_state.rds"))
+map_data_county_yearly <- readRDS(here::here("data","processed","map_data_county_yearly.rds"))
+map_data_state_yearly <- readRDS(here::here("data","processed","map_data_state_yearly.rds"))
 
-data_state_yearly <- read.csv2("data/processed/data_state_yearly.csv", row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
+data_state_yearly <- read.csv2(here::here("data","processed","data_state_yearly.csv"), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 new_data_state <- subset(data_state_yearly, start_year >= "2000")
+
+
+# ---------------------------------- First Story on Solar and Income ------------------------------
+## load
+data_state_solar_income_2015 <- read.csv2(here::here("data", "processed", paste0("data_state_solar_income_2015", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
+## load
+data_county_solar_income_2015 <- read.csv2(here::here("data", "processed", paste0("data_county_solar_income_2015", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
+
+
 
 #### create ui ####
 ui <- dashboardPage(
@@ -85,14 +94,43 @@ ui <- dashboardPage(
       # Second tab content
       tabItem(tabName = "storyline",
               h2("Would you like to participate in adventurous stories?\nJoin our R-Force!"),
+              #br(),
               div(class = "text",
                   #p("Because we do not have a story yet,", tags$b("the content is left blank intentionally.")),
                   #p("And I just put these sentences", tags$em("to test the codes."))
                   p("We have connected the data on energy production in Germany to publicly available regional data at state and county level. So far we have some ideas which stories we could tell and are very open to your suggestions and your support!"),
-                  p("Do rich regions in Germany have more solar panels?"),
-                  p("Are voting results related to protests against wind power plants?"),
-                  p("Which questions would you like to explore?")
-              )
+                  p(tags$b("Do rich regions in Germany have more solar power plants?")),
+                  p(tags$b("Do rich regions in Germany have larger solar power plants?")),
+                  #p("Are voting results related to protests against wind power plants?"),
+                  #p("Which questions would you like to explore?")
+              ),
+              br(),
+              h3("Income and Solar Plants at state level"),
+              h4("Average yearly income and total amount of solar power plants"),
+              br(),
+              plotOutput("plot_state_income_n", ),
+              br(),
+              br(),
+              br(),
+              
+              h4("Average yearly income and mean power of plant in Watt"),
+              br(),
+              plotOutput("plot_state_income_mean", ),
+              br(),
+              br(),
+              
+              h3("Income and Solar Plants at county level"),
+              h4("Average yearly income and total amount of solar power plants"),
+              br(),
+              plotOutput("plot_county_income_n", ),
+              br(),
+              br(),
+              br(),
+              
+              h4("Average yearly income and mean power of plant in Watt"),
+              br(),
+              plotOutput("plot_county_income_mean", )
+              
       ),
       
       # Third tab content
@@ -109,3 +147,5 @@ ui <- dashboardPage(
     )
   )
 )
+
+
