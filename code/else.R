@@ -1,12 +1,14 @@
-# ***********************************************************************************************
-#### tmap example ####
+# ----------------------------------------------------------------------------------------------
+# This file contains code that might be useful later or tests to improve some code
+
+
+# ----------------------------------- tmap example -----------------------------------
 data("World")
 tm_shape(World)
 
 
 
-# ***********************************************************************************************
-#### set directory at top level of the project ####
+# -------------------------------- set directory at top level of the project ------------------------------
 # identify folder of running or sourced script
 thisFolder <- function() {
   cmdArgs <- commandArgs(trailingOnly = FALSE)
@@ -35,8 +37,7 @@ here()
 # --> here works like shit if you do not start the R-session new
 
 
-# ***********************************************************************************************
-#### create Rproj (if not existing) ####
+# ---------------------------------- create Rproj (if not existing) -----------------------------
 #proj_file <- "sposm_group_assignment.Rproj" # not used
 
 # --> don't do it: raises erros in usage (when combined with GDrive?)
@@ -56,8 +57,7 @@ if(FALSE)
 
 
 
-# ***********************************************************************************************
-#### open R-project ####
+# -------------------------------------- open R-project --------------------------------------
 # --> don't do it: raises erros in usage (when combined with GDrive?)
 #openFile('sposm_group_assignment.Rproj')
 
@@ -65,8 +65,7 @@ if(FALSE)
 
 
 
-# ***********************************************************************************************
-#### test shape files ####
+# ------------------------------------- test shape files --------------------------------------------
 #C:/Users/Sebastian/Google Drive/_Downloads/vg250_neu
 
 test <- st_read("C:/Users/Sebastian/Google Drive/_Downloads/vg250_neu", options = "ENCODING=UTF-8", stringsAsFactors = FALSE)
@@ -74,9 +73,7 @@ test <- st_read("C:/Users/Sebastian/Google Drive/_Downloads/vg250_neu", options 
 
 
 
-# ***********************************************************************************************
-#### messing with regional data and other sources ####
-
+# ------------------------ messing around with regional data and other sources -----------------------------
 ### regional statistic
 # use Wiesbaden to do that?
 # https://github.com/sumtxt/wiesbaden
@@ -147,83 +144,3 @@ unzip(zipF, exdir = outDir)
 # -> fucking messy
 
 
-df <- data_state_yearly
-df$EinheitenTyp <- "All"
-df %>% group_by(start_year, EinheitenTyp, ags_federal_state) %>%
-  summarize(n = sum(n), mean = mean(mean), sum = sum(sum)) %>%
-  ungroup() -> test
-
-
-
-Period <- reactive({
-  df <- get(paste0("data_", input$geo_level, "_yearly"))
-  if (input$source == "All"){
-    df$EinheitenTyp <- "All"
-    if(input$geo_level == "state"){
-      df %>% group_by(start_year, EinheitenTyp, ags_federal_state) %>%
-        summarize(n = sum(n), mean = mean(mean), sum = sum(sum)) %>%
-        ungroup() %>%
-        filter(start_year >= input$years[1]) %>%
-        filter(start_year <= input$years[2]) %>%
-        filter(ags_federal_state == input$map_shape_click$id) -> df
-    }else{
-      df %>% group_by(start_year, EinheitenTyp, ags_county) %>%
-        summarize(n = sum(n), mean = mean(mean), sum = sum(sum)) %>%
-        ungroup() %>%
-        filter(start_year >= input$years[1]) %>%
-        filter(start_year <= input$years[2]) %>%
-        filter(ags_county == input$map_shape_click$id) -> df
-    }
-  }else{
-    if(input$geo_level == "state"){
-      df %>% filter(EinheitenTyp == input$source) %>%
-        filter(start_year >= input$years[1]) %>%
-        filter(start_year <= input$years[2]) %>%
-        filter(ags_federal_state == input$map_shape_click$id) -> df
-    }else{
-      df %>% filter(EinheitenTyp == input$source) %>%
-        filter(start_year >= input$years[1]) %>%
-        filter(start_year <= input$years[2]) %>%
-        filter(ags_county == input$map_shape_click$id) -> df
-    }
-  }
-})    
-
-
-
-#### test 2
-Period <- reactive({
-  df <- get(paste0("data_", input$geo_level, "_yearly"))
-  
-  selected_regionid <- input$map_shape_click$id
-  
-  # Turn the generated "." back into "-" in the state names. e.g. Nordrhein.Westfalen to Nordrhein-Westfalen
-  selected_regionid <- sub(".","-",selected_regionid, fixed = TRUE)
-  
-  if(input$geo_level == "state"){
-    df %>% filter(EinheitenTyp == input$source) %>%
-      filter(start_year >= input$years[1]) %>%
-      filter(start_year <= input$years[2]) %>%
-      filter(ags_federal_state == selected_regionid)
-  }#else{
-  #  df %>% filter(EinheitenTyp == input$source) %>%
-  #    filter(start_year >= input$years[1]) %>%
-  #   filter(start_year <= input$years[2]) %>%
-  #  filter(ags_county == input$map_shape_click$id) -> df
-  #}
-})    
-
-# ----------------------------- missing region id -----------------
-map_data_state_yearly_combined_all_sources %>%
-  filter(start_year >= 2000) %>%
-  filter(start_year <= 2019)  -> test
-names(map_data_state_yearly_combined_all_sources)
-
-ggplot(test, aes(x=start_year, y=get("n")))+
-  geom_bar(stat="identity", fill = "yellow") +
-  theme_minimal(base_size = 16) +
-  xlab('Year') + ylab("Number of Power Plants") +
-  theme(axis.text.x=element_text(angle=90, hjust=1),
-        axis.title=element_text(size=18,face="bold"),
-        legend.title = element_blank()) +
-  ggtitle("National development for all energy sources")
