@@ -63,6 +63,8 @@ ui <- dashboardPage(
                                              selectInput('out_var', 'Output Variable', c("Number of power plants" = "n", 
                                                                                          "Sum of power production" = "sum", 
                                                                                          "Average power production per plant" = "mean" )),
+                                             selectInput('tmap_scale', "Scale for the Map", c("linear" = "pretty",
+                                                                                              "logarithmic" = "log10")),
                                              sliderInput("scale", "Rough Number of Legend Classes",
                                                          min = 2, max = 10, value = 6),
                                              sliderInput("years", "Period of interest for yearly change",

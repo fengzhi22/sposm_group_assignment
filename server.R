@@ -284,7 +284,8 @@ server <- function(input, output) {
     
     p1 <- tm_shape(Energy()) +
       tm_polygons(input$out_var, palette = coloring(), n = input$scale, title = title_legend(), 
-                  id = "regionid", popup.vars = c("Value:" = input$out_var)) +
+                  id = "regionid", popup.vars = c("Value:" = input$out_var),
+                  style = input$tmap_scale) +
       tm_layout(legend.outside = TRUE) +
       tm_layout(frame = FALSE)
     
