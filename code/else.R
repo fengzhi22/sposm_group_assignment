@@ -144,3 +144,15 @@ unzip(zipF, exdir = outDir)
 # -> fucking messy
 
 
+# ----------------------------------------- TESTING AREA ------------------------------------
+map_data_state_yearly_combined_all_sources <- as_tibble(map_data_state_yearly_combined_all_sources)
+
+map_data_state_yearly_combined_all_sources %>%
+  select(regionid, start_year, n, mean, sum) %>%
+  filter(regionid == "Bayern")
+
+test <- map_data_state_yearly_combined_all_sources %>%
+  select(-geometry) %>%
+  filter(regionid == "Bayern")
+
+table(test$n)

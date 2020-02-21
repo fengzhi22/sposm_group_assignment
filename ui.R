@@ -10,6 +10,8 @@ library("dplyr")
 library("shinydashboard")
 library("leaflet")
 
+
+# -------------------------------------------- load final data  ---------------------------------
 map_data_state_combined_all_sources <- readRDS(here::here("data","processed","map_data_state_combined_all_sources.rds"))
 map_data_state_yearly_combined_all_sources <- readRDS(here::here("data","processed","map_data_state_yearly_combined_all_sources.rds"))
 map_data_county_combined_all_sources <- readRDS(here::here("data","processed","map_data_county_combined_all_sources.rds"))
@@ -31,19 +33,19 @@ data_county_solar_income_2015 <- read.csv2(here::here("data", "processed", paste
 
 
 
-#### create ui ####
+# -------------------------------------------- create ui  -----------------------------------
 ui <- dashboardPage(
   dashboardHeader(title = "Dashboard"),
   dashboardSidebar(
     sidebarMenu(
       menuItem("Data Explorer", tabName = "data_explorer", icon = icon("th")),
-      menuItem("Storyline", tabName = "storyline", icon = icon("dashboard")),
+      menuItem("Storyboard", tabName = "storyboard", icon = icon("dashboard")),
       menuItem("Reference", tabName = "reference", icon = icon("th"))
     )
   ),
   dashboardBody(
     tabItems(
-      # First tab content
+      # ---------------------------- First tab content "German Power Plant Data Explorer" ----
       tabItem(tabName = "data_explorer",
               fluidRow(
                 column(width = 4,
@@ -58,8 +60,8 @@ ui <- dashboardPage(
                                                                                       "Gas Energy" = "Gas", "Mineral Oil Energy" = "Mineralölprodukte",
                                                                                       "Battery" = "Stromspeichereinheit", "Geothermal Energy" = "Geothermie")),
                                              selectInput('geo_level', 'Geographical Level', c("State" = "state", "County" = "county")),
-                                             selectInput('out_var', 'Output Variable', c("Total number of power plants" = "n", 
-                                                                                         "Total power production" = "sum", 
+                                             selectInput('out_var', 'Output Variable', c("Number of power plants" = "n", 
+                                                                                         "Sum of power production" = "sum", 
                                                                                          "Average power production per plant" = "mean" )),
                                              sliderInput("scale", "Rough Number of Legend Classes",
                                                          min = 2, max = 10, value = 6),
@@ -91,8 +93,8 @@ ui <- dashboardPage(
               )
       ),
       
-      # Second tab content
-      tabItem(tabName = "storyline",
+      # ---------------------------- Second tab content:  Storyboard --------------------
+      tabItem(tabName = "storyboard",
               h2("Would you like to participate in adventurous stories?\nJoin our R-Force!"),
               #br(),
               div(class = "text",
@@ -103,6 +105,7 @@ ui <- dashboardPage(
                   #p("Which questions would you like to explore?")
               ),
               br(),
+              # ----------------------- First story: Income and Solar plants ------------
               h3("Income and Solar Plants at state level"),
               h4("Average yearly income and total amount of solar power plants"),
               br(),
@@ -131,7 +134,7 @@ ui <- dashboardPage(
               
       ),
       
-      # Third tab content
+      # ----------------------------------- Third tab content: References ------------------------
       tabItem(tabName = "reference",
               h2("Reference"),
               div(class = "list",
