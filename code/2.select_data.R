@@ -256,23 +256,92 @@ data_state_yearly <- enh3 %>%
   summarize(n = length(ags_federal_state), mean = mean(Nettonennleistung), sum = sum(Nettonennleistung)) %>%
   ungroup()
 
+# calculate sum of needed entries
+length(unique(data_state_yearly$start_year)) # start in 1970
+# 2019-1970 = 50
+current_full_year <- as.numeric(format(Sys.Date(), "%Y"))-1
+a <- current_full_year-1969 # just consider full years
+
+b <- length(unique(data_state_yearly$EinheitenTyp))
+# 15 
+c <- length(unique(data_state_yearly$ags_federal_state))
+# 17
+n <- a*b*c
+# -> 50*15*17 = 12750
+
+# create container to fill
+data_state_yearly_full_1970 <- as.data.frame(matrix(NA, nrow = n, ncol = 3))
+names(data_state_yearly_full_1970) <- c("start_year", "EinheitenTyp", "ags_federal_state")
+data_state_yearly_full_1970$start_year <- as.integer(data_state_yearly_full_1970$start_year)
+data_state_yearly_full_1970$EinheitenTyp = as.character(data_state_yearly_full_1970$EinheitenTyp)
+data_state_yearly_full_1970$ags_federal_state = as.character(data_state_yearly_full_1970$ags_federal_state)
+
+# now actual content
+data_state_yearly_full_1970$start_year[1:n] <- rep(1970:current_full_year, each = (b*c))
+data_state_yearly_full_1970$EinheitenTyp[1:n] <- rep(unique(data_state_yearly$EinheitenTyp), each = c, times = a)
+states <- unique(data_state_yearly$ags_federal_state)[order(as.numeric(unique(data_state_yearly$ags_federal_state)))]
+data_state_yearly_full_1970$ags_federal_state[1:n] <- rep(states, times = a*b)
+
+# merge data of n, sum, mean
+data_state_yearly_full <- data_state_yearly_full_1970 %>%
+  full_join(data_state_yearly) %>%
+  arrange(start_year, ags_federal_state)
+
+# fill NAs with 0 values
+data_state_yearly_full$n[is.na(data_state_yearly_full$n)] <- 0
+data_state_yearly_full$mean[is.na(data_state_yearly_full$mean)] <- 0
+data_state_yearly_full$sum[is.na(data_state_yearly_full$sum)] <- 0
 
 table(data_state_yearly$start_year)
-# there are solar panels that seem to be veeeeery old before 1950!?
+# there are solar panels that seem to be veeeeery old before 1970!?
 # -> How can that be?
 #[TBD]
 
-write.csv2(data_state_yearly, file = here("data", "processed", "data_state_yearly.csv"), row.names = FALSE, fileEncoding="UTF-8")
+write.csv2(data_state_yearly_full, file = here("data", "processed", "data_state_yearly.csv"), row.names = FALSE, fileEncoding="UTF-8")
 
 # ***********************************************************************************************
-#### aggregate yearly data on state level combining all enegery sources ####
+#### aggregate yearly data on state level combining all energy sources ####
 data_state_yearly_combined_all_sources <- enh3 %>%
   filter(!is.na(Nettonennleistung)) %>%
   group_by(start_year, ags_federal_state) %>%
   summarize(n = length(ags_federal_state), mean = mean(Nettonennleistung), sum = sum(Nettonennleistung)) %>%
   ungroup()
 
-write.csv2(data_state_yearly_combined_all_sources, file = here("data", "processed", "data_state_yearly_combined_all_sources.csv"), row.names = FALSE, fileEncoding="UTF-8")
+
+# calculate sum of needed entries
+length(unique(data_state_yearly_combined_all_sources$start_year)) # start in 1970
+# 2019-1970 = 50
+current_full_year <- as.numeric(format(Sys.Date(), "%Y"))-1
+a <- current_full_year-1969 # just consider full years
+
+c <- length(unique(data_state_yearly_combined_all_sources$ags_federal_state))
+# 17
+n <- a*c
+# -> 50*17 = 850
+
+# create container to fill
+data_state_yearly_combined_all_sources_full_1970 <- as.data.frame(matrix(NA, nrow = n, ncol = 2))
+names(data_state_yearly_combined_all_sources_full_1970) <- c("start_year", "ags_federal_state")
+data_state_yearly_combined_all_sources_full_1970$start_year <- as.integer(data_state_yearly_combined_all_sources_full_1970$start_year)
+data_state_yearly_combined_all_sources_full_1970$ags_federal_state = as.character(data_state_yearly_combined_all_sources_full_1970$ags_federal_state)
+
+# now actual content
+data_state_yearly_combined_all_sources_full_1970$start_year[1:n] <- rep(1970:current_full_year, each = c)
+states <- unique(data_state_yearly_combined_all_sources$ags_federal_state)[order(as.numeric(unique(data_state_yearly_combined_all_sources$ags_federal_state)))]
+data_state_yearly_combined_all_sources_full_1970$ags_federal_state[1:n] <- rep(states, times = a)
+
+# merge data of n, sum, mean
+data_state_yearly_combined_all_sources_full <- data_state_yearly_combined_all_sources_full_1970 %>%
+  full_join(data_state_yearly_combined_all_sources) %>%
+  arrange(start_year, ags_federal_state)
+
+# fill NAs with 0 values
+data_state_yearly_combined_all_sources_full$n[is.na(data_state_yearly_combined_all_sources_full$n)] <- 0
+data_state_yearly_combined_all_sources_full$mean[is.na(data_state_yearly_combined_all_sources_full$mean)] <- 0
+data_state_yearly_combined_all_sources_full$sum[is.na(data_state_yearly_combined_all_sources_full$sum)] <- 0
+
+
+write.csv2(data_state_yearly_combined_all_sources_full, file = here("data", "processed", "data_state_yearly_combined_all_sources.csv"), row.names = FALSE, fileEncoding="UTF-8")
 
 
 # ***********************************************************************************************
@@ -282,17 +351,76 @@ data_state <- enh3 %>%
   summarize(n = length(ags_federal_state), mean = mean(Nettonennleistung), sum = sum(Nettonennleistung)) %>%
   ungroup()
 
-write.csv2(data_state, file = here("data", "processed", "data_state.csv"), row.names = FALSE, fileEncoding="UTF-8")
+
+# calculate sum of needed entries
+b <- length(unique(data_state$EinheitenTyp))
+# 15 
+c <- length(unique(data_state$ags_federal_state))
+# 17
+n <- b*c
+# -> 15*17 = 255
+
+# create container to fill
+data_state_full_energy <- as.data.frame(matrix(NA, nrow = n, ncol = 2))
+names(data_state_full_energy) <- c("EinheitenTyp", "ags_federal_state")
+data_state_full_energy$EinheitenTyp = as.character(data_state_full_energy$EinheitenTyp)
+data_state_full_energy$ags_federal_state = as.character(data_state_full_energy$ags_federal_state)
+
+# now actual content
+data_state_full_energy$EinheitenTyp[1:n] <- rep(unique(data_state$EinheitenTyp), each = c)
+states <- unique(data_state$ags_federal_state)[order(as.numeric(unique(data_state$ags_federal_state)))]
+data_state_full_energy$ags_federal_state[1:n] <- rep(states, times = b)
+
+# merge data of n, sum, mean
+data_state_full <- data_state_full_energy %>%
+  full_join(data_state) %>%
+  arrange(ags_federal_state)
+
+# fill NAs with 0 values
+data_state_full$n[is.na(data_state_full$n)] <- 0
+data_state_full$mean[is.na(data_state_full$mean)] <- 0
+data_state_full$sum[is.na(data_state_full$sum)] <- 0
+
+
+write.csv2(data_state_full, file = here("data", "processed", "data_state.csv"), row.names = FALSE, fileEncoding="UTF-8")
+
 
 # ***********************************************************************************************
-#### aggregate data on state level combining all enegery sources ####
+#### aggregate data on state level combining all energy sources ####
 data_state_combined_all_sources <- enh3 %>%
   filter(!is.na(Nettonennleistung)) %>%
   group_by(ags_federal_state) %>%
   summarize(n = length(ags_federal_state), mean = mean(Nettonennleistung), sum = sum(Nettonennleistung)) %>%
   ungroup()
 
-write.csv2(data_state_combined_all_sources, file = here("data", "processed", "data_state_combined_all_sources.csv"), row.names = FALSE, fileEncoding="UTF-8")
+
+# calculate sum of needed entries
+c <- length(unique(data_state_combined_all_sources$ags_federal_state))
+# 17
+n <- c
+
+# create container to fill
+data_state_combined_all_sources_full_energy <- as.data.frame(matrix(NA, nrow = n, ncol = 1))
+names(data_state_combined_all_sources_full_energy) <- c("ags_federal_state")
+data_state_combined_all_sources_full_energy$ags_federal_state = as.character(data_state_combined_all_sources_full_energy$ags_federal_state)
+
+# now actual content
+states <- unique(data_state_combined_all_sources$ags_federal_state)[order(as.numeric(unique(data_state_combined_all_sources$ags_federal_state)))]
+data_state_combined_all_sources_full_energy$ags_federal_state[1:n] <- states
+
+# merge data of n, sum, mean
+data_state_combined_all_sources_full <- data_state_combined_all_sources_full_energy %>%
+  full_join(data_state_combined_all_sources) %>%
+  arrange(ags_federal_state)
+
+# fill NAs with 0 values
+data_state_combined_all_sources_full$n[is.na(data_state_combined_all_sources_full$n)] <- 0
+data_state_combined_all_sources_full$mean[is.na(data_state_combined_all_sources_full$mean)] <- 0
+data_state_combined_all_sources_full$sum[is.na(data_state_combined_all_sources_full$sum)] <- 0
+
+
+
+write.csv2(data_state_combined_all_sources_full, file = here("data", "processed", "data_state_combined_all_sources.csv"), row.names = FALSE, fileEncoding="UTF-8")
 
 
 # ***********************************************************************************************
@@ -303,9 +431,49 @@ data_county_yearly <- enh3 %>%
   summarize(n = length(ags_county), mean = mean(Nettonennleistung), sum = sum(Nettonennleistung)) %>%
   ungroup()
 
-# save as csv
-write.csv2(data_county_yearly, file = here("data", "processed", "data_county_yearly.csv"), row.names = FALSE, fileEncoding="UTF-8")
 
+# calculate sum of needed entries
+length(unique(data_county_yearly$start_year)) # start in 1970
+# 2019-1970 = 50
+current_full_year <- as.numeric(format(Sys.Date(), "%Y"))-1
+a <- current_full_year-1969 # just consider full years
+
+b <- length(unique(data_county_yearly$EinheitenTyp))
+# 15 
+c <- length(unique(data_county_yearly$ags_county))
+# 402
+n <- a*b*c
+# -> 50*15*402 = 301500
+
+# create container to fill
+data_county_yearly_full_1970 <- as.data.frame(matrix(NA, nrow = n, ncol = 3))
+names(data_county_yearly_full_1970) <- c("start_year", "EinheitenTyp", "ags_county")
+data_county_yearly_full_1970$start_year <- as.integer(data_county_yearly_full_1970$start_year)
+data_county_yearly_full_1970$EinheitenTyp = as.character(data_county_yearly_full_1970$EinheitenTyp)
+data_county_yearly_full_1970$ags_county = as.character(data_county_yearly_full_1970$ags_county)
+
+# now actual content
+data_county_yearly_full_1970$start_year[1:n] <- rep(1970:current_full_year, each = (b*c))
+data_county_yearly_full_1970$EinheitenTyp[1:n] <- rep(unique(data_county_yearly$EinheitenTyp), each = c, times = a)
+counties <- unique(data_county_yearly$ags_county)[order(as.numeric(unique(data_county_yearly$ags_county)))]
+data_county_yearly_full_1970$ags_county[1:n] <- rep(counties, times = a*b)
+
+# merge data of n, sum, mean
+data_county_yearly_full <- data_county_yearly_full_1970 %>%
+  full_join(data_county_yearly) %>%
+  arrange(start_year, ags_county)
+
+# fill NAs with 0 values
+data_county_yearly_full$n[is.na(data_county_yearly_full$n)] <- 0
+data_county_yearly_full$mean[is.na(data_county_yearly_full$mean)] <- 0
+data_county_yearly_full$sum[is.na(data_county_yearly_full$sum)] <- 0
+
+
+# save as csv
+write.csv2(data_county_yearly_full, file = here("data", "processed", "data_county_yearly.csv"), row.names = FALSE, fileEncoding="UTF-8")
+
+
+# ***********************************************************************************************
 #### aggregate yearly data on county level combining all enegery sources ####
 data_county_yearly_combined_all_sources <- enh3 %>%
   filter(!is.na(Nettonennleistung)) %>%
@@ -313,7 +481,41 @@ data_county_yearly_combined_all_sources <- enh3 %>%
   summarize(n = length(ags_county), mean = mean(Nettonennleistung), sum = sum(Nettonennleistung)) %>%
   ungroup()
 
-write.csv2(data_county_yearly_combined_all_sources, file = here("data", "processed", "data_county_yearly_combined_all_sources.csv"), row.names = FALSE, fileEncoding="UTF-8")
+
+# calculate sum of needed entries
+length(unique(data_county_yearly_combined_all_sources$start_year)) # start in 1970
+# 2019-1970 = 50
+current_full_year <- as.numeric(format(Sys.Date(), "%Y"))-1
+a <- current_full_year-1969 # just consider full years
+
+c <- length(unique(data_county_yearly_combined_all_sources$ags_county))
+# 402
+n <- a*c
+# -> 50*402 = 20100
+
+# create container to fill
+data_county_yearly_combined_all_sources_full_1970 <- as.data.frame(matrix(NA, nrow = n, ncol = 2))
+names(data_county_yearly_combined_all_sources_full_1970) <- c("start_year", "ags_county")
+data_county_yearly_combined_all_sources_full_1970$start_year <- as.integer(data_county_yearly_combined_all_sources_full_1970$start_year)
+data_county_yearly_combined_all_sources_full_1970$ags_county = as.character(data_county_yearly_combined_all_sources_full_1970$ags_county)
+
+# now actual content
+data_county_yearly_combined_all_sources_full_1970$start_year[1:n] <- rep(1970:current_full_year, each = c)
+counties <- unique(data_county_yearly_combined_all_sources$ags_county)[order(as.numeric(unique(data_county_yearly_combined_all_sources$ags_county)))]
+data_county_yearly_combined_all_sources_full_1970$ags_county[1:n] <- rep(counties, times = a)
+
+# merge data of n, sum, mean
+data_county_yearly_combined_all_sources_full <- data_county_yearly_combined_all_sources_full_1970 %>%
+  full_join(data_county_yearly_combined_all_sources) %>%
+  arrange(start_year, ags_county)
+
+# fill NAs with 0 values
+data_county_yearly_combined_all_sources_full$n[is.na(data_county_yearly_combined_all_sources_full$n)] <- 0
+data_county_yearly_combined_all_sources_full$mean[is.na(data_county_yearly_combined_all_sources_full$mean)] <- 0
+data_county_yearly_combined_all_sources_full$sum[is.na(data_county_yearly_combined_all_sources_full$sum)] <- 0
+
+
+write.csv2(data_county_yearly_combined_all_sources_full, file = here("data", "processed", "data_county_yearly_combined_all_sources.csv"), row.names = FALSE, fileEncoding="UTF-8")
 
 
 # ***********************************************************************************************
@@ -324,8 +526,40 @@ data_county <- enh3 %>%
   summarize(n = length(ags_county), mean = mean(Nettonennleistung), sum = sum(Nettonennleistung)) %>%
   ungroup()
 
+
+# calculate sum of needed entries
+b <- length(unique(data_county$EinheitenTyp))
+# 15 
+c <- length(unique(data_county$ags_county))
+# 402
+n <- b*c
+# -> 15*402 = 6030
+
+# create container to fill
+data_county_full_energy <- as.data.frame(matrix(NA, nrow = n, ncol = 2))
+names(data_county_full_energy) <- c("EinheitenTyp", "ags_county")
+data_county_full_energy$EinheitenTyp = as.character(data_county_full_energy$EinheitenTyp)
+data_county_full_energy$ags_county = as.character(data_county_full_energy$ags_county)
+
+# now actual content
+data_county_full_energy$EinheitenTyp[1:n] <- rep(unique(data_county$EinheitenTyp), each = c)
+counties <- unique(data_county$ags_county)[order(as.numeric(unique(data_county$ags_county)))]
+data_county_full_energy$ags_county[1:n] <- rep(counties, times = b)
+
+# merge data of n, sum, mean
+data_county_full <- data_county_full_energy %>%
+  full_join(data_county) %>%
+  arrange(ags_county)
+
+# fill NAs with 0 values
+data_county_full$n[is.na(data_county_full$n)] <- 0
+data_county_full$mean[is.na(data_county_full$mean)] <- 0
+data_county_full$sum[is.na(data_county_full$sum)] <- 0
+
+
 # save as csv
-write.csv2(data_county, file = here("data", "processed", "data_county.csv"), row.names = FALSE, fileEncoding="UTF-8")
+write.csv2(data_county_full, file = here("data", "processed", "data_county.csv"), row.names = FALSE, fileEncoding="UTF-8")
+
 
 # ***********************************************************************************************
 #### aggregate data on county level combining all enegery sources ####
@@ -335,8 +569,33 @@ data_county_combined_all_sources <- enh3 %>%
   summarize(n = length(ags_county), mean = mean(Nettonennleistung), sum = sum(Nettonennleistung)) %>%
   ungroup()
 
-write.csv2(data_county_combined_all_sources, file = here("data", "processed", "data_county_combined_all_sources.csv"), row.names = FALSE, fileEncoding="UTF-8")
 
+# calculate sum of needed entries
+c <- length(unique(data_county_combined_all_sources$ags_county))
+# 402
+n <- c
+
+# create container to fill
+data_county_combined_all_sources_full_energy <- as.data.frame(matrix(NA, nrow = n, ncol = 1))
+names(data_county_combined_all_sources_full_energy) <- c("ags_county")
+data_county_combined_all_sources_full_energy$ags_county = as.character(data_county_combined_all_sources_full_energy$ags_county)
+
+# now actual content
+counties <- unique(data_county_combined_all_sources$ags_county)[order(as.numeric(unique(data_county_combined_all_sources$ags_county)))]
+data_county_combined_all_sources_full_energy$ags_county[1:n] <- counties
+
+# merge data of n, sum, mean
+data_county_combined_all_sources_full <- data_county_combined_all_sources_full_energy %>%
+  full_join(data_county_combined_all_sources) %>%
+  arrange(ags_county)
+
+# fill NAs with 0 values
+data_county_combined_all_sources_full$n[is.na(data_county_combined_all_sources_full$n)] <- 0
+data_county_combined_all_sources_full$mean[is.na(data_county_combined_all_sources_full$mean)] <- 0
+data_county_combined_all_sources_full$sum[is.na(data_county_combined_all_sources_full$sum)] <- 0
+
+
+write.csv2(data_county_combined_all_sources_full, file = here("data", "processed", "data_county_combined_all_sources.csv"), row.names = FALSE, fileEncoding="UTF-8")
 
 
 # ***********************************************************************************************
@@ -399,7 +658,7 @@ table(state_elections$year)
 ### merging regional data
 ## state yearly
 # income
-data_state_yearly_extended <- data_state_yearly %>%
+data_state_yearly_extended <- data_state_yearly_full %>%
   arrange(start_year, ags_federal_state) %>%
   left_join(county_income, by = c("start_year" = "year", "ags_federal_state" = "ags"))
   
@@ -418,7 +677,7 @@ write.csv2(data_state_yearly_extended, file = here("data", "processed", "data_st
 
 ## county yearly
 # income
-data_county_yearly_extended <- data_county_yearly %>%
+data_county_yearly_extended <- data_county_yearly_full %>%
   arrange(start_year, ags_county) %>%
   left_join(county_income, by = c("start_year" = "year", "ags_county" = "ags"))
 
@@ -488,4 +747,4 @@ write.csv2(data_county_solar_income_2015, file = here("data", "processed", "data
 
 
 # ***********************************************************************************************
-file.edit(here("code", "4.3shiny_all_data.R"))
+file.edit(here("code", "3.prepare_data_for_shiny.R"))

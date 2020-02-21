@@ -10,6 +10,8 @@ library("dplyr")
 library("shinydashboard")
 library("leaflet")
 
+
+# -------------------------------------------- load final data  ---------------------------------
 map_data_state_combined_all_sources <- readRDS(here::here("data","processed","map_data_state_combined_all_sources.rds"))
 map_data_state_yearly_combined_all_sources <- readRDS(here::here("data","processed","map_data_state_yearly_combined_all_sources.rds"))
 map_data_county_combined_all_sources <- readRDS(here::here("data","processed","map_data_county_combined_all_sources.rds"))
@@ -30,9 +32,10 @@ data_state_solar_income_2015 <- read.csv2(here::here("data", "processed", paste0
 data_county_solar_income_2015 <- read.csv2(here::here("data", "processed", paste0("data_county_solar_income_2015", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 
 
-#### create server ####
+# -------------------------------------------- create server  ---------------------------------
 server <- function(input, output) {
   
+  # ---------------------------------------- load map datasets -----------------
   dataset <- reactive({
     get(paste0("map_data_", input$geo_level))
   })
@@ -51,6 +54,7 @@ server <- function(input, output) {
   })
   
   
+  # ---------------------------------------------- Energy "all" dataset -----------------
   Energy <- reactive({
     if (input$source == "All") {
       dataset_combined()
@@ -59,6 +63,8 @@ server <- function(input, output) {
     }
   })
   
+  
+  # --------------------------------------------- data to download -----------------
   data_to_download <- reactive({
     if (input$source == "All") {
       dataset()
@@ -67,7 +73,7 @@ server <- function(input, output) {
     }
   })
   
-  # ---------- Period --------------------
+  # ----------------------------------------------- Period --------------------
   Period <- reactive({
     selected_regionid <- input$map_shape_click$id
     
@@ -100,7 +106,7 @@ server <- function(input, output) {
   
   
   
-  # ---------- dataset_region --------------------
+  # ------------------------------------------- regional dataset --------------------
   dataset_region <- reactive({
     columns <- c("Solareinheit", "Windeinheit", "Biomasse", "Wasser", "Braunkohle", "Steinkohle", "Gas", "Mineralölprodukte", "Stromspeichereinheit", "Geothermie")
     
@@ -118,6 +124,9 @@ server <- function(input, output) {
     dataset
   })
   
+  
+  # ---------------  coloring set up for different colors in the horizontal bar graph -----------------
+  # --------------- (not fully developed or applied yet) ----------------------------------------------
   order_coloring <- reactive({
     colors_bar_graph <- data.frame(EinheitenTyp = character(),
                                    colors = character(),
@@ -152,6 +161,7 @@ server <- function(input, output) {
     
   })
   
+  # ------------------------------------------------ coloring the heatmaps (map) ------------------
   coloring <- reactive({
     if (input$source == "Solareinheit"){"YlOrRd"}else{
       if (input$source == "Windeinheit"){"Blues"}else{
@@ -174,6 +184,8 @@ server <- function(input, output) {
     }
   })
   
+  
+  # ----------------------------- single coloring of yearly graphs according to energy type -----------
   coloring_yearly_graph <- reactive({
     if (input$source == "All"){"#FF6600"}else{
       if (input$source == "Solareinheit"){"#FFCC33"}else{
@@ -199,6 +211,7 @@ server <- function(input, output) {
   })
   
   
+  # ------------------------------------------- titles in legend according to output variable ---------
   title_legend <- reactive({
     if (input$out_var == "n"){"Number of Power Plants"}else{
       if (input$out_var == "sum"){"Power in kw(p)"} else{
@@ -207,6 +220,7 @@ server <- function(input, output) {
     }
   })
   
+  # ---------------------------------------------- energy type and English translation -----------
   label_energy <- reactive({
     if (input$source == "Solareinheit"){"Solar"}else{
       if (input$source == "Windeinheit"){"Wind"}else{
@@ -230,7 +244,7 @@ server <- function(input, output) {
     }
   })
   
-  
+  # -------------------------------------- title for (second) graph on age of existing power plants ---
   output$title_change_over_time <- renderText({
     selected_regionid <- input$map_shape_click$id
     
@@ -254,9 +268,9 @@ server <- function(input, output) {
     
     if(is.null(selected_regionid)){paste("Please select a region in the map")}else{
       if (!(any(selected_regionid %in% check))){paste("Please select a region in the map")}else{
-        if (input$out_var == "n"){paste("Total number of power plants in", selected_regionid)}else{
-          if (input$out_var == "sum"){paste("Total power production in", selected_regionid)}else{
-            if (input$out_var == "mean"){paste("Average power production per plant in", selected_regionid)}
+        if (input$out_var == "n"){paste("Age (commissioning year) of power plants in\n", selected_regionid)}else{
+          if (input$out_var == "sum"){paste("Aditional power installed each year in\n", selected_regionid)}else{
+            if (input$out_var == "mean"){paste("Average power production of additionally installed power plants in\n", selected_regionid)}
           }
         }
       }
@@ -264,18 +278,56 @@ server <- function(input, output) {
     }
   })
   
+  
+  # ------------------------ first map showing geographical distribution of chosen energy type ----
   output$map <- renderLeaflet({
     
-    p2 <- tm_shape(Energy()) +
+    p1 <- tm_shape(Energy()) +
       tm_polygons(input$out_var, palette = coloring(), n = input$scale, title = title_legend(), 
                   id = "regionid", popup.vars = c("Value:" = input$out_var)) +
       tm_layout(legend.outside = TRUE) +
       tm_layout(frame = FALSE)
     
-    tmap_leaflet(p2)
+    tmap_leaflet(p1)
     
   })
   
+  
+  # ----------------------------- second graph showing the commisioning year of existing plants ------
+  output$plot_change_over_time <- renderPlot({
+    if (!is.null(input$map_shape_click)) {
+      
+      ggplot(Period(), aes(x=start_year, y=get(input$out_var), fill=EinheitenTyp))+
+        #geom_line(size=1.5) + 
+        geom_bar(stat="identity", fill = coloring_yearly_graph()) +
+        theme_minimal(base_size = 16) +
+        xlab('Year') + ylab(title_legend()) +
+        theme(axis.text.x=element_text(angle=90, hjust=1),
+              axis.title=element_text(size=18,face="bold"),
+              legend.title = element_blank()) +
+        theme(legend.position="bottom") +
+        scale_fill_discrete(labels = label_energy())
+    }else{
+      if(FALSE)# works but not fully developed: What about other out_var and other inputs?
+      {
+        df <- data_state_yearly_combined_all_sources %>% # since combined later, not important if state or county level
+          filter(start_year >= input$years[1]) %>%
+          filter(start_year <= input$years[2])
+        
+        ggplot(df, aes(x=start_year, y=get(input$out_var)))+
+          geom_bar(stat="identity", fill = "steelblue") +
+          theme_minimal(base_size = 16) +
+          xlab('Year') + ylab(title_legend()) +
+          theme(axis.text.x=element_text(angle=90, hjust=1),
+                axis.title=element_text(size=18,face="bold"),
+                legend.title = element_blank()) +
+          ggtitle("National development for all energy sources")
+      }
+    }
+  }, bg="transparent")
+  
+  
+  # ------------------------ third graph showing the distribution of energy types for a chosen region --
   output$plot_energy_bar_chart <- renderPlot({
     if (!is.null(input$map_shape_click)) {
       ggplot(dataset_region(), aes(x = reorder(EinheitenTyp, get(input$out_var)), y = get(input$out_var), fill = EinheitenTyp)) +
@@ -297,7 +349,8 @@ server <- function(input, output) {
     }
   }, bg="transparent")
   
-  # Downloadable csv of selected dataset ----
+  
+  # ---------------------------------------------- Downloadable csv of selected dataset ------------
   output$downloadData <- downloadHandler(
     filename = function() {
       # data_state_solar.csv
@@ -305,45 +358,14 @@ server <- function(input, output) {
     },
     content = function(file) {
       data_to_download <- data_to_download()
-      # geometry data is too big and messsies up with the csv file. can't drop it so this is the solution
+      # geometry data is too big and messses up with the csv file. can't drop it so this is the solution
       data_to_download$geometry <- NULL
       write.csv(data_to_download, file, row.names = FALSE)
     }
   )
   
-  output$plot_change_over_time <- renderPlot({
-    if (!is.null(input$map_shape_click)) {
-      
-      ggplot(Period(), aes(x=start_year, y=get(input$out_var), fill=EinheitenTyp))+
-        #geom_line(size=1.5) + 
-        geom_bar(stat="identity", fill = coloring_yearly_graph()) +
-        theme_minimal(base_size = 16) +
-        xlab('Year') + ylab(title_legend()) +
-        theme(axis.text.x=element_text(angle=90, hjust=1),
-              axis.title=element_text(size=18,face="bold"),
-              legend.title = element_blank()) +
-        theme(legend.position="bottom") +
-        scale_fill_discrete(labels = label_energy())
-    }else{
-      if(FALSE)# work but not fully developed: What about other out_var and other inputs
-      {
-        df <- data_state_yearly_combined_all_sources %>% # since combined later, not important if state or county level
-          filter(start_year >= input$years[1]) %>%
-          filter(start_year <= input$years[2])
-        
-        ggplot(df, aes(x=start_year, y=get(input$out_var)))+
-          geom_bar(stat="identity", fill = "steelblue") +
-          theme_minimal(base_size = 16) +
-          xlab('Year') + ylab(title_legend()) +
-          theme(axis.text.x=element_text(angle=90, hjust=1),
-                axis.title=element_text(size=18,face="bold"),
-                legend.title = element_blank()) +
-          ggtitle("National development for all energy sources")
-      }
-    }
-  }, bg="transparent")
   
-  
+  # ----------------------------------------- story board: plots for the first story -------------
   output$plot_state_income_n <- renderPlot({
     ggplot(data_state_solar_income_2015, aes(x=income_per_tax_person, y=solar_plants_per_1000_tax_person)) +
       expand_limits(x = c(25000, 45000), y = 0) +
@@ -363,7 +385,6 @@ server <- function(input, output) {
       expand_limits(x = c(25000, 45000), y = 0) +
       geom_point() +
       geom_smooth(method = lm, fullrange = T, se = F) +
-      #stat_smooth(method = lm) +
       ggtitle("Relation of Income and Solar Plants at state level") +
       ylab("Mean power of solar plants in Watt") +
       xlab("Income per tax person in Euros per year") +
@@ -378,11 +399,9 @@ server <- function(input, output) {
       expand_limits(x = c(25000, 70000), y = 0) +
       geom_point() +
       #geom_smooth(fullrange = T, se = F) +
-      #stat_smooth(method = lm) +
       ggtitle("Relation of Income and Solar Plants at county level") +
       ylab("Solar plants per 1000 tax persons") +
       xlab("Income per tax person in Euros per year") +
-      #geom_text(aes(label=name), vjust = 1.2) +
       theme(panel.background = element_rect(fill = "transparent"), 
             plot.background = element_rect(fill = "transparent", color = NA))
     
@@ -393,11 +412,9 @@ server <- function(input, output) {
       expand_limits(x = c(25000, 70000), y = 0) +
       geom_point() +
       geom_smooth(method = lm, fullrange = T, se = F) +
-      #stat_smooth(method = lm) +
       ggtitle("Relation of Income and Solar Plants at county level") +
       ylab("Mean power of solar plants in Watt") +
       xlab("Income per tax person in Euros per year") +
-      #geom_text(aes(label=name), vjust = 1.2) +
       theme(panel.background = element_rect(fill = "transparent"), 
             plot.background = element_rect(fill = "transparent", color = NA))
   }, bg="transparent")

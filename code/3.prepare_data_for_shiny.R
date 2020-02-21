@@ -77,17 +77,17 @@ ger_shape_state$ags <- as.numeric(ger_shape_state$ags)
 # ***********************************************************************************************
 #### merge shape file after aggregation ####
 ## general maps for data exploration
-map_data_state <- inner_join(ger_shape_state, data_state, by = c("ags" = "ags_federal_state"))
-map_data_state_combined_all_sources <- inner_join(ger_shape_state, data_state_combined_all_sources, by = c("ags" = "ags_federal_state"))
-map_data_county <- inner_join(ger_shape_county, data_county, by = c("ags" = "ags_county"))
-map_data_county_combined_all_sources <- inner_join(ger_shape_county, data_county_combined_all_sources, by = c("ags" = "ags_county"))
+map_data_state <- left_join(ger_shape_state, data_state, by = c("ags" = "ags_federal_state"))
+map_data_state_combined_all_sources <- left_join(ger_shape_state, data_state_combined_all_sources, by = c("ags" = "ags_federal_state"))
+map_data_county <- left_join(ger_shape_county, data_county, by = c("ags" = "ags_county"))
+map_data_county_combined_all_sources <- left_join(ger_shape_county, data_county_combined_all_sources, by = c("ags" = "ags_county"))
 
 # yearly datasets
-map_data_state_yearly <- inner_join(ger_shape_state, data_state_yearly, by = c("ags" = "ags_federal_state"))
-map_data_state_yearly_combined_all_sources <- inner_join(ger_shape_state, data_state_yearly_combined_all_sources, by = c("ags" = "ags_federal_state"))
+map_data_state_yearly <- left_join(ger_shape_state, data_state_yearly, by = c("ags" = "ags_federal_state"))
+map_data_state_yearly_combined_all_sources <- left_join(ger_shape_state, data_state_yearly_combined_all_sources, by = c("ags" = "ags_federal_state"))
 
-map_data_county_yearly <- inner_join(ger_shape_county, data_county_yearly, by = c("ags" = "ags_county"))
-map_data_county_yearly_combined_all_sources <- inner_join(ger_shape_county, data_county_yearly_combined_all_sources, by = c("ags" = "ags_county"))
+map_data_county_yearly <- left_join(ger_shape_county, data_county_yearly, by = c("ags" = "ags_county"))
+map_data_county_yearly_combined_all_sources <- left_join(ger_shape_county, data_county_yearly_combined_all_sources, by = c("ags" = "ags_county"))
 
 
 # Lage "Windkraft auf See" dropped
