@@ -1,8 +1,16 @@
+
 # -------------------------------------------- load data for energy explorer -----------------------
 library("here")
+library("shiny")
+library("zip")
+library("sf")
+library("tmap")
+library("tmaptools")
+library("ggplot2")
+library("dplyr")
+library("shinydashboard")
+library("leaflet")
 source(here::here("code", "3.prepare_data_for_shiny.R"))
-
-
 
 # ---------------------------------- load data: First Story on Solar and Income --------------------
 ## load

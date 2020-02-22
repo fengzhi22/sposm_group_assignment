@@ -1,3 +1,13 @@
+library("here")
+library("shiny")
+library("zip")
+library("sf")
+library("tmap")
+library("tmaptools")
+library("ggplot2")
+library("dplyr")
+library("shinydashboard")
+library("leaflet")
 # -------------------------------------------- create ui  -----------------------------------
 ui <- dashboardPage(
   dashboardHeader(title = "Dashboard"),
