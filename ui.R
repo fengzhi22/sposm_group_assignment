@@ -1,38 +1,3 @@
-library("utils")
-library("here")
-library("shiny")
-library("zip")
-library("sf")
-library("tmap")
-library("tmaptools")
-library("ggplot2")
-library("dplyr")
-library("shinydashboard")
-library("leaflet")
-
-
-# -------------------------------------------- load final data  ---------------------------------
-map_data_state_combined_all_sources <- readRDS(here::here("data","processed","map_data_state_combined_all_sources.rds"))
-map_data_state_yearly_combined_all_sources <- readRDS(here::here("data","processed","map_data_state_yearly_combined_all_sources.rds"))
-map_data_county_combined_all_sources <- readRDS(here::here("data","processed","map_data_county_combined_all_sources.rds"))
-map_data_county_yearly_combined_all_sources <- readRDS(here::here("data","processed","map_data_county_yearly_combined_all_sources.rds"))
-map_data_county <- readRDS(here::here("data","processed","map_data_county.rds"))
-map_data_state <- readRDS(here::here("data","processed","map_data_state.rds"))
-map_data_county_yearly <- readRDS(here::here("data","processed","map_data_county_yearly.rds"))
-map_data_state_yearly <- readRDS(here::here("data","processed","map_data_state_yearly.rds"))
-
-data_state_yearly <- read.csv2(here::here("data","processed","data_state_yearly.csv"), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
-new_data_state <- subset(data_state_yearly, start_year >= "2000")
-
-
-# ---------------------------------- First Story on Solar and Income ------------------------------
-## load
-data_state_solar_income_2015 <- read.csv2(here::here("data", "processed", paste0("data_state_solar_income_2015", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
-## load
-data_county_solar_income_2015 <- read.csv2(here::here("data", "processed", paste0("data_county_solar_income_2015", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
-
-
-
 # -------------------------------------------- create ui  -----------------------------------
 ui <- dashboardPage(
   dashboardHeader(title = "Dashboard"),
