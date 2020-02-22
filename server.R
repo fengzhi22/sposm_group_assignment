@@ -1,31 +1,10 @@
-library("utils")
+# -------------------------------------------- load data for energy explorer -----------------------
 library("here")
-library("shiny")
-library("zip")
-library("sf")
-library("tmap")
-library("tmaptools")
-library("ggplot2")
-library("dplyr")
-library("shinydashboard")
-library("leaflet")
+source(here::here("code", "3.prepare_data_for_shiny.R"))
 
 
-# -------------------------------------------- load final data  ---------------------------------
-map_data_state_combined_all_sources <- readRDS(here::here("data","processed","map_data_state_combined_all_sources.rds"))
-map_data_state_yearly_combined_all_sources <- readRDS(here::here("data","processed","map_data_state_yearly_combined_all_sources.rds"))
-map_data_county_combined_all_sources <- readRDS(here::here("data","processed","map_data_county_combined_all_sources.rds"))
-map_data_county_yearly_combined_all_sources <- readRDS(here::here("data","processed","map_data_county_yearly_combined_all_sources.rds"))
-map_data_county <- readRDS(here::here("data","processed","map_data_county.rds"))
-map_data_state <- readRDS(here::here("data","processed","map_data_state.rds"))
-map_data_county_yearly <- readRDS(here::here("data","processed","map_data_county_yearly.rds"))
-map_data_state_yearly <- readRDS(here::here("data","processed","map_data_state_yearly.rds"))
 
-data_state_yearly <- read.csv2(here::here("data","processed","data_state_yearly.csv"), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
-new_data_state <- subset(data_state_yearly, start_year >= "2000")
-
-
-# ---------------------------------- First Story on Solar and Income ------------------------------
+# ---------------------------------- load data: First Story on Solar and Income --------------------
 ## load
 data_state_solar_income_2015 <- read.csv2(here::here("data", "processed", paste0("data_state_solar_income_2015", ".csv")), row.names = NULL, encoding = "UTF-8", stringsAsFactors = FALSE)
 ## load
@@ -37,6 +16,10 @@ server <- function(input, output) {
   
   # ---------------------------------------- load map datasets -----------------
   dataset <- reactive({
+    get(paste0("map_data_", input$geo_level, "_", input$source))
+  })
+  
+  dataset_regional_distribution <- reactive({
     get(paste0("map_data_", input$geo_level))
   })
   
@@ -45,7 +28,7 @@ server <- function(input, output) {
   })
   
   dataset_yearly <- reactive({
-    get(paste0("map_data_", input$geo_level, "_yearly"))
+    get(paste0("map_data_", input$geo_level, "_yearly_", input$source))
   })
   
   
@@ -59,7 +42,7 @@ server <- function(input, output) {
     if (input$source == "All") {
       dataset_combined()
     } else{
-      dataset() %>% filter(EinheitenTyp == input$source)
+      dataset()# %>% filter(EinheitenTyp == input$source)
     }
   })
   
@@ -93,7 +76,7 @@ server <- function(input, output) {
           filter(regionid == selected_regionid)
       } else{
         dataset_yearly() %>%
-          filter(EinheitenTyp == input$source) %>%
+          #filter(EinheitenTyp == input$source) %>% # should now already be the correct input$source
           filter(start_year >= input$years[1]) %>%
           filter(start_year <= input$years[2]) %>%
           filter(regionid == selected_regionid)
@@ -115,7 +98,7 @@ server <- function(input, output) {
     # Turn the generated "." back into "-" in the state names. e.g. Nordrhein.Westfalen to Nordrhein-Westfalen
     selected_regionid <- gsub(".","-",selected_regionid, fixed = TRUE)
     
-    dataset <- dataset() %>% 
+    dataset <- dataset_regional_distribution() %>% 
       filter(regionid == selected_regionid) %>% 
       filter(EinheitenTyp %in% columns)
     
@@ -268,7 +251,7 @@ server <- function(input, output) {
     
     if(is.null(selected_regionid)){paste("Please select a region in the map")}else{
       if (!(any(selected_regionid %in% check))){paste("Please select a region in the map")}else{
-        if (input$out_var == "n"){paste("Age (commissioning year) of power plants in\n", selected_regionid)}else{
+        if (input$out_var == "n"){paste("Birth (commissioning) year of running power plants in\n", selected_regionid)}else{
           if (input$out_var == "sum"){paste("Aditional power installed each year in\n", selected_regionid)}else{
             if (input$out_var == "mean"){paste("Average power production of additionally installed power plants in\n", selected_regionid)}
           }
